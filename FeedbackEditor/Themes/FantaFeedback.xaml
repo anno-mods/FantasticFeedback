@@ -132,7 +132,9 @@
                         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0" />
                         <ContentPresenter HorizontalAlignment="Stretch"
                                               VerticalAlignment="Stretch"
-                                              x:Name="PART_ContentHostPART_ContentHost" />
+                                              x:Name="PART_ContentHostPART_ContentHost"
+                                           AllowDrop="False"
+                                          IsHitTestVisible="False"/>
                         <ContentPresenter HorizontalAlignment="Left"
                                               VerticalAlignment="Stretch"
                                               x:Name="PART_LeftIndicator">

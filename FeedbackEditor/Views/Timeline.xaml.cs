@@ -37,33 +37,30 @@ namespace FeedbackEditor.Views
             Timelines.ItemsSource = FeedbackConfigs;
 
             FeedbackConfigs.Add(new FeedbackConfigViewModel(dummy));
+            Timelines.AllowDrop = false;
         }
-    }
 
-    public class TempDataType : ITimeLineData
-    {
-        public static int cnt = 0;
-        static Random rand = new Random();
-        public TempDataType()
+        private void Timelines_DragEnter(object sender, DragEventArgs e)
         {
-            cnt++;
-            Name = "Temp" + cnt.ToString();
-            StartTime = TimeSpan.FromMilliseconds(rand.Next(0, 600));
-            EndTime = StartTime + TimeSpan.FromMilliseconds(rand.Next(300, 700));
+
         }
-        public TimeSpan? StartTime { get; set; }
-        public TimeSpan? EndTime { get; set; }
-        public bool? bResizable { get; set; }
-        public String Name { get; set; }
     }
 
     public class TempDataTemplateSeletor : DataTemplateSelector
     {
-        public DataTemplate TempDataType { get; set; }
+        public DataTemplate PlaySequenceAction { get; set; }
+        public DataTemplate WalkBetweenDummiesAction { get; set; }
+        public DataTemplate GenericSequenceAction { get; set; }
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
+            if (item is PlaySequenceActionViewModel)
+                return PlaySequenceAction;
+
+            if (item is WalkBetweenDummiesActionViewModel)
+                return WalkBetweenDummiesAction;
+
             if (item is SequenceActionViewModel)
-                return TempDataType;
+                return GenericSequenceAction;
             return null;
         }
     }

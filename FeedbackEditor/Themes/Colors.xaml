@@ -10,6 +10,16 @@
                      Color="DarkOliveGreen"/>
     <SolidColorBrush x:Key="DefaultActionAccentColorBrush"
                      Color="GreenYellow" />
+
+
+    <SolidColorBrush x:Key="WalkActionColorBrush"
+                     Color="DarkRed" />
+    <SolidColorBrush x:Key="WalkActionAccentColorBrush"
+                     Color="Red" />
+    <SolidColorBrush x:Key="PlayActionColorBrush"
+                     Color="DarkCyan" />
+    <SolidColorBrush x:Key="PlayActionAccentColorBrush"
+                     Color="MediumTurquoise" />
     <SolidColorBrush x:Key="TextColorBrush" 
                      Color="WhiteSmoke"/>
 </ResourceDictionary>

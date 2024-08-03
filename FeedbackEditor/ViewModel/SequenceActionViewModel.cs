@@ -16,11 +16,14 @@ namespace FeedbackEditor.ViewModel
 
         public string Name { get; set; }
 
+        public ActionType ActionType { get; }
+
         public SequenceActionViewModel(SequenceAction sequenceAction, int msOffset)
         {
             Name = sequenceAction.GetType().Name;
             StartTime = TimeSpan.FromMilliseconds(msOffset);
             EndTime = TimeSpan.FromMilliseconds(msOffset+100);
+            ActionType = sequenceAction.ElementType;
         }
     }
 }

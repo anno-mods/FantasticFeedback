@@ -1,4 +1,5 @@
 ﻿using FeedbackEditor.Models.FC;
+using FeedbackEditor.Models.FC.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,12 @@ namespace FeedbackEditor.ViewModel
             var offset = 0;
             foreach (var action in loop.ElementContainer)
             {
-                Datas.Add(new SequenceActionViewModel(action, offset));
+                var viewModel = new SequenceActionViewModel(action, offset);
+                if (action is PlaySequenceAction)
+                    viewModel = new PlaySequenceActionViewModel((PlaySequenceAction)action, offset);
+                if (action is WalkBetweenDummiesAction)
+                    viewModel = new WalkBetweenDummiesActionViewModel((WalkBetweenDummiesAction)action, offset);
+                Datas.Add(viewModel);
                 offset += 100;
             }
         }

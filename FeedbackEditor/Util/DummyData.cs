@@ -50,7 +50,8 @@ namespace FeedbackEditor.Util
                                     new WalkBetweenDummiesAction()
                                     {
                                         WalkSequence = SequenceID.walk01,
-                                        StartDummy = "lol",
+                                        StartDummy = "DummyStart",
+                                        TargetDummy = "Dummytarget"
                                     }
                                 }
                             }

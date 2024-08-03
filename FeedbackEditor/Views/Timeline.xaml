@@ -42,7 +42,65 @@
 
             <tt:Timelines.TimeItemTemplateSelector>
                 <local:TempDataTemplateSeletor>
-                    <local:TempDataTemplateSeletor.TempDataType>
+                    <local:TempDataTemplateSeletor.WalkBetweenDummiesAction>
+                        <DataTemplate DataType="{x:Type vm:WalkBetweenDummiesActionViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource WalkActionAccentColorBrush}"
+                                        CornerRadius="6"
+                                        Margin="0,2"
+                                        Background="{StaticResource WalkActionColorBrush}">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Walk: "
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13" />
+                                        <TextBlock Text="{Binding DummyFrom}"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="13" />
+                                        <TextBlock Text=" to "
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="13" />
+                                        <TextBlock Text="{Binding DummyTo}"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="13" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </local:TempDataTemplateSeletor.WalkBetweenDummiesAction>
+                    <local:TempDataTemplateSeletor.PlaySequenceAction>
+                        <DataTemplate DataType="{x:Type vm:PlaySequenceActionViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource PlayActionAccentColorBrush}"
+                                        CornerRadius="6"
+                                        Margin="0,2"
+                                        Background="{StaticResource PlayActionColorBrush}">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Play Sequence: "
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13" />
+                                        <TextBlock Text="{Binding SequenceID}"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="13" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </local:TempDataTemplateSeletor.PlaySequenceAction>
+                    <local:TempDataTemplateSeletor.GenericSequenceAction>
                         <DataTemplate  DataType="{x:Type vm:SequenceActionViewModel}">
                             <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
                                 <Border BorderThickness="3"
@@ -51,26 +109,18 @@
                                         Margin="0,2"
                                         Background="{StaticResource DefaultActionColorBrush}">
                                     <StackPanel Orientation="Vertical"
-                                                HorizontalAlignment="Center">
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
                                         <TextBlock Text="{Binding Path=Name}"
                                                    HorizontalAlignment="Center"
                                                    FontWeight="Bold"
                                                    Foreground="{StaticResource TextColorBrush}"
-                                                   FontSize="13"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=StartTime}"
-                                                       Foreground="{StaticResource TextColorBrush}" />
-                                            <TextBlock Text=" to "
-                                                       Foreground="{StaticResource TextColorBrush}" />
-                                            <TextBlock Text="{Binding Path=EndTime}"
-                                                       Foreground="{StaticResource TextColorBrush}" />
-                                        </StackPanel>
+                                                   FontSize="13" />
                                     </StackPanel>
                                 </Border>
                             </Grid>
-                            
                         </DataTemplate>
-                    </local:TempDataTemplateSeletor.TempDataType>
+                    </local:TempDataTemplateSeletor.GenericSequenceAction>
                 </local:TempDataTemplateSeletor>
             </tt:Timelines.TimeItemTemplateSelector>
             <tt:Timelines.TimePlayerTemplate>
