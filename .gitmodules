@@ -1,0 +1,3 @@
+[submodule "WPF-Timelines"]
+	path = WPF-Timelines
+	url = https://github.com/taubenangriff/WPF-Timelines
