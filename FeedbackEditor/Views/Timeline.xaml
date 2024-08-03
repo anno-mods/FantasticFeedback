@@ -16,7 +16,7 @@
         <tt:Timelines x:Name="Timelines" 
                       RowHeight="40"
                       HeaderWidth="250"
-                      RulerHeight="30"
+                      RulerHeight="0"
                       ItemsSource="{Binding FeedbackConfigs}">
             <tt:Timelines.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type tt:TimeLinesDataBase}"
