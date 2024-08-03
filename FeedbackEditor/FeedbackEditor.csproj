@@ -9,6 +9,11 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WPF-Timelines\Timelines\Timelines.csproj" />
   </ItemGroup>
 
 </Project>
