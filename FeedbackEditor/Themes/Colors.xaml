@@ -6,4 +6,10 @@
                      Color="DarkSlateGray" />
     <SolidColorBrush x:Key="LoopChannelColorBrush"
                      Color="#FF478080" />
+    <SolidColorBrush x:Key="DefaultActionColorBrush"
+                     Color="DarkOliveGreen"/>
+    <SolidColorBrush x:Key="DefaultActionAccentColorBrush"
+                     Color="GreenYellow" />
+    <SolidColorBrush x:Key="TextColorBrush" 
+                     Color="WhiteSmoke"/>
 </ResourceDictionary>

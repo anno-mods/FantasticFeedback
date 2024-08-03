@@ -36,28 +36,7 @@ namespace FeedbackEditor.Views
 
             Timelines.ItemsSource = FeedbackConfigs;
 
-            var feedbackConfig = new FeedbackConfigViewModel();
-            var feedbackConfig2 = new FeedbackConfigViewModel();
-            var sequenceDefinition = new SequenceDefinitionViewModel();
-            var loop = new LoopViewModel();
-            var loop2 = new LoopViewModel();
-            var loop3 = new LoopViewModel();
-            sequenceDefinition.AddLoop(loop);
-            sequenceDefinition.AddLoop(loop2);
-            var sequenceDefinition2 = new SequenceDefinitionViewModel();
-            sequenceDefinition2.AddLoop(loop3);
-            feedbackConfig.AddSequenceDefinition(sequenceDefinition);
-            feedbackConfig2.AddSequenceDefinition(sequenceDefinition2);
-            FeedbackConfigs.Add(feedbackConfig);
-            FeedbackConfigs.Add(feedbackConfig2);
-
-            feedbackConfig.ChannelName = "Actor 01";
-            feedbackConfig2.ChannelName = "Actor 02";
-            sequenceDefinition.ChannelName = "work01";
-            sequenceDefinition2.ChannelName = "idle01";
-            loop.ChannelName = "Loop0";
-            loop2.ChannelName = "loop1";
-            loop3.ChannelName = "loop0";
+            FeedbackConfigs.Add(new FeedbackConfigViewModel(dummy));
         }
     }
 
@@ -83,7 +62,7 @@ namespace FeedbackEditor.Views
         public DataTemplate TempDataType { get; set; }
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is TempDataType)
+            if (item is SequenceActionViewModel)
                 return TempDataType;
             return null;
         }

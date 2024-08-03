@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FeedbackEditor.Models.FC;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +15,22 @@ namespace FeedbackEditor.ViewModel
         public string ChannelName { get; set; } = "Unnamed Sequence";
         public Thickness OffsetOverride => new Thickness(30, 3, 3, 3);
         public ChannelType ChannelType { get; } = ChannelType.SEQUENCE;
+
+        public SequenceDefinitionViewModel() { 
+        
+        }
+
+        public SequenceDefinitionViewModel(SequenceDefinition sequenceDefinition) : this()
+        {
+            var loopCount = 0;
+            foreach (var loop in sequenceDefinition.Loops) 
+            {
+                var loopViewModel = new LoopViewModel(loop);
+                loopViewModel.ChannelName = "Loop" + loopCount;
+                AddLoop(loopViewModel);
+                loopCount++;
+            }
+        }
 
         public void AddLoop(LoopViewModel loopViewModel)
         {

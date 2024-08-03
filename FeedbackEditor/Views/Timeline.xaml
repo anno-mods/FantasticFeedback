@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:FeedbackEditor.Views"
+             xmlns:vm="clr-namespace:FeedbackEditor.ViewModel"
              xmlns:converter="clr-namespace:FeedbackEditor.Converters"
              xmlns:tt="clr-namespace:TimeLines;assembly=Timelines"
              mc:Ignorable="d" 
@@ -42,19 +43,32 @@
             <tt:Timelines.TimeItemTemplateSelector>
                 <local:TempDataTemplateSeletor>
                     <local:TempDataTemplateSeletor.TempDataType>
-                        <DataTemplate  DataType="{x:Type local:TempDataType}">
-                            <Border BorderThickness="1"
-                                    BorderBrush="Green"
-                                    CornerRadius="4"
-                                    Margin="0,2"
-                                    Background="#77FFFFFF">
-                                <StackPanel Orientation="Vertical"
-                                            HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding Path=Name}" />
-                                    <TextBlock Text="{Binding Path=StartTime}" />
-                                    <TextBlock Text="{Binding Path=EndTime}" />
-                                </StackPanel>
-                            </Border>
+                        <DataTemplate  DataType="{x:Type vm:SequenceActionViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource DefaultActionAccentColorBrush}"
+                                        CornerRadius="6"
+                                        Margin="0,2"
+                                        Background="{StaticResource DefaultActionColorBrush}">
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Path=Name}"
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=StartTime}"
+                                                       Foreground="{StaticResource TextColorBrush}" />
+                                            <TextBlock Text=" to "
+                                                       Foreground="{StaticResource TextColorBrush}" />
+                                            <TextBlock Text="{Binding Path=EndTime}"
+                                                       Foreground="{StaticResource TextColorBrush}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                            
                         </DataTemplate>
                     </local:TempDataTemplateSeletor.TempDataType>
                 </local:TempDataTemplateSeletor>

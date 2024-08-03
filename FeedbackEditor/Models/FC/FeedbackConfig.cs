@@ -16,9 +16,9 @@ namespace FeedbackEditor.Models.FC
 
         public bool? MainObject { get; set; }
 
-        public List<FeedbackLoop>? FeedbackLoops { get; set; } = new();
+        public List<FeedbackLoop> FeedbackLoops { get; set; } = new();
 
-        public List<SequenceDefinition>? SequenceDefinitions { get; set; } = new();
+        public List<SequenceDefinition> SequenceDefinitions { get; set; } = new();
 
         public bool IgnoreRootObjectXZRotation { get; set; }
 

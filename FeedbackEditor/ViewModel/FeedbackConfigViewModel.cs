@@ -23,6 +23,10 @@ namespace FeedbackEditor.ViewModel
 
         public FeedbackConfigViewModel(FeedbackConfig feedbackConfig) : this() 
         {
+            foreach (var sequenceDefinition in feedbackConfig.SequenceDefinitions)
+            {
+                AddSequenceDefinition(new SequenceDefinitionViewModel(sequenceDefinition));
+            }
 
         }
 
