@@ -64,5 +64,66 @@ namespace FeedbackEditor.Util
                 }
             };
         }
+
+
+        public FeedbackConfig GetDummy2()
+        {
+
+            return new FeedbackConfig()
+            {
+                HasValue = true,
+                AssetVariationList = new AssetVariationList()
+                {
+                    GuidVariationList = { { 500, -1 } }
+                },
+                MainObject = false,
+                FeedbackLoops = new() {
+                    new FeedbackLoop() { k = false, v = false }
+                },
+                SequenceDefinitions = new()
+                {
+                    new SequenceDefinition()
+                    {
+                        HasValue = true,
+                        DefaultState = new FeedbackState()
+                        {
+                            DummyID = 0,
+                            DummyName = "kek",
+                            FadeVisibility = true,
+                            ResetToDefaultEveryLoop = true,
+                            SequenceID = SequenceID.work02,
+                            StartDummyGroup = "kekgroup",
+                            Visible = true,
+                        },
+                        Loops = new()
+                        {
+                            new Loop() {
+                                ElementContainer = new()
+                                {
+                                    new WalkBetweenDummiesAction()
+                                    {
+                                        WalkSequence = SequenceID.walk01,
+                                        StartDummy = "DummyStart",
+                                        TargetDummy = "Dummytarget"
+                                    },
+                                    new WalkBetweenDummiesAction()
+                                    {
+                                        WalkSequence = SequenceID.walk01,
+                                        StartDummy = "DummyStart",
+                                        TargetDummy = "Dummytarget"
+                                    },
+                                    new WalkBetweenDummiesAction()
+                                    {
+                                        WalkSequence = SequenceID.walk01,
+                                        StartDummy = "DummyStart",
+                                        TargetDummy = "Dummytarget"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                }
+            };
+        }
     }
 }
