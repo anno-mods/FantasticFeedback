@@ -22,12 +22,12 @@ namespace FeedbackEditor.Views.Nodes
     /// <summary>
     /// Interaktionslogik für PlaySequenceNodeView.xaml
     /// </summary>
-    public partial class PlaySequenceNodeView : IViewFor<PlaySequenceActionViewModel>
+    public partial class WalkBetweenDummiesNodeView : IViewFor<WalkBetweenDummiesActionViewModel>
     {
         public static readonly DependencyProperty ViewModelProperty =
-        DependencyProperty.Register(nameof(ViewModel), typeof(PlaySequenceActionViewModel), typeof(PlaySequenceNodeView), new PropertyMetadata(null));
+        DependencyProperty.Register(nameof(ViewModel), typeof(WalkBetweenDummiesActionViewModel), typeof(WalkBetweenDummiesNodeView), new PropertyMetadata(null));
 
-        public PlaySequenceNodeView()
+        public WalkBetweenDummiesNodeView()
         {
             InitializeComponent();
 
@@ -36,16 +36,16 @@ namespace FeedbackEditor.Views.Nodes
                 this.WhenAnyValue(v => v.ViewModel).BindTo(this, v => v.NodeView.ViewModel).DisposeWith(d);
             });
         }
-        public PlaySequenceActionViewModel ViewModel
+        public WalkBetweenDummiesActionViewModel ViewModel
         {
-            get => (PlaySequenceActionViewModel)GetValue(ViewModelProperty);
+            get => (WalkBetweenDummiesActionViewModel)GetValue(ViewModelProperty);
             set => SetValue(ViewModelProperty, value);
         }
 
         object IViewFor.ViewModel
         {
             get => ViewModel;
-            set => ViewModel = (PlaySequenceActionViewModel)value;
+            set => ViewModel = (WalkBetweenDummiesActionViewModel)value;
         }
 
         private void NumericSpinner_ValueChanged(object sender, EventArgs e)

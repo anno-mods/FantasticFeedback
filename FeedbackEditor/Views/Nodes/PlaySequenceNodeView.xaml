@@ -16,12 +16,11 @@
                         <Setter.Value>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="10">
-                                    <CheckBox Content="Reset Start Time"
+                                    <Label Content="Sequence:"></Label>
+                                    <ComboBox ItemsSource="{Binding Source={StaticResource SequenceIdValues}}"
+                                              Height="30"
                                               Margin="5"
-                                              BorderThickness="2"
-                                              
-                                              BorderBrush="{StaticResource PlayActionAccentColorBrush}">
-                                    </CheckBox>
+                                              VerticalContentAlignment="Center"></ComboBox>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
@@ -33,8 +32,7 @@
                                             <RowDefinition />
                                             <RowDefinition />
                                         </Grid.RowDefinitions>
-                                        <Label Content="Min Play Count" 
-                                               Margin="3"/>
+                                        <Label Content="Min Play Count" />
                                         <controls:NumericSpinner Value="0"
                                                                  Grid.Column="1"
                                                                  ValueChanged="NumericSpinner_ValueChanged"
@@ -45,7 +43,6 @@
                                         </controls:NumericSpinner>
 
                                         <Label Content="Max Play Count"
-                                               Margin="3"
                                                Grid.Row="1"/>
                                         <controls:NumericSpinner Value="0"
                                                                  Grid.Row="1"
@@ -56,7 +53,6 @@
                                                                  Margin="3">
                                         </controls:NumericSpinner>
                                         <Label Content="Min Play Time"
-                                               Margin="3"
                                                Grid.Row="2" />
                                         <controls:NumericSpinner Value="0"
                                                                  Grid.Row="2"
@@ -67,7 +63,6 @@
                                                                  Margin="3">
                                         </controls:NumericSpinner>
                                         <Label Content="Max Play Time"
-                                               Margin="3"
                                                Grid.Row="3" />
                                         <controls:NumericSpinner Value="0"
                                                                  Grid.Row="3"
@@ -78,6 +73,11 @@
                                                                  Margin="3">
                                         </controls:NumericSpinner>
                                     </Grid>
+                                    <CheckBox Content="Reset Start Time"
+                                              Margin="5"
+                                              BorderThickness="2"
+                                              BorderBrush="{StaticResource PlayActionAccentColorBrush}">
+                                    </CheckBox>
                                 </StackPanel>
                             </DataTemplate>
                         </Setter.Value>

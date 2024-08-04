@@ -21,7 +21,7 @@
                       ItemsSource="{Binding FeedbackConfigs}">
             <tt:Timelines.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type tt:TimeLinesDataBase}"
-                                          ItemsSource="{Binding Childs}">
+                                          ItemsSource="{Binding Childs, UpdateSourceTrigger=PropertyChanged}">
                     <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=HeaderWidth}" />
@@ -127,8 +127,6 @@
             <tt:Timelines.TimePlayerTemplate>
                 <ControlTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="Play" />
-                        <Button Content="Stop" />
                     </StackPanel>
                 </ControlTemplate>
             </tt:Timelines.TimePlayerTemplate>

@@ -52,6 +52,10 @@ namespace FeedbackEditor.Util
                                         WalkSequence = SequenceID.walk01,
                                         StartDummy = "DummyStart",
                                         TargetDummy = "Dummytarget"
+                                    },
+                                    new PlaySequenceAction() {
+                                        IdleSequenceID= SequenceID.work01,
+                                        HasValue= true
                                     }
                                 }
                             }

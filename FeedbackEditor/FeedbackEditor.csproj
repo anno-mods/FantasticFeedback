@@ -35,4 +35,10 @@
     <ProjectReference Include="..\WPF-Timelines\Timelines\Timelines.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\Nodes\WalkBetweenDummiesNodeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

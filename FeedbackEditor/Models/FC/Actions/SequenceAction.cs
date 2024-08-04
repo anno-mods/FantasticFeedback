@@ -14,6 +14,7 @@ namespace FeedbackEditor.Models.FC.Actions
         WALK_SPLINE = 4,
         FADE = 6,
         SCALE = 9,
+        TURN_TO = 10,
         PLAY_ANY_SEQUENCE = 12,
         FOLLOW_SPLINE_ANY_SEQUENCE = 15
     }
@@ -143,5 +144,11 @@ namespace FeedbackEditor.Models.FC.Actions
 
         [XmlAttribute(AttributeName = "elementType")]
         public ActionType ElementType { get; set; }
+        
+        public IEnumerable<SequenceID> SequenceIDValues { get; set; }
+
+        public SequenceAction() {
+            SequenceIDValues = Enum.GetValues<SequenceID>().Cast<SequenceID>().ToList();
+        }
     }
 }

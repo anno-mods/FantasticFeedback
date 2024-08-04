@@ -30,8 +30,9 @@ namespace FeedbackEditor
             var viewModel = new FeedbackConfigViewModel(dummy);
             TimelineView.FeedbackConfigs.Add(viewModel);
 
-            var network = (viewModel.Childs.First().Childs.First() as LoopViewModel)?.Network;
-            NodeView.Network = network;
+            NodeView.LoopViewModel = viewModel.Childs.First().Childs.First() as LoopViewModel;
+
+            NodeView.Layout();
         }
     }
 }

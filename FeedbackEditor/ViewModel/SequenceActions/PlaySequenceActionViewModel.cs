@@ -19,11 +19,11 @@ namespace FeedbackEditor.ViewModel
             Splat.Locator.CurrentMutable.Register(() => new PlaySequenceNodeView(), typeof(IViewFor<PlaySequenceActionViewModel>));
         }
 
-        public String SequenceID { get; set; }
-        
-        public PlaySequenceActionViewModel(PlaySequenceAction sequenceAction, int msOffset) : base(sequenceAction, msOffset)
+        public string SequenceID { get; set; }
+
+        public PlaySequenceActionViewModel(PlaySequenceAction sequenceAction) : base(sequenceAction)
         {
-            SequenceID = $"{sequenceAction.IdleSequenceID.ToString()} ({((int)sequenceAction.IdleSequenceID)})";  
+            SequenceID = $"{sequenceAction.IdleSequenceID.ToString()} ({(int)sequenceAction.IdleSequenceID})";
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using DynamicData;
+using FeedbackEditor.ViewModel;
+using NodeNetwork.Toolkit.Layout.ForceDirected;
 using NodeNetwork.ViewModels;
 using NodeNetwork.Views;
 using PropertyChanged;
@@ -6,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,11 +29,33 @@ namespace FeedbackEditor.Views
     [AddINotifyPropertyChangedInterface]
     public partial class Sequence : UserControl
     {
-        public NetworkViewModel Network { get; set; } = new NetworkViewModel();
+        public LoopViewModel LoopViewModel { get; set; }
+
         public Sequence()
         {
             DataContext = this;
             InitializeComponent();
+        }
+
+        public void Layout()
+        {
+            Point Pos = new Point(0, 0);
+            foreach (var n in LoopViewModel.Network.Nodes.Items)
+            {
+                n.Position = Pos;
+                Pos.X += n.Size.Width + 200;
+            }
+
+        }
+
+        private void OnLayoutButtonClick(object sender, RoutedEventArgs e)
+        {
+            Layout();
+        }
+
+        private void OnAddButtonClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

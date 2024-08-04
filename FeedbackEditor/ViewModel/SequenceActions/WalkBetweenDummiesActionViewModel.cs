@@ -1,4 +1,5 @@
 ﻿using FeedbackEditor.Models.FC.Actions;
+using FeedbackEditor.Views.Nodes;
 using NodeNetwork.Views;
 using PropertyChanged;
 using ReactiveUI;
@@ -15,13 +16,13 @@ namespace FeedbackEditor.ViewModel
     {
         static WalkBetweenDummiesActionViewModel()
         {
-            Splat.Locator.CurrentMutable.Register(() => new NodeView(), typeof(IViewFor<WalkBetweenDummiesActionViewModel>));
+            Splat.Locator.CurrentMutable.Register(() => new WalkBetweenDummiesNodeView(), typeof(IViewFor<WalkBetweenDummiesActionViewModel>));
         }
 
-        public String DummyFrom { get; set; }
-        public String DummyTo { get; set; }
+        public string DummyFrom { get; set; }
+        public string DummyTo { get; set; }
 
-        public WalkBetweenDummiesActionViewModel(WalkBetweenDummiesAction sequenceAction, int msOffset) : base(sequenceAction, msOffset)
+        public WalkBetweenDummiesActionViewModel(WalkBetweenDummiesAction sequenceAction) : base(sequenceAction)
         {
             DummyFrom = sequenceAction.StartDummy;
             DummyTo = sequenceAction.TargetDummy;
