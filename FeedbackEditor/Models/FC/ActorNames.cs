@@ -14,5 +14,7 @@ namespace FeedbackEditor.Models.FC
 
         [XmlElement("i")]
         public List<String> Names = new List<String>();
+
+        public ActorNames() { }
     }
 }

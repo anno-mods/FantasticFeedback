@@ -31,32 +31,19 @@ namespace FeedbackEditor
         {
             InitializeComponent();
             DataContext = this;
-            var dummy = new DummyData().GetDummy();
-            var second_dummy = new DummyData().GetDummy2();
-            var viewModel = new FeedbackConfigViewModel(dummy);
-            var viewModel2 = new FeedbackConfigViewModel(second_dummy);
-            TimelineView.FeedbackConfigs.Add(viewModel);
-            TimelineView.FeedbackConfigs.Add(viewModel2);
 
-            var fcfile = new DummyData().GetDummyFcFile();
-
-            XmlDocument doc = new XmlDocument();
             var serializer = new XmlSerializer(typeof(FcFile));
 
-            var settings = new XmlWriterSettings();
-            settings.OmitXmlDeclaration = true;
-            settings.Indent = true;
-
-            using var fs = File.Create("fc.xml");
-            using (XmlWriter writer = new FeedbackXmlWriter(XmlWriter.Create(fs, settings))) 
-            {
-                serializer.Serialize(writer, fcfile);
-            }
-            fs.Close();
             using var fs1 = File.OpenRead("fc.xml");
             using (XmlReader reader = XmlReader.Create(fs1))
             {
-                var obj = serializer.Deserialize(reader);
+                var fcFile = serializer.Deserialize(reader) as FcFile;
+
+                fcFile.FeedbackDefinition.FeedbackConfigs.ForEach(x =>
+                {
+                    var vm = new FeedbackConfigViewModel(x);
+                    TimelineView.FeedbackConfigs.Add(vm);
+                });
             }
 
             TimelineView.SelectedLoopChanged += (sender, e) => NodeView.LoopViewModel = e;

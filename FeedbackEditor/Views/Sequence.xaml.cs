@@ -57,12 +57,21 @@ namespace FeedbackEditor.Views
         public void Layout()
         {
             if (LoopViewModel is null)
-                return; 
+                return;
+            int MaxX = 3000;
+            int row = 0;
             Point Pos = new Point(50, 50);
             foreach (var n in LoopViewModel.Network.Nodes.Items)
             {
                 n.Position = Pos;
                 Pos.X += 400;
+
+                if(Pos.X > MaxX)
+                {
+                    Pos.X %= MaxX;
+                    row++;
+                }
+                Pos.Y = 50 + row * 400;
             }
         }
 

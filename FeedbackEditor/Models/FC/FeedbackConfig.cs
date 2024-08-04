@@ -45,5 +45,7 @@ namespace FeedbackEditor.Models.FC
         public bool IgnoreDistanceScale { get; set; }
 
         public String? Description { get; set; }
+
+        public FeedbackConfig() { }
     }
 }

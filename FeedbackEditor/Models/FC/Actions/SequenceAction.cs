@@ -18,6 +18,7 @@ namespace FeedbackEditor.Models.FC.Actions
         WAIT = 2,
         WALK_SPLINE = 4,
         FADE = 6,
+        BARRIER = 7,
         SCALE = 9,
         TURN_TO = 10,
         PLAY_ANY_SEQUENCE = 12,

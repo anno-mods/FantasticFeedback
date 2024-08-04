@@ -21,11 +21,20 @@ namespace FeedbackEditor.ViewModel
 
         public string SequenceID { get; set; }
 
+        public int FuckYou { 
+            get; 
+            set;
+        }
+
+        public PlaySequenceAction Action { get; set; }
+
         public PlaySequenceActionViewModel(PlaySequenceAction sequenceAction) : base(sequenceAction)
         {
             SequenceID = $"{sequenceAction.IdleSequenceID.ToString()} ({(int)sequenceAction.IdleSequenceID})";
 
             Name = "Play Sequence";
+
+            Action = sequenceAction;
         }
     }
 }

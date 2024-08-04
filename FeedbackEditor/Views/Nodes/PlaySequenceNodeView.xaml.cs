@@ -1,8 +1,10 @@
 ﻿using FeedbackEditor.Models.FC.Actions;
 using FeedbackEditor.ViewModel;
+using PropertyChanged;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Text;
@@ -22,6 +24,7 @@ namespace FeedbackEditor.Views.Nodes
     /// <summary>
     /// Interaktionslogik für PlaySequenceNodeView.xaml
     /// </summary>
+    [AddINotifyPropertyChangedInterface]
     public partial class PlaySequenceNodeView : IViewFor<PlaySequenceActionViewModel>
     {
         public static readonly DependencyProperty ViewModelProperty =
@@ -29,6 +32,7 @@ namespace FeedbackEditor.Views.Nodes
 
         public PlaySequenceNodeView()
         {
+            DataContext = this; 
             InitializeComponent();
 
             this.WhenActivated(d =>
@@ -36,10 +40,14 @@ namespace FeedbackEditor.Views.Nodes
                 this.WhenAnyValue(v => v.ViewModel).BindTo(this, v => v.NodeView.ViewModel).DisposeWith(d);
             });
         }
+
         public PlaySequenceActionViewModel ViewModel
         {
             get => (PlaySequenceActionViewModel)GetValue(ViewModelProperty);
-            set => SetValue(ViewModelProperty, value);
+            set {
+                SetValue(ViewModelProperty, value);
+                this.OnPropertyChanged(nameof(ViewModel));
+            }
         }
 
         object IViewFor.ViewModel
@@ -50,7 +58,6 @@ namespace FeedbackEditor.Views.Nodes
 
         private void NumericSpinner_ValueChanged(object sender, EventArgs e)
         {
-
         }
     }
 }

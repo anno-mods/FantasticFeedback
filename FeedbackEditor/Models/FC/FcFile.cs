@@ -10,7 +10,9 @@ namespace FeedbackEditor.Models.FC
     [XmlRoot("Content")]
     public class FcFile
     {
+        [XmlElement]
         public FeedbackDefinition FeedbackDefinition { get; set; }
+        [XmlElement]
         public ActorNames ActorNames { get; set; }
     }
 

@@ -39,7 +39,7 @@ namespace FeedbackEditor.Models.FC
             {
                 ProcessElement(node);
             }
-            int i = 0; 
+            reader.ReadEndElement();
         }
 
         private void ProcessElement(XmlNode node)
