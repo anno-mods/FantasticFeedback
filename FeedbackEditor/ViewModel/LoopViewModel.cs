@@ -43,7 +43,7 @@ namespace FeedbackEditor.ViewModel
             Loop = loop;
             SequenceActionViewModel? previousNode = null;
 
-            foreach (var action in loop.ElementContainer)
+            foreach (var action in loop.ElementContainer.Elements)
             {
                 var viewModel = AddSequenceAction(action);
                 CreateConnection(viewModel.PreviousActionInput, previousNode?.FollowupActionOutput ?? EntryNode.FollowupActionOutput);
@@ -97,7 +97,7 @@ namespace FeedbackEditor.ViewModel
             {
                 Datas.Remove(item);
             }
-            Loop.ElementContainer.Clear(); 
+            Loop.ElementContainer.Elements.Clear(); 
 
             SequenceActionViewModel? node = null;
             SequenceActionViewModel? previousNode = null; 
@@ -109,7 +109,7 @@ namespace FeedbackEditor.ViewModel
                     continue;
                 //This hacky fix is nessecary because Timelines was only designed to add a Node without a Starttime
                 Datas.Add(node);
-                Loop.ElementContainer.Add(node.SequenceAction);
+                Loop.ElementContainer.Elements.Add(node.SequenceAction);
                 if (previousNode is not null)
                     node.MoveAfter(previousNode);
                 previousNode = node;

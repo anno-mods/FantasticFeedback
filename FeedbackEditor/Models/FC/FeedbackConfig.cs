@@ -9,15 +9,17 @@ namespace FeedbackEditor.Models.FC
 {
     public class FeedbackConfig
     {
-        [XmlAttribute(AttributeName ="hasValue")]
+        [XmlElement(ElementName = "hasValue")]
         public bool HasValue { get; set; }
 
         public AssetVariationList? AssetVariationList { get; set; }
 
         public bool? MainObject { get; set; }
 
+        [XmlElement]
         public List<FeedbackLoop> FeedbackLoops { get; set; } = new();
 
+        [XmlArrayItem("i")]
         public List<SequenceDefinition> SequenceDefinitions { get; set; } = new();
 
         public bool IgnoreRootObjectXZRotation { get; set; }

@@ -10,6 +10,21 @@ namespace FeedbackEditor.Util
 {
     public class DummyData
     {
+        public FcFile GetDummyFcFile() 
+        {
+            var file = new FcFile()
+            {
+                FeedbackDefinition = new FeedbackDefinition(),
+                ActorNames = new ActorNames()
+            };
+
+            file.ActorNames.Names.Add("walking");
+            file.ActorNames.Names.Add("standing");
+
+            file.FeedbackDefinition.FeedbackConfigs.Add(GetDummy());
+            file.FeedbackDefinition.FeedbackConfigs.Add(GetDummy2());
+            return file; 
+        }
         public FeedbackConfig GetDummy() {
 
             return new FeedbackConfig()
@@ -38,11 +53,11 @@ namespace FeedbackEditor.Util
                             StartDummyGroup = "kekgroup",
                             Visible = true,
                         },
-                        Loops = new()
-                        { 
-                            new Loop() {
-                                ElementContainer = new()
-                                {
+                        Loop0 = new Loop() 
+                        {
+                            ElementContainer = new()
+                            {
+                                Elements = new () {
                                     new PlaySequenceAction() {
                                         IdleSequenceID= SequenceID.idle01,
                                         HasValue= true
@@ -59,7 +74,7 @@ namespace FeedbackEditor.Util
                                     }
                                 }
                             }
-                        }                        
+                        }
                     },
                 }
             };
@@ -95,28 +110,41 @@ namespace FeedbackEditor.Util
                             StartDummyGroup = "kekgroup",
                             Visible = true,
                         },
-                        Loops = new()
+                        Loop0 =
+                        new Loop() 
                         {
-                            new Loop() {
-                                ElementContainer = new()
-                                {
+                            ElementContainer = new()
+                            {
+                                Elements = new () {
+                                    new PlaySequenceAction() {
+                                        IdleSequenceID= SequenceID.idle01,
+                                        HasValue= true
+                                    },
+                                    new PlaySequenceAction() {
+                                        IdleSequenceID= SequenceID.work01,
+                                        HasValue= true
+                                    },
+                                    new PlaySequenceAction() {
+                                        IdleSequenceID= SequenceID.work01,
+                                        HasValue= true
+                                    }
+                                }
+                            }
+                        },
+                        Loop1 = new Loop() 
+                        {
+                            ElementContainer = new()
+                            {
+                                Elements = new () {
                                     new WalkBetweenDummiesAction()
                                     {
                                         WalkSequence = SequenceID.walk01,
                                         StartDummy = "DummyStart",
                                         TargetDummy = "Dummytarget"
                                     },
-                                    new WalkBetweenDummiesAction()
-                                    {
-                                        WalkSequence = SequenceID.walk01,
-                                        StartDummy = "DummyStart",
-                                        TargetDummy = "Dummytarget"
-                                    },
-                                    new WalkBetweenDummiesAction()
-                                    {
-                                        WalkSequence = SequenceID.walk01,
-                                        StartDummy = "DummyStart",
-                                        TargetDummy = "Dummytarget"
+                                    new PlaySequenceAction() {
+                                        IdleSequenceID= SequenceID.idle01,
+                                        HasValue= true
                                     }
                                 }
                             }

@@ -1,13 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace FeedbackEditor.Models.FC.Actions
 {
+    [XmlRoot("i")]
     public class WalkBetweenDummiesAction : SequenceAction
     {
+        [XmlElement("WalkSequence")]
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
+        public int SequenceIDForSerializing
+        {
+            get => (int)WalkSequence;
+            set => WalkSequence = (SequenceID)value;
+        }
+
+        [XmlIgnore]
         public SequenceID WalkSequence { get; set; } = SequenceID.walk01;
 
         public float SpeedFactorF { get; set; }

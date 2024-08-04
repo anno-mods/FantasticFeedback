@@ -29,17 +29,36 @@ namespace FeedbackEditor.Views
     [AddINotifyPropertyChangedInterface]
     public partial class Sequence : UserControl
     {
-        public LoopViewModel LoopViewModel { get; set; }
+        private LoopViewModel? _loopViewModel;
+        public LoopViewModel? LoopViewModel 
+        {
+            get => _loopViewModel;
+            set
+            {
+                _loopViewModel = value;
+                Network = value is null ? _fallback : value.Network;
+                HasNetwork = value is not null; 
+            }
+        }
+
+        private NetworkViewModel _fallback = new NetworkViewModel();
+        public NetworkViewModel Network { get; private set; }
+
+        public bool HasNetwork { get; private set; }
 
         public Sequence()
         {
             DataContext = this;
+            if(LoopViewModel is null)
+                Network = _fallback; 
             InitializeComponent();
         }
 
         public void Layout()
         {
-            Point Pos = new Point(0, 0);
+            if (LoopViewModel is null)
+                return; 
+            Point Pos = new Point(50, 50);
             foreach (var n in LoopViewModel.Network.Nodes.Items)
             {
                 n.Position = Pos;

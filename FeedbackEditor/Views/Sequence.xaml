@@ -11,7 +11,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <nodenetwork:NetworkView x:Name="NetworkView"
-                                 ViewModel="{Binding LoopViewModel.Network, UpdateSourceTrigger=PropertyChanged}"
+                                 ViewModel="{Binding Network, UpdateSourceTrigger=PropertyChanged}"
                                  HorizontalAlignment="Stretch" 
                                  IsVisibleChanged="NetworkView_IsVisibleChanged"/>
         <StackPanel Orientation="Horizontal"
@@ -22,10 +22,13 @@
                     x:Name="AddNode"
                     Click="OnAddButtonClick" 
                     Margin="5"
-                    Width="100"/>
+                    Width="100"
+                    IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Auto Layout"
                     Click="OnLayoutButtonClick"
-                    Margin="5" Width="100"/>
+                    Margin="5"
+                    Width="100"
+                    IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -27,8 +27,8 @@ namespace FeedbackEditor.Views
     {
         public ObservableCollection<FeedbackConfigViewModel> FeedbackConfigs { get; set; } = new();
 
-        private LoopViewModel _selectedLoop; 
-        public LoopViewModel SelectedLoop 
+        private LoopViewModel? _selectedLoop; 
+        public LoopViewModel? SelectedLoop 
         { 
             get => _selectedLoop; 
             private set 
@@ -55,17 +55,22 @@ namespace FeedbackEditor.Views
         private void ChooseLoop(object sender, RoutedEventArgs e)
         {
             if (sender is not RadioButton button)
-                return; 
-
-            var viewModel = button.DataContext as LoopViewModel;
-
-            if (viewModel is null)
                 return;
 
-            if (viewModel == SelectedLoop)
-                return;
+            if (button.DataContext is LoopViewModel viewModel)
+            {
+                if (viewModel is null)
+                    return;
 
-            SelectedLoop = viewModel;
+                if (viewModel == SelectedLoop)
+                    return;
+
+                SelectedLoop = viewModel;
+            }
+            else if (button.DataContext is SequenceDefinitionViewModel sequenceDefinition)
+            {
+                SelectedLoop = null;
+            }
         }
     }
 

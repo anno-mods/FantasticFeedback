@@ -1,7 +1,10 @@
-﻿using FeedbackEditor.Util;
+﻿using FeedbackEditor.Models.FC;
+using FeedbackEditor.Serialization;
+using FeedbackEditor.Util;
 using FeedbackEditor.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace FeedbackEditor
 {
@@ -33,9 +38,28 @@ namespace FeedbackEditor
             TimelineView.FeedbackConfigs.Add(viewModel);
             TimelineView.FeedbackConfigs.Add(viewModel2);
 
-            TimelineView.SelectedLoopChanged += (sender, e) => NodeView.LoopViewModel = e;
+            var fcfile = new DummyData().GetDummyFcFile();
 
-            NodeView.LoopViewModel = viewModel.Childs.First().Childs.First() as LoopViewModel;
+            XmlDocument doc = new XmlDocument();
+            var serializer = new XmlSerializer(typeof(FcFile));
+
+            var settings = new XmlWriterSettings();
+            settings.OmitXmlDeclaration = true;
+            settings.Indent = true;
+
+            using var fs = File.Create("fc.xml");
+            using (XmlWriter writer = new FeedbackXmlWriter(XmlWriter.Create(fs, settings))) 
+            {
+                serializer.Serialize(writer, fcfile);
+            }
+            fs.Close();
+            using var fs1 = File.OpenRead("fc.xml");
+            using (XmlReader reader = XmlReader.Create(fs1))
+            {
+                var obj = serializer.Deserialize(reader);
+            }
+
+            TimelineView.SelectedLoopChanged += (sender, e) => NodeView.LoopViewModel = e;
         }
     }
 }

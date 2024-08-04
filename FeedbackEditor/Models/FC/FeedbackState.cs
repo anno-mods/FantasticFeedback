@@ -1,6 +1,7 @@
 ﻿using FeedbackEditor.Models.FC.Actions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,18 @@ namespace FeedbackEditor.Models.FC
     {
         public String? DummyName { get; set; } = "";
 
-        [XmlAttribute(AttributeName ="DummyId")]
+        [XmlElement(ElementName ="DummyId")]
         public int DummyID { get; set; }
 
+        [XmlIgnore]
         public SequenceID SequenceID { get; set; } = SequenceID.undefined;
+
+        [XmlElement("SequenceID")]
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
+        public int SequenceIDForSerializing {
+            get => (int)SequenceID;
+            set => SequenceID = (SequenceID)value;
+        }
 
         public bool Visible { get; set; }
 

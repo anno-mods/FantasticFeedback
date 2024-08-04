@@ -24,6 +24,8 @@ namespace FeedbackEditor.ViewModel
         public PlaySequenceActionViewModel(PlaySequenceAction sequenceAction) : base(sequenceAction)
         {
             SequenceID = $"{sequenceAction.IdleSequenceID.ToString()} ({(int)sequenceAction.IdleSequenceID})";
+
+            Name = "Play Sequence";
         }
     }
 }

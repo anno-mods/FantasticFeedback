@@ -1,16 +1,21 @@
-﻿using System;
+﻿using Accessibility;
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace FeedbackEditor.Models.FC.Actions
 {
-    public enum ActionType { 
+    public enum ActionType {
         WALK_BETWEEN_DUMMIES = 0,
-        PLAY_SEQUENCE = 1, 
-        WAIT = 2, 
+        PLAY_SEQUENCE = 1,
+        WAIT = 2,
         WALK_SPLINE = 4,
         FADE = 6,
         SCALE = 9,
@@ -20,9 +25,9 @@ namespace FeedbackEditor.Models.FC.Actions
     }
 
     public enum SequenceID
-    { 
+    {
         undefined = -1,
-        @default = 0, 
+        @default = 0,
         idle01 = 1000,
         idle02 = 1001,
         idle03 = 1002,
@@ -137,18 +142,42 @@ namespace FeedbackEditor.Models.FC.Actions
         missland = 2411,
     }
 
+    [XmlInclude(typeof(PlaySequenceAction))]
+    [XmlInclude(typeof(WalkBetweenDummiesAction))]
+    [XmlRoot("i")]
     public class SequenceAction
     {
-        [XmlAttribute(AttributeName = "hasValue")]
+        [XmlElement(ElementName = "hasValue")]
         public bool HasValue { get; set; }
 
-        [XmlAttribute(AttributeName = "elementType")]
-        public ActionType ElementType { get; set; }
-        
+        [XmlIgnore]
+        public virtual ActionType ElementType { get; set; }
+
+        [XmlElement(ElementName = "elementType")]
+        public int ElementTypeForSerialization
+        {
+            get => (int)ElementType;
+            set => ElementType = (ActionType)value;
+        }
+
+        [XmlIgnore]
         public IEnumerable<SequenceID> SequenceIDValues { get; set; }
 
         public SequenceAction() {
             SequenceIDValues = Enum.GetValues<SequenceID>().Cast<SequenceID>().ToList();
+        }
+    }
+
+    public class SequenceActionFactory
+    {
+        public Type GetTypeOfAction(ActionType actionType)
+        {
+            return actionType switch
+            {
+                ActionType.WALK_BETWEEN_DUMMIES => typeof(WalkBetweenDummiesAction),
+                ActionType.PLAY_SEQUENCE => typeof(PlaySequenceAction),
+                _ => typeof(SequenceAction)
+            };
         }
     }
 }

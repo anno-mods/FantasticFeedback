@@ -56,10 +56,8 @@
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
-                        </RadioButton.Template>
-                        
-                    </RadioButton>
-                               
+                        </RadioButton.Template>                        
+                    </RadioButton>                               
                 </HierarchicalDataTemplate>
             </tt:Timelines.ItemTemplate>
 

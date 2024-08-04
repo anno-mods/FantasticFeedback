@@ -26,6 +26,8 @@ namespace FeedbackEditor.ViewModel
         {
             DummyFrom = sequenceAction.StartDummy;
             DummyTo = sequenceAction.TargetDummy;
+
+            Name = "Walk Between Dummies";
         }
     }
 }

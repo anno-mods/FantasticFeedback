@@ -10,9 +10,9 @@
     <Grid ShowGridLines="True"
           Background="DarkSlateGray">
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition MinHeight ="100"/>
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition MinHeight="100" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <views:Sequence HorizontalAlignment="Stretch"
