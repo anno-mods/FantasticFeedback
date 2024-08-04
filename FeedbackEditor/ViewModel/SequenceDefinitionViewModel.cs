@@ -1,4 +1,6 @@
 ﻿using FeedbackEditor.Models.FC;
+using NodeNetwork.ViewModels;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +12,7 @@ using TimeLines;
 
 namespace FeedbackEditor.ViewModel
 {
+    [AddINotifyPropertyChangedInterface]
     public class SequenceDefinitionViewModel : TimeLinesDataBase, IChannel
     {
         public string ChannelName { get; set; } = "Unnamed Sequence";

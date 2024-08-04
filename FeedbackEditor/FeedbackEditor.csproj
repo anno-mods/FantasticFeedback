@@ -8,8 +8,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\WPF-Numeric-Spinner-NumericUpDown\NumericSpinner.xaml.cs" Link="Component\NumericSpinner.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Component\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NodeNetwork" Version="6.0.0" />
+    <PackageReference Include="NodeNetworkToolkit" Version="6.0.0" />
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\WPF-Numeric-Spinner-NumericUpDown\Generic.xaml" Link="Component\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\WPF-Numeric-Spinner-NumericUpDown\NumericSpinner.xaml" Link="Component\NumericSpinner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

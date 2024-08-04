@@ -31,13 +31,7 @@ namespace FeedbackEditor.Views
         {
             InitializeComponent();
             DataContext = this;
-
-            var dummy = new DummyData().GetDummy();
-
             Timelines.ItemsSource = FeedbackConfigs;
-
-            FeedbackConfigs.Add(new FeedbackConfigViewModel(dummy));
-            Timelines.AllowDrop = false;
         }
 
         private void Timelines_DragEnter(object sender, DragEventArgs e)

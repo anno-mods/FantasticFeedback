@@ -7,7 +7,50 @@
         xmlns:views="clr-namespace:FeedbackEditor.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <views:Timeline />
+    <Grid ShowGridLines="True"
+          Background="DarkSlateGray">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <views:Sequence HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            x:Name="NodeView"/>
+
+        </Grid>
+        <GridSplitter Grid.Row="1"
+                      BorderThickness="0"
+                      Grid.ColumnSpan="2"
+                      Height="6"
+                      Background="Transparent"
+                      BorderBrush="Transparent"
+                      ResizeDirection="Rows"
+                      HorizontalAlignment="Stretch">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Width="{TemplateBinding Width}">
+                        <Border Height="3"
+                                Width="50"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                BorderThickness="1 0"
+                                Background="White"
+                                BorderBrush="Cyan">
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
+        <Grid Grid.Row="2"
+              HorizontalAlignment="Stretch">
+            <views:Timeline HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            x:Name="TimelineView"/>
+        </Grid>
     </Grid>
 </Window>

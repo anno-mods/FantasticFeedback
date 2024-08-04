@@ -1,4 +1,5 @@
 ﻿using FeedbackEditor.Util;
+using FeedbackEditor.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,13 @@ namespace FeedbackEditor
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+            var dummy = new DummyData().GetDummy();
+            var viewModel = new FeedbackConfigViewModel(dummy);
+            TimelineView.FeedbackConfigs.Add(viewModel);
+
+            var network = (viewModel.Childs.First().Childs.First() as LoopViewModel)?.Network;
+            NodeView.Network = network;
         }
     }
 }
