@@ -1,3 +1,6 @@
 [submodule "WPF-Timelines"]
 	path = WPF-Timelines
 	url = https://github.com/taubenangriff/WPF-Timelines
+[submodule "WPF-Numeric-Spinner-NumericUpDown"]
+	path = WPF-Numeric-Spinner-NumericUpDown
+	url = https://github.com/Stopbyte/WPF-Numeric-Spinner-NumericUpDown/
