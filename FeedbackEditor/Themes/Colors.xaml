@@ -6,6 +6,10 @@
                      Color="DarkSlateGray" />
     <SolidColorBrush x:Key="LoopChannelColorBrush"
                      Color="#FF478080" />
+    <SolidColorBrush x:Key="LoopChannelHighlightedColorBrush"
+                     Color="#FF007575" />
+    <SolidColorBrush x:Key="LoopChannelHighlightedBorderColorBrush"
+                     Color="#FF06E6E6" />
     <SolidColorBrush x:Key="DefaultActionColorBrush"
                      Color="DarkOliveGreen"/>
     <SolidColorBrush x:Key="DefaultActionAccentColorBrush"

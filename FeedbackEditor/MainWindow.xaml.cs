@@ -27,12 +27,15 @@ namespace FeedbackEditor
             InitializeComponent();
             DataContext = this;
             var dummy = new DummyData().GetDummy();
+            var second_dummy = new DummyData().GetDummy();
             var viewModel = new FeedbackConfigViewModel(dummy);
+            var viewModel2 = new FeedbackConfigViewModel(second_dummy);
             TimelineView.FeedbackConfigs.Add(viewModel);
+            TimelineView.FeedbackConfigs.Add(viewModel2);
+
+            TimelineView.SelectedLoopChanged += (sender, e) => NodeView.LoopViewModel = e;
 
             NodeView.LoopViewModel = viewModel.Childs.First().Childs.First() as LoopViewModel;
-
-            NodeView.Layout();
         }
     }
 }

@@ -17,8 +17,7 @@
         <Grid Grid.Row="0">
             <views:Sequence HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            x:Name="NodeView"/>
-
+                            x:Name="NodeView" />
         </Grid>
         <GridSplitter Grid.Row="1"
                       BorderThickness="0"

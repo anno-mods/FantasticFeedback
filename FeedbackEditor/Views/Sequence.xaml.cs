@@ -43,18 +43,23 @@ namespace FeedbackEditor.Views
             foreach (var n in LoopViewModel.Network.Nodes.Items)
             {
                 n.Position = Pos;
-                Pos.X += n.Size.Width + 200;
+                Pos.X += 400;
             }
-
         }
 
         private void OnLayoutButtonClick(object sender, RoutedEventArgs e)
         {
-            Layout();
+            Layout(); 
         }
 
         private void OnAddButtonClick(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void NetworkView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Layout();
 
         }
     }

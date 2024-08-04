@@ -12,7 +12,8 @@
     <Grid>
         <nodenetwork:NetworkView x:Name="NetworkView"
                                  ViewModel="{Binding LoopViewModel.Network, UpdateSourceTrigger=PropertyChanged}"
-                                 HorizontalAlignment="Stretch" />
+                                 HorizontalAlignment="Stretch" 
+                                 IsVisibleChanged="NetworkView_IsVisibleChanged"/>
         <StackPanel Orientation="Horizontal"
                     Height="50"
                     VerticalAlignment="Bottom"

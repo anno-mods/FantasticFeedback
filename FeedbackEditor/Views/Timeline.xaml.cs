@@ -27,6 +27,19 @@ namespace FeedbackEditor.Views
     {
         public ObservableCollection<FeedbackConfigViewModel> FeedbackConfigs { get; set; } = new();
 
+        private LoopViewModel _selectedLoop; 
+        public LoopViewModel SelectedLoop 
+        { 
+            get => _selectedLoop; 
+            private set 
+            { 
+                _selectedLoop= value;
+                SelectedLoopChanged.Invoke(this, SelectedLoop);
+            }
+        }
+
+        public event EventHandler<LoopViewModel> SelectedLoopChanged = delegate { };
+
         public Timeline()
         {
             InitializeComponent();
@@ -37,6 +50,22 @@ namespace FeedbackEditor.Views
         private void Timelines_DragEnter(object sender, DragEventArgs e)
         {
 
+        }
+
+        private void ChooseLoop(object sender, RoutedEventArgs e)
+        {
+            if (sender is not RadioButton button)
+                return; 
+
+            var viewModel = button.DataContext as LoopViewModel;
+
+            if (viewModel is null)
+                return;
+
+            if (viewModel == SelectedLoop)
+                return;
+
+            SelectedLoop = viewModel;
         }
     }
 

@@ -12,6 +12,7 @@
     <Grid>
         <Grid.Resources>
             <converter:ChannelColorConverter x:Key="ChannelColor" />
+            <converter:ChannelSelectableConverter x:Key="ChannelSelectable" />
         </Grid.Resources>
         <tt:Timelines x:Name="Timelines" 
                       Grid.Row="1"
@@ -22,22 +23,43 @@
             <tt:Timelines.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type tt:TimeLinesDataBase}"
                                           ItemsSource="{Binding Childs, UpdateSourceTrigger=PropertyChanged}">
-                    <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=HeaderWidth}" />
-                        </Grid.ColumnDefinitions>
-                        <Border Margin="{Binding OffsetOverride}"
-                                CornerRadius="10"
-                                Background="{Binding ChannelType, Converter={StaticResource ChannelColor}}">
+                    <RadioButton GroupName="Loops"
+                                 Click="ChooseLoop"
+                                 IsEnabled="{Binding ChannelType, Converter={StaticResource ChannelSelectable}}">
+                        <RadioButton.Template>
+                            <ControlTemplate TargetType="RadioButton">
+                                <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}"
+                                      Width="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=HeaderWidth}">
+                                    <Border Margin="{Binding OffsetOverride}"
+                                            CornerRadius="6"
+                                            Background="{Binding ChannelType, Converter={StaticResource ChannelColor}}"
+                                            x:Name="BackgroundBorder"
+                                            BorderBrush="{StaticResource LoopChannelHighlightedBorderColorBrush}">
 
-                            <TextBlock FontSize="13"
-                                        Grid.Row="0"
-                                        Text="{Binding ChannelName}"
-                                        Foreground="White"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center" />
-                        </Border>     
-                    </Grid>               
+                                        <TextBlock FontSize="13"
+                                                   Grid.Row="0"
+                                                   Text="{Binding ChannelName}"
+                                                   Foreground="White"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsChecked"
+                                             Value="True">
+                                        <Setter TargetName="BackgroundBorder"
+                                                Property="Background"
+                                                Value="{StaticResource LoopChannelHighlightedColorBrush}" />
+                                        <Setter TargetName="BackgroundBorder"
+                                                Property="BorderThickness"
+                                                Value="3" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </RadioButton.Template>
+                        
+                    </RadioButton>
+                               
                 </HierarchicalDataTemplate>
             </tt:Timelines.ItemTemplate>
 
