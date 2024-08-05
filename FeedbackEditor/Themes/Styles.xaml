@@ -15,5 +15,4 @@
         <Setter Property="FontSize"
                 Value="13" />
     </Style>
-
 </ResourceDictionary>

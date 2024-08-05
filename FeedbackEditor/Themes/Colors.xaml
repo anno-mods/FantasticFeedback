@@ -30,4 +30,9 @@
                      Color="Lime" />
     <SolidColorBrush x:Key="TextColorBrush" 
                      Color="WhiteSmoke"/>
+
+    <SolidColorBrush x:Key="BackgroundColorBrush"
+                     Color="#404040" />
+    <SolidColorBrush x:Key="LightColorBrush"
+                     Color="BlanchedAlmond" />
 </ResourceDictionary>

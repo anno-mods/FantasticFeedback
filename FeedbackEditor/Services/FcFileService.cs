@@ -48,17 +48,20 @@ namespace FeedbackEditor.Services
             throw new NotImplementedException();
         }
 
-        public void LoadFcFile(String datapath)
+        public FcFile LoadFcFile(String datapath)
         {
             using var fs1 = File.OpenRead(datapath);
             using (XmlReader reader = XmlReader.Create(fs1))
             {
                 var file = _serializer.Deserialize(reader) as FcFile;
-                if (file == null)
-                    return;
-                CurrentFile = file;
-                FileLoaded?.Invoke(this, CurrentFile);
+                return file;
             }
+        }
+
+        public void SetCurrentFile(FcFile file)
+        {
+            CurrentFile = file;
+            FileLoaded?.Invoke(this, CurrentFile);
         }
     }
 }

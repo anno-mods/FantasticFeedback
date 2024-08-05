@@ -63,7 +63,10 @@ namespace FeedbackEditor
 
             if (true == picker.ShowDialog())
             {
-                FcFileService.Instance.LoadFcFile(picker.FileName);
+                var file = FcFileService.Instance.LoadFcFile(picker.FileName);
+                if (file is null)
+                    throw new InvalidDataException("The Fc File loaded is invalid");
+                FcFileService.Instance.SetCurrentFile(file);
             }
         }
     }

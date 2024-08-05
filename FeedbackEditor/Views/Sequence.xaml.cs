@@ -40,6 +40,9 @@ namespace FeedbackEditor.Views
         public NetworkViewModel Network { get; private set; }
 
         public bool HasNetwork { get; private set; }
+
+        public bool ShowAddPanel { get; set; }
+
         private IDisposable? _disposeEvents;
 
         private ForceDirectedLayouter _layouter = new ForceDirectedLayouter();
@@ -57,6 +60,7 @@ namespace FeedbackEditor.Views
 
         public void ShowLoop(Loop loop)
         {
+            ShowAddPanel = false;
             _currentLoop = new LoopNodesViewModel(loop);
             Network = _currentLoop.Network;
             HasNetwork = true;
@@ -157,12 +161,18 @@ namespace FeedbackEditor.Views
 
         private void OnAddButtonClick(object sender, RoutedEventArgs e)
         {
+            ShowAddPanel = !ShowAddPanel;
 
         }
 
         private void NetworkView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
 
+        }
+
+        private void NetworkView_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ShowAddPanel = false;
         }
     }
 }
