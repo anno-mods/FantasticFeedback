@@ -27,7 +27,7 @@
     <SolidColorBrush x:Key="BranchActionColorBrush"
                      Color="ForestGreen" />
     <SolidColorBrush x:Key="BranchActionAccentColorBrush"
-                     Color="LemonChiffon" />
+                     Color="Lime" />
     <SolidColorBrush x:Key="TextColorBrush" 
                      Color="WhiteSmoke"/>
 </ResourceDictionary>
