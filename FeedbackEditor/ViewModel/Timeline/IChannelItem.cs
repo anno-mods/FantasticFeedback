@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeedbackEditor.ViewModel
+namespace FeedbackEditor.ViewModel.Timeline
 {
     public interface IChannelItem
     {
-        String Name { get; }
+        string Name { get; }
     }
 }

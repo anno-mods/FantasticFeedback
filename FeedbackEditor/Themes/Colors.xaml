@@ -24,6 +24,10 @@
                      Color="DarkCyan" />
     <SolidColorBrush x:Key="PlayActionAccentColorBrush"
                      Color="MediumTurquoise" />
+    <SolidColorBrush x:Key="BranchActionColorBrush"
+                     Color="ForestGreen" />
+    <SolidColorBrush x:Key="BranchActionAccentColorBrush"
+                     Color="LemonChiffon" />
     <SolidColorBrush x:Key="TextColorBrush" 
                      Color="WhiteSmoke"/>
 </ResourceDictionary>

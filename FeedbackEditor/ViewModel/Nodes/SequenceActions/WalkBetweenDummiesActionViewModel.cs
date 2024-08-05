@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace FeedbackEditor.ViewModel
 {
     [AddINotifyPropertyChangedInterface]
-    public class WalkBetweenDummiesActionViewModel : SequenceActionViewModel
+    public class WalkBetweenDummiesActionViewModel : SequenceActionNodeViewModel
     {
         static WalkBetweenDummiesActionViewModel()
         {

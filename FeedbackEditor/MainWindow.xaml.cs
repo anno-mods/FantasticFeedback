@@ -1,11 +1,15 @@
 ﻿using FeedbackEditor.Models.FC;
 using FeedbackEditor.Serialization;
+using FeedbackEditor.Services;
 using FeedbackEditor.Util;
 using FeedbackEditor.ViewModel;
+using FeedbackEditor.ViewModel.Nodes;
+using FeedbackEditor.ViewModel.Timeline;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Serialization;
+using static System.Net.WebRequestMethods;
 
 namespace FeedbackEditor
 {
@@ -32,21 +37,20 @@ namespace FeedbackEditor
             InitializeComponent();
             DataContext = this;
 
-            var serializer = new XmlSerializer(typeof(FcFile));
+            FcFileService.Instance.LoadFcFile("costume_factory_01.xml");
+            
+            TimelineView.SelectionChanged += OnSelectedLoopChanged;
+        }
 
-            using var fs1 = File.OpenRead("fc.xml");
-            using (XmlReader reader = XmlReader.Create(fs1))
+        public void OnSelectedLoopChanged(object? sender, LoopViewModel? selectedLoop)
+        {
+            if (selectedLoop?.Loop is not Loop loop)
             {
-                var fcFile = serializer.Deserialize(reader) as FcFile;
-
-                fcFile.FeedbackDefinition.FeedbackConfigs.ForEach(x =>
-                {
-                    var vm = new FeedbackConfigViewModel(x);
-                    TimelineView.FeedbackConfigs.Add(vm);
-                });
+                NodeView.ShowDefaultNodesView();
+                return;
             }
-
-            TimelineView.SelectedLoopChanged += (sender, e) => NodeView.LoopViewModel = e;
+            NodeView.ShowLoop(loop);
+            NodeView.ChangeListenerTo(selectedLoop);
         }
     }
 }

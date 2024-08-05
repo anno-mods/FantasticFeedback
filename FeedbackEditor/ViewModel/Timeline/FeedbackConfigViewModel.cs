@@ -1,4 +1,6 @@
 ﻿using FeedbackEditor.Models.FC;
+using FeedbackEditor.Services;
+using FeedbackEditor.ViewModel.Timeline;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,7 @@ namespace FeedbackEditor.ViewModel
 
         public FeedbackConfigViewModel(FeedbackConfig feedbackConfig) : this() 
         {
+            ChannelName = FcFileService.Instance.GetActorName(feedbackConfig);
             foreach (var sequenceDefinition in feedbackConfig.SequenceDefinitions)
             {
                 AddSequenceDefinition(new SequenceDefinitionViewModel(sequenceDefinition));

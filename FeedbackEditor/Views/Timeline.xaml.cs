@@ -1,22 +1,13 @@
 ﻿using FeedbackEditor.Models.FC;
-using FeedbackEditor.Util;
+using FeedbackEditor.Models.FC.Actions;
+using FeedbackEditor.Services;
 using FeedbackEditor.ViewModel;
+using FeedbackEditor.ViewModel.Timeline;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using TimeLines;
 
 namespace FeedbackEditor.Views
 {
@@ -34,22 +25,26 @@ namespace FeedbackEditor.Views
             private set 
             { 
                 _selectedLoop= value;
-                SelectedLoopChanged.Invoke(this, SelectedLoop);
+                SelectionChanged.Invoke(this, SelectedLoop);
             }
         }
 
-        public event EventHandler<LoopViewModel> SelectedLoopChanged = delegate { };
+        public event EventHandler<LoopViewModel?> SelectionChanged = delegate { };
 
         public Timeline()
         {
             InitializeComponent();
             DataContext = this;
             Timelines.ItemsSource = FeedbackConfigs;
-        }
 
-        private void Timelines_DragEnter(object sender, DragEventArgs e)
-        {
-
+            FcFileService.Instance.FileLoaded += (sender, file) => {
+                FeedbackConfigs.Clear();
+                file.FeedbackDefinition.FeedbackConfigs.ForEach(x =>
+                {
+                    var vm = new FeedbackConfigViewModel(x);
+                    FeedbackConfigs.Add(vm);
+                });
+            };
         }
 
         private void ChooseLoop(object sender, RoutedEventArgs e)
@@ -79,17 +74,22 @@ namespace FeedbackEditor.Views
         public DataTemplate PlaySequenceAction { get; set; }
         public DataTemplate WalkBetweenDummiesAction { get; set; }
         public DataTemplate GenericSequenceAction { get; set; }
+        public DataTemplate BranchAction { get; set; }
+
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is PlaySequenceActionViewModel)
-                return PlaySequenceAction;
+            if (item is not SequenceActionTimelineViewModel timelineViewModel)
+            {
+                return null;
+            }
 
-            if (item is WalkBetweenDummiesActionViewModel)
-                return WalkBetweenDummiesAction;
-
-            if (item is SequenceActionViewModel)
-                return GenericSequenceAction;
-            return null;
+            return timelineViewModel.SequenceAction.ElementType switch
+            {
+                ActionType.PLAY_SEQUENCE => PlaySequenceAction,
+                ActionType.WALK_BETWEEN_DUMMIES => WalkBetweenDummiesAction,
+                ActionType.BRANCH => BranchAction,
+                _ => GenericSequenceAction
+            };
         }
     }
 }

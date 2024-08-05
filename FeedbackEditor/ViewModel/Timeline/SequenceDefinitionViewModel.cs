@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TimeLines;
 
-namespace FeedbackEditor.ViewModel
+namespace FeedbackEditor.ViewModel.Timeline
 {
     [AddINotifyPropertyChangedInterface]
     public class SequenceDefinitionViewModel : TimeLinesDataBase, IChannel
@@ -19,14 +19,15 @@ namespace FeedbackEditor.ViewModel
         public Thickness OffsetOverride => new Thickness(30, 3, 3, 3);
         public ChannelType ChannelType { get; } = ChannelType.SEQUENCE;
 
-        public SequenceDefinitionViewModel() { 
-        
+        public SequenceDefinitionViewModel()
+        {
+
         }
 
         public SequenceDefinitionViewModel(SequenceDefinition sequenceDefinition) : this()
         {
             var loopCount = 0;
-            foreach (var loop in sequenceDefinition.Loops) 
+            foreach (var loop in sequenceDefinition.Loops)
             {
                 var loopViewModel = new LoopViewModel(loop);
                 loopViewModel.ChannelName = "Loop" + loopCount;

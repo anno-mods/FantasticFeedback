@@ -15,6 +15,8 @@ namespace FeedbackEditor.Models.FC
         public ElementContainer ElementContainer { get; set; }
     }
 
+
+    [XmlInclude(typeof(BranchElementContainer))]
     public class ElementContainer : IXmlSerializable
     {
         [XmlArrayItem("i")]
@@ -33,7 +35,7 @@ namespace FeedbackEditor.Models.FC
             var loadedNode = new XmlDocument();
             loadedNode.Load(clonedReader);
 
-            var nodes = loadedNode.SelectNodes("/ElementContainer/Elements/i");
+            var nodes = loadedNode.SelectNodes($"/{loadedNode.DocumentElement.Name}/Elements/i");
 
             foreach (XmlNode node in nodes)
             {

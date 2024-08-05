@@ -16,6 +16,7 @@ namespace FeedbackEditor.Models.FC.Actions
         WALK_BETWEEN_DUMMIES = 0,
         PLAY_SEQUENCE = 1,
         WAIT = 2,
+        BRANCH = 3,
         WALK_SPLINE = 4,
         FADE = 6,
         BARRIER = 7,
@@ -177,6 +178,7 @@ namespace FeedbackEditor.Models.FC.Actions
             {
                 ActionType.WALK_BETWEEN_DUMMIES => typeof(WalkBetweenDummiesAction),
                 ActionType.PLAY_SEQUENCE => typeof(PlaySequenceAction),
+                ActionType.BRANCH => typeof(BranchAction),
                 _ => typeof(SequenceAction)
             };
         }

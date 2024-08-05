@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace FeedbackEditor.ViewModel
+namespace FeedbackEditor.ViewModel.Timeline
 {
-    public enum ChannelType { 
+    public enum ChannelType
+    {
         ACTOR,
         SEQUENCE,
         LOOP
     }
     public interface IChannel
     {
-        String ChannelName { get; set; }
+        string ChannelName { get; set; }
         Thickness OffsetOverride { get; }
         ChannelType ChannelType { get; }
     }

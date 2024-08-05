@@ -1,5 +1,6 @@
 ﻿using FeedbackEditor.Models.FC.Actions;
 using FeedbackEditor.ViewModel;
+using FeedbackEditor.ViewModel.Nodes.SequenceActions;
 using FeedbackEditor.ViewModel.Timeline;
 using PropertyChanged;
 using ReactiveUI;
@@ -26,12 +27,12 @@ namespace FeedbackEditor.Views.Nodes
     /// Interaktionslogik für PlaySequenceNodeView.xaml
     /// </summary>
     [AddINotifyPropertyChangedInterface]
-    public partial class PlaySequenceNodeView : IViewFor<PlaySequenceActionViewModel>
+    public partial class BranchNodeView : IViewFor<BranchActionNodeViewModel>
     {
         public static readonly DependencyProperty ViewModelProperty =
-        DependencyProperty.Register(nameof(ViewModel), typeof(PlaySequenceActionViewModel), typeof(PlaySequenceNodeView), new PropertyMetadata(null));
+        DependencyProperty.Register(nameof(ViewModel), typeof(BranchActionNodeViewModel), typeof(BranchNodeView), new PropertyMetadata(null));
 
-        public PlaySequenceNodeView()
+        public BranchNodeView()
         {
             DataContext = this; 
             InitializeComponent();
@@ -42,9 +43,9 @@ namespace FeedbackEditor.Views.Nodes
             });
         }
 
-        public PlaySequenceActionViewModel ViewModel
+        public BranchActionNodeViewModel ViewModel
         {
-            get => (PlaySequenceActionViewModel)GetValue(ViewModelProperty);
+            get => (BranchActionNodeViewModel)GetValue(ViewModelProperty);
             set {
                 SetValue(ViewModelProperty, value);
                 this.OnPropertyChanged(nameof(ViewModel));
@@ -54,11 +55,7 @@ namespace FeedbackEditor.Views.Nodes
         object IViewFor.ViewModel
         {
             get => ViewModel;
-            set => ViewModel = (PlaySequenceActionViewModel)value;
-        }
-
-        private void NumericSpinner_ValueChanged(object sender, EventArgs e)
-        {
+            set => ViewModel = (BranchActionNodeViewModel)value;
         }
     }
 }

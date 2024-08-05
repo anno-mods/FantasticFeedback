@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace FeedbackEditor.ViewModel
 {
     [AddINotifyPropertyChangedInterface]
-    public class PlaySequenceActionViewModel : SequenceActionViewModel
+    public class PlaySequenceActionViewModel : SequenceActionNodeViewModel
     {
         static PlaySequenceActionViewModel()
         {
@@ -20,11 +20,6 @@ namespace FeedbackEditor.ViewModel
         }
 
         public string SequenceID { get; set; }
-
-        public int FuckYou { 
-            get; 
-            set;
-        }
 
         public PlaySequenceAction Action { get; set; }
 

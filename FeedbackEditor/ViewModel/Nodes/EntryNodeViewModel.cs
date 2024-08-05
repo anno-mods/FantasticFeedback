@@ -1,5 +1,4 @@
 ﻿using DynamicData;
-using FeedbackEditor.ViewModel;
 using NodeNetwork.ViewModels;
 using NodeNetwork.Views;
 using ReactiveUI;
@@ -9,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeedbackEditor.ViewModel
+namespace FeedbackEditor.ViewModel.Nodes
 {
-    public class EntryNodeViewModel : NodeViewModel
+    public class EntryNodeViewModel : NodeViewModel, IFollowupPositionableNode
     {
         static EntryNodeViewModel()
         {
@@ -22,7 +21,7 @@ namespace FeedbackEditor.ViewModel
 
         public EntryNodeViewModel()
         {
-            FollowupActionOutput= new NodeOutputViewModel();
+            FollowupActionOutput = new NodeOutputViewModel();
             Outputs.Add(FollowupActionOutput);
 
             FollowupActionOutput.Name = "Next Action";

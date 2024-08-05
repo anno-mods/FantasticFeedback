@@ -1,6 +1,8 @@
 ﻿using DynamicData;
 using DynamicData.Binding;
 using FeedbackEditor.Models.FC.Actions;
+using FeedbackEditor.ViewModel.Nodes;
+using FeedbackEditor.ViewModel.Timeline;
 using NodeNetwork.ViewModels;
 using NodeNetwork.Views;
 using PropertyChanged;
@@ -16,18 +18,12 @@ using TimeLines;
 namespace FeedbackEditor.ViewModel
 {
     [AddINotifyPropertyChangedInterface]
-    public class SequenceActionViewModel : NodeViewModel, ITimeLineData, IChannelItem
+    public class SequenceActionNodeViewModel : NodeViewModel, IFollowupPositionableNode
     {
-        static SequenceActionViewModel()
+        static SequenceActionNodeViewModel()
         {
-            Splat.Locator.CurrentMutable.Register(() => new NodeView(), typeof(IViewFor<SequenceActionViewModel>));
+            Splat.Locator.CurrentMutable.Register(() => new NodeView(), typeof(IViewFor<SequenceActionNodeViewModel>));
         }
-
-        public TimeSpan? StartTime { get; set; }
-        public TimeSpan? EndTime { get; set; }
-        public bool? bResizable => false;
-
-        public int Width { get; } = 100;
 
         public ActionType ActionType { get; }
 
@@ -36,7 +32,7 @@ namespace FeedbackEditor.ViewModel
 
         public SequenceAction SequenceAction { get; }
 
-        public SequenceActionViewModel()
+        public SequenceActionNodeViewModel()
         {
             PreviousActionInput = new NodeInputViewModel();
             PreviousActionInput.Name = "Previous Action";
@@ -52,19 +48,11 @@ namespace FeedbackEditor.ViewModel
             SequenceAction = new SequenceAction(); 
         }
 
-        public SequenceActionViewModel(SequenceAction sequenceAction) : this()
+        public SequenceActionNodeViewModel(SequenceAction sequenceAction) : this()
         {
             Name = sequenceAction.GetType().Name;
-            StartTime = TimeSpan.FromMilliseconds(0);
-            EndTime = TimeSpan.FromMilliseconds(Width);
             ActionType = sequenceAction.ElementType;
             SequenceAction = sequenceAction;
-        }
-
-        public void MoveAfter(SequenceActionViewModel sequenceActionViewModel)
-        {
-            StartTime = sequenceActionViewModel.EndTime;
-            EndTime = StartTime!.Value.Add(TimeSpan.FromMilliseconds(Width));
         }
     }
 }
