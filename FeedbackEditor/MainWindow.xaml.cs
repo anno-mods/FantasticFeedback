@@ -68,6 +68,7 @@ namespace FeedbackEditor
                     throw new InvalidDataException("The Fc File loaded is invalid");
                 FcFileService.Instance.SetCurrentFile(file);
             }
+            NodeView.ShowDefaultNodesView();
         }
     }
 }

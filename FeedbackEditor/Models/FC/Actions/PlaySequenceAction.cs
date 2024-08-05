@@ -23,7 +23,7 @@ namespace FeedbackEditor.Models.FC.Actions
         }
 
         [XmlIgnore]
-        public SequenceID IdleSequenceID { get; set; } = SequenceID.idle01;
+        public SequenceID IdleSequenceID { get; set; }
 
         [XmlIgnore]
         [DoNotNotify]

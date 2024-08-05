@@ -34,5 +34,5 @@
     <SolidColorBrush x:Key="BackgroundColorBrush"
                      Color="#404040" />
     <SolidColorBrush x:Key="LightColorBrush"
-                     Color="BlanchedAlmond" />
+                     Color="Tomato" />
 </ResourceDictionary>

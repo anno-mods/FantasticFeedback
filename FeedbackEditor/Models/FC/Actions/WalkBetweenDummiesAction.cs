@@ -20,7 +20,7 @@ namespace FeedbackEditor.Models.FC.Actions
         }
 
         [XmlIgnore]
-        public SequenceID WalkSequence { get; set; } = SequenceID.walk01;
+        public SequenceID WalkSequence { get; set; }
 
         [XmlIgnore]
         public override ActionType ElementType { get; set; } = ActionType.WALK_BETWEEN_DUMMIES;

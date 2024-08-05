@@ -21,6 +21,8 @@
                                     <ComboBox ItemsSource="{Binding Source={StaticResource SequenceIdValues}}"
                                               Height="30"
                                               Margin="5"
+                                              IsSynchronizedWithCurrentItem="True"
+                                              SelectedItem="{Binding DataContext.ViewModel.Action.IdleSequenceID, UpdateSourceTrigger=PropertyChanged, ElementName=PlaySequenceView}"
                                               VerticalContentAlignment="Center"></ComboBox>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -77,6 +79,7 @@
                                     </Grid>
                                     <CheckBox Content="Reset Start Time"
                                               Margin="5"
+                                              IsChecked="{Binding DataContext.ViewModel.Action.ResetStartTime, ElementName=PlaySequenceView}"
                                               BorderThickness="2"
                                               BorderBrush="{StaticResource PlayActionAccentColorBrush}">
                                     </CheckBox>
