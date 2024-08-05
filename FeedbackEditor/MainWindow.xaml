@@ -51,5 +51,8 @@
                             VerticalAlignment="Stretch"
                             x:Name="TimelineView"/>
         </Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Button Content="Open File" Width="100" Height="25" Margin="5" Click="OpenFileClick"/>
+        </StackPanel>
     </Grid>
 </Window>

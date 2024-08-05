@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using Microsoft.Win32;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -51,6 +52,19 @@ namespace FeedbackEditor
             }
             NodeView.ShowLoop(loop);
             NodeView.ChangeListenerTo(selectedLoop);
+        }
+
+        private void OpenFileClick(object sender, RoutedEventArgs e)
+        {
+            var picker = new OpenFileDialog
+            {
+                Filter = "Fc Files converted with FileDBReader (*.xml)|*.xml"
+            };
+
+            if (true == picker.ShowDialog())
+            {
+                FcFileService.Instance.LoadFcFile(picker.FileName);
+            }
         }
     }
 }
