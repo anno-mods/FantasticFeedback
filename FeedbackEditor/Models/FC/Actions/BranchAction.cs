@@ -12,6 +12,10 @@ namespace FeedbackEditor.Models.FC.Actions
     {
         [XmlArrayItem("i")]
         public List<BranchEntry> BranchList { get; set; } = new();
+
+        public BranchAction() {
+            ElementType = ActionType.BRANCH;
+        }
     }
 
     public class BranchEntry

@@ -26,10 +26,6 @@ namespace FeedbackEditor.ViewModel.Nodes
 
         public Loop Loop { get; }
 
-        private List<SequenceActionNodeViewModel> _viewModels = new List<SequenceActionNodeViewModel>();
-
-        public bool ContainsBranches { get => _viewModels.Any(x => x is BranchActionNodeViewModel); }
-
         public LoopNodesViewModel()
         {
             Network = new NetworkViewModel();
@@ -61,7 +57,23 @@ namespace FeedbackEditor.ViewModel.Nodes
             };
         }
 
-        public void Init(IEnumerable<SequenceAction> sequenceActions, NodeOutputViewModel root_output)
+        public void RetrackSequenceFromNodes()
+        {
+            Loop.ElementContainer.Elements.Clear();
+            IFollowupNode? node = EntryNode;
+
+            AddSuccessors(node, Loop.ElementContainer.Elements);
+        }
+
+        public void AddEmpty<T>() where T : SequenceAction, new()
+        {
+            var sequenceAction = new T();
+            var ViewModel = NodeViewModelFactory.GetSequenceActionViewModel(sequenceAction);
+
+            Network.Nodes.Add(ViewModel);
+        }
+
+        private void Init(IEnumerable<SequenceAction> sequenceActions, NodeOutputViewModel root_output)
         {
             SequenceActionNodeViewModel? previousNode = null;
             foreach (var action in sequenceActions.ToList())
@@ -83,25 +95,17 @@ namespace FeedbackEditor.ViewModel.Nodes
                 previousNode = viewModel;
 
                 Network.Nodes.Add(viewModel);
-                _viewModels.Add(viewModel);
             }
         }
 
-        public void CreateConnection(NodeInputViewModel input, NodeOutputViewModel output)
+        private void CreateConnection(NodeInputViewModel input, NodeOutputViewModel output)
         {
             var con = Network.ConnectionFactory(input, output);
             Network.Connections.Edit(x => x.Add(con));
         }
 
-        public void RetrackSequenceFromNodes()
-        {
-            Loop.ElementContainer.Elements.Clear();
-            IFollowupNode? node = EntryNode;
-
-            AddSuccessors(node, Loop.ElementContainer.Elements);
-        }
-
-        public void AddSuccessors(IFollowupNode node, List<SequenceAction> sequences)
+        
+        private void AddSuccessors(IFollowupNode node, List<SequenceAction> sequences)
         {
             var followup = node.GetSuccessor();
             if (followup is null)

@@ -37,6 +37,7 @@
                         Background="White"
                         BorderBrush="{StaticResource PlayActionAccentColorBrush}"
                         BorderThickness="2"
+                        Click="OnAddSequenceButtonClick"
                         materialDesign:ButtonAssist.CornerRadius="20"
                         IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
                     <StackPanel Orientation="Horizontal"
@@ -57,6 +58,7 @@
                 <Button x:Name="AddWalkNode"
                         Height="40"
                         Margin="5"
+                        Click="OnAddWalkButtonClick"
                         Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
                         Background="White"
                         BorderBrush="{StaticResource WalkActionAccentColorBrush}"
@@ -85,6 +87,7 @@
                         Background="White"
                         BorderBrush="{StaticResource BranchActionAccentColorBrush}"
                         BorderThickness="2"
+                        Click="OnAddBranchButtonClick"
                         materialDesign:ButtonAssist.CornerRadius="20"
                         IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
                     <StackPanel Orientation="Horizontal"

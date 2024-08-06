@@ -16,7 +16,7 @@ namespace FeedbackEditor.ViewModel.Timeline
 
         public int Width 
         {
-            get => SequenceAction is not BranchAction branchAction
+            get => SequenceAction is not BranchAction branchAction || !branchAction.BranchList.Any()
                 ? 100
                 : branchAction.BranchList.Max(x => x.pair2.Elements.Count()) * 100;                
             }

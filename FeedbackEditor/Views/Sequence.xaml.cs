@@ -145,6 +145,7 @@ namespace FeedbackEditor.Views
                 NodeRepulsionForce = 40,
                 EquilibriumDistance = node => 0.9,
                 RowForce = node => 1000,
+                NodeMass = node => node is BranchActionNodeViewModel ? 20 : 10,
                 IsFixedNode = (node) => node is EntryNodeViewModel
             };
             var cts = new CancellationTokenSource();
@@ -162,12 +163,36 @@ namespace FeedbackEditor.Views
         private void OnAddButtonClick(object sender, RoutedEventArgs e)
         {
             ShowAddPanel = !ShowAddPanel;
+        }
 
+        private void OnAddSequenceButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (HasNetwork) {
+                _currentLoop?.AddEmpty<PlaySequenceAction>();
+            }
+            ShowAddPanel = false;
+        }
+
+        private void OnAddWalkButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (HasNetwork)
+            {
+                _currentLoop?.AddEmpty<WalkBetweenDummiesAction>();
+            }
+            ShowAddPanel = false;
+        }
+
+        private void OnAddBranchButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (HasNetwork)
+            {
+                _currentLoop?.AddEmpty<BranchAction>();
+            }
+            ShowAddPanel = false;
         }
 
         private void NetworkView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-
         }
 
         private void NetworkView_MouseDown(object sender, MouseButtonEventArgs e)
