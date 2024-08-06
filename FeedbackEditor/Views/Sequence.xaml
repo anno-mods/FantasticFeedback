@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:FeedbackEditor.Views"
              xmlns:reactiveUi="http://reactiveui.net"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:nodeList="clr-namespace:NodeNetwork.Toolkit.NodeList;assembly=NodeNetworkToolkit"
              xmlns:nodenetwork="clr-namespace:NodeNetwork.Views;assembly=NodeNetwork"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="SequenceView">
     <Grid>
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
@@ -18,67 +20,124 @@
                                  HorizontalAlignment="Stretch" 
                                  IsVisibleChanged="NetworkView_IsVisibleChanged"
                                  MouseDown="NetworkView_MouseDown"/>
-        <Grid VerticalAlignment="Bottom">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Bottom" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
-                        Grid.Row="0"
-                        Margin="10,5,5,0"
-                        Visibility="{Binding ShowAddPanel, Converter={StaticResource BoolToVis}}">
-                <Border Background="{StaticResource BackgroundColorBrush}"
+                        Grid.Column="1"
+                        Visibility="{Binding ShowAddPanel, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}">
+                <Button x:Name="AddPlaySequenceNode"
+                        Height="40"
+                        Margin="5"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                        Background="White"
+                        BorderBrush="{StaticResource PlayActionAccentColorBrush}"
                         BorderThickness="2"
-                        BorderBrush="{StaticResource LightColorBrush}"
-                        CornerRadius="6">
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
                     <StackPanel Orientation="Horizontal"
-                                MinHeight="50">
-                        <Button Content="Play"
-                                x:Name="AddPlaySequenceNode"
-                                Margin="5"
-                                Background="{StaticResource PlayActionColorBrush}"
-                                BorderBrush="{StaticResource PlayActionAccentColorBrush}"
-                                Foreground="{StaticResource TextColorBrush}"
-                                BorderThickness="2"
-                                Width="80"
-                                IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}" />
-                        <Button Content="Walk"
-                                x:Name="AddWalkNode"
-                                Margin="5"
-                                Background="{StaticResource WalkActionColorBrush}"
-                                BorderBrush="{StaticResource WalkActionAccentColorBrush}"
-                                Foreground="{StaticResource TextColorBrush}"
-                                BorderThickness="2"
-                                Width="80"
-                                IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}" />
-                        <Button Content="Branch"
-                                x:Name="AddBranchNode"
-                                Background="{StaticResource BranchActionColorBrush}"
-                                BorderBrush="{StaticResource BranchActionAccentColorBrush}"
-                                Foreground="{StaticResource TextColorBrush}"
-                                BorderThickness="2"
-                                Margin="5"
-                                Width="80"
-                                IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}" />
+                                Margin="-5,0,0,0">
+                        <materialDesign:PackIcon Kind="Play"
+                                                 Foreground="{StaticResource PlayActionColorBrush}"
+                                                 VerticalAlignment="Center"
+                                                 Height="30"
+                                                 Width="30"
+                                                 HorizontalAlignment="Center">
+                        </materialDesign:PackIcon>
+                        <TextBlock Text="Play Sequence"
+                                   Foreground="Black"
+                                   Margin="2"
+                                   VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
-                </Border>
+                </Button>
+                <Button x:Name="AddWalkNode"
+                        Height="40"
+                        Margin="5"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                        Background="White"
+                        BorderBrush="{StaticResource WalkActionAccentColorBrush}"
+                        BorderThickness="2"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                    <StackPanel Orientation="Horizontal"
+                                Margin="-5,0,0,0">
+                        <materialDesign:PackIcon Kind="Walk"
+                                                 Foreground="{StaticResource WalkActionColorBrush}"
+                                                 VerticalAlignment="Center"
+                                                 Height="30"
+                                                 Width="30"
+                                                 HorizontalAlignment="Center">
+                        </materialDesign:PackIcon>
+                        <TextBlock Text="Walk"
+                                   Foreground="Black"
+                                   Margin="2"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="AddBranchNode"
+                        Height="40"
+                        Margin="5"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                        Background="White"
+                        BorderBrush="{StaticResource BranchActionAccentColorBrush}"
+                        BorderThickness="2"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                    <StackPanel Orientation="Horizontal"
+                                Margin="-5,0,0,0">
+                        <materialDesign:PackIcon Kind="ShareVariant"
+                                                 Foreground="{StaticResource BranchActionColorBrush}"
+                                                 VerticalAlignment="Center"
+                                                 Height="30"
+                                                 Width="30"
+                                                 HorizontalAlignment="Center">
+                        </materialDesign:PackIcon>
+                        <TextBlock Text="Branch"
+                                   Foreground="Black"
+                                   Margin="2"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal"
-                        Height="50"
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Left">
+                <Button  Click="OnLayoutButtonClick"
                         Margin="5"
-                        Grid.Row="1">
-                <Button Content="Add New"
-                        x:Name="AddNode"
+                         Height="50"
+                         Background="{StaticResource ButtonColorBrush}"
+                         Width="50"
+                         IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                    <materialDesign:PackIcon Kind="FitToScreen"
+                                             Foreground="{StaticResource TextColorBrush}"
+                                             VerticalAlignment="Center"
+                                             Height="30"
+                                             Width="30"
+                                             HorizontalAlignment="Center">
+                    </materialDesign:PackIcon>
+                </Button>
+                <Button x:Name="AddNode"
                         Click="OnAddButtonClick"
-                        Margin="5"
-                        Width="100"
-                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}" />
-                <Button Content="Auto Layout"
-                        Click="OnLayoutButtonClick"
-                        Margin="5"
-                        Width="100"
-                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}" />
+                        Margin="10,5"
+                        Width="70"
+                        Background="{StaticResource ButtonColorBrush}"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                        Height="70"
+                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                    <materialDesign:PackIcon Kind="Plus"
+                                             Foreground="{StaticResource TextColorBrush}"
+                                             VerticalAlignment="Center"
+                                             Height="50"
+                                             Width="50"
+                                             HorizontalAlignment="Center">
+                    </materialDesign:PackIcon>
+                </Button>
+
+                
             </StackPanel>
         </Grid>
     </Grid>

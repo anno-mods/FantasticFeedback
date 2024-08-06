@@ -31,7 +31,7 @@
                                 <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}"
                                       Width="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=HeaderWidth}">
                                     <Border Margin="{Binding OffsetOverride}"
-                                            CornerRadius="6"
+                                            CornerRadius="15"
                                             Background="{Binding ChannelType, Converter={StaticResource ChannelColor}}"
                                             x:Name="BackgroundBorder"
                                             BorderBrush="{StaticResource LoopChannelHighlightedBorderColorBrush}">
@@ -68,7 +68,7 @@
                             <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
                                 <Border BorderThickness="3"
                                         BorderBrush="{StaticResource WalkActionAccentColorBrush}"
-                                        CornerRadius="6"
+                                        CornerRadius="15"
                                         Margin="0,2"
                                         Background="{StaticResource WalkActionColorBrush}">
                                     <StackPanel Orientation="Horizontal"
@@ -101,7 +101,7 @@
                             <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
                                 <Border BorderThickness="3"
                                         BorderBrush="{StaticResource PlayActionAccentColorBrush}"
-                                        CornerRadius="6"
+                                        CornerRadius="15"
                                         Margin="0,2"
                                         Background="{StaticResource PlayActionColorBrush}">
                                     <StackPanel Orientation="Horizontal"
@@ -126,7 +126,7 @@
                             <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
                                 <Border BorderThickness="3"
                                         BorderBrush="{StaticResource DefaultActionAccentColorBrush}"
-                                        CornerRadius="6"
+                                        CornerRadius="15"
                                         Margin="0,2"
                                         Background="{StaticResource DefaultActionColorBrush}">
                                     <StackPanel Orientation="Vertical"
@@ -147,7 +147,7 @@
                             <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
                                 <Border BorderThickness="3"
                                         BorderBrush="{StaticResource BranchActionAccentColorBrush}"
-                                        CornerRadius="6"
+                                        CornerRadius="15"
                                         Margin="0,2"
                                         Background="{StaticResource BranchActionColorBrush}">
                                     <StackPanel Orientation="Vertical"

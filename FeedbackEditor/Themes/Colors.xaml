@@ -35,4 +35,10 @@
                      Color="#404040" />
     <SolidColorBrush x:Key="LightColorBrush"
                      Color="Tomato" />
+    <SolidColorBrush x:Key="ButtonColorBrush"
+                     Color="DarkCyan" />
+    <SolidColorBrush x:Key="ButtonPressedBrush"
+                     Color="Cyan" />
+    <SolidColorBrush x:Key="ButtonDisabledBrush"
+                     Color="Gray" />
 </ResourceDictionary>

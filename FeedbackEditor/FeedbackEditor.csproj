@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
     <PackageReference Include="NodeNetwork" Version="6.0.0" />
     <PackageReference Include="NodeNetworkToolkit" Version="6.0.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
