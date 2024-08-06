@@ -22,10 +22,13 @@ namespace FeedbackEditor.ViewModel
         public string DummyFrom { get; set; }
         public string DummyTo { get; set; }
 
+        public WalkBetweenDummiesAction Action { get; set; }
+
         public WalkBetweenDummiesActionViewModel(WalkBetweenDummiesAction sequenceAction) : base(sequenceAction)
         {
             DummyFrom = sequenceAction.StartDummy;
             DummyTo = sequenceAction.TargetDummy;
+            Action = sequenceAction;
 
             Name = "Walk Between Dummies";
         }

@@ -1,5 +1,6 @@
 ﻿using FeedbackEditor.Models.FC.Actions;
 using FeedbackEditor.ViewModel;
+using PropertyChanged;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace FeedbackEditor.Views.Nodes
     /// <summary>
     /// Interaktionslogik für PlaySequenceNodeView.xaml
     /// </summary>
+    [AddINotifyPropertyChangedInterface]
     public partial class WalkBetweenDummiesNodeView : IViewFor<WalkBetweenDummiesActionViewModel>
     {
         public static readonly DependencyProperty ViewModelProperty =
@@ -29,6 +31,7 @@ namespace FeedbackEditor.Views.Nodes
 
         public WalkBetweenDummiesNodeView()
         {
+            DataContext = this;
             InitializeComponent();
 
             this.WhenActivated(d =>

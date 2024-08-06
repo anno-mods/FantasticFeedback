@@ -112,7 +112,7 @@
                                                    FontWeight="Bold"
                                                    Foreground="{StaticResource TextColorBrush}"
                                                    FontSize="13" />
-                                        <TextBlock Text="{Binding SequenceAction.IdleSequenceID}"
+                                        <TextBlock Text="{Binding SequenceAction.IdleSequenceID,UpdateSourceTrigger=PropertyChanged}"
                                                    Foreground="{StaticResource TextColorBrush}"
                                                    HorizontalAlignment="Center"
                                                    FontSize="13" />

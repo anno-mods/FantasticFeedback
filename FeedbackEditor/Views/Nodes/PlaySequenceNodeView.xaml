@@ -17,11 +17,10 @@
                         <Setter.Value>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="10">
-                                    <Label Content="Sequence:"></Label>
+                                    <Label Content="{Binding DataContext}"></Label>
                                     <ComboBox ItemsSource="{Binding Source={StaticResource SequenceIdValues}}"
                                               Height="30"
                                               Margin="5"
-                                              IsSynchronizedWithCurrentItem="True"
                                               SelectedItem="{Binding DataContext.ViewModel.Action.IdleSequenceID, UpdateSourceTrigger=PropertyChanged, ElementName=PlaySequenceView}"
                                               VerticalContentAlignment="Center"></ComboBox>
                                     <Grid>
