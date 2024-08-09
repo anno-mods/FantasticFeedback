@@ -37,7 +37,9 @@
                                             <RowDefinition />
                                             <RowDefinition />
                                         </Grid.RowDefinitions>
-                                        <Label Content="Min Play Count" />
+                                        <Label Content="Min Play Count"
+                                               Margin="3"
+                                               Style="{StaticResource MaterialDesignLabel}"/>
                                         <controls:NumericSpinner Grid.Column="1"
                                                                  Value="{Binding DataContext.ViewModel.Action.MinPlayCount, ElementName=PlaySequenceView}"
                                                                  x:Name="MinPlayCount"
@@ -49,7 +51,9 @@
                                         </controls:NumericSpinner>
 
                                         <Label Content="Max Play Count"
-                                               Grid.Row="1"/>
+                                               Grid.Row="1"
+                                               Margin="3"
+                                               Style="{StaticResource MaterialDesignLabel}"/>
                                         <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.MaxPlayCount, ElementName=PlaySequenceView}"
                                                                  Grid.Row="1"
                                                                  Grid.Column="1"
@@ -59,7 +63,9 @@
                                                                  Margin="3">
                                         </controls:NumericSpinner>
                                         <Label Content="Min Play Time"
-                                               Grid.Row="2" />
+                                               Grid.Row="2"
+                                               Margin="3"
+                                               Style="{StaticResource MaterialDesignLabel}" />
                                         <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.MinPlayTime, ElementName=PlaySequenceView}"
                                                                  Grid.Row="2"
                                                                  Grid.Column="1"
@@ -69,7 +75,9 @@
                                                                  Margin="3">
                                         </controls:NumericSpinner>
                                         <Label Content="Max Play Time"
-                                               Grid.Row="3" />
+                                               Grid.Row="3"
+                                               Margin="3"
+                                               Style="{StaticResource MaterialDesignLabel}" />
                                         <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.MaxPlayTime, ElementName=PlaySequenceView}"
                                                                  Grid.Row="3"
                                                                  Grid.Column="1"
@@ -81,9 +89,10 @@
                                     </Grid>
                                     <CheckBox Content="Reset Start Time"
                                               Margin="5"
+                                              HorizontalAlignment="Left"
+                                              Background="{StaticResource PlayActionAccentColorBrush}"
                                               IsChecked="{Binding DataContext.ViewModel.Action.ResetStartTime, ElementName=PlaySequenceView}"
-                                              BorderThickness="2"
-                                              BorderBrush="{StaticResource PlayActionAccentColorBrush}">
+                                              Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
                                     </CheckBox>
                                 </StackPanel>
                             </DataTemplate>
