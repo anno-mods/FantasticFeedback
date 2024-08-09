@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Joins;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
@@ -35,6 +37,7 @@ namespace FeedbackEditor.Models.FC
                 {
                     XElement? el = XNode.ReadFrom(tempReader) as XElement;
                     Lol = el.Value;
+                    FillGuidsFromCdataString(el.Value);
                 }
                 if (reader.Name == nameof(AssetGroupNames))
                 {
@@ -56,8 +59,8 @@ namespace FeedbackEditor.Models.FC
                 if (!first)
                 {
                     builder.Append(' ');
-                    first = false; 
                 }
+                first = false;
                 builder.Append(key);
                 builder.Append(' ');
                 builder.Append(value);
@@ -65,6 +68,25 @@ namespace FeedbackEditor.Models.FC
             builder.Append(']');
             writer.WriteElementString(nameof(GuidVariationList), builder.ToString());
             writer.WriteElementString(nameof(AssetGroupNames), AssetGroupNames);
+        }
+
+        private void FillGuidsFromCdataString(String cdata)
+        {
+            var match = Regex.Match(cdata, @"CDATA\[([0-9\s-]+)\]");
+            try
+            {
+                var extract = match.Groups[1].Value;
+                var split = extract.Split(' ');
+                for (int i = 0; i < split.Length; i += 2)
+                {
+                    GuidVariationList.Add(int.Parse(split[i]), int.Parse(split[i + 1]));
+                }
+            }
+            catch
+            {
+                Console.WriteLine($"Error parsing CDATA {cdata}");
+            }
+
         }
     }
 }

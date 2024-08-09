@@ -67,8 +67,11 @@ namespace FeedbackEditor.Services
 
         public void SaveCurrentFile(String filepath)
         {
+            var settings = new XmlWriterSettings();
+            settings.OmitXmlDeclaration = true;
+            settings.Indent = true;
             using var fs = File.Create(filepath);
-            using (XmlWriter writer = new FeedbackXmlWriter(XmlWriter.Create(fs)))
+            using (XmlWriter writer = new FeedbackXmlWriter(XmlWriter.Create(fs, settings)))
             {
                 _serializer.Serialize(writer, CurrentFile);
             }
