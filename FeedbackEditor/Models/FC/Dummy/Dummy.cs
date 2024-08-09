@@ -1,13 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace FeedbackEditor.Models.FC.Dummy
 {
+    public struct Vector3
+    { 
+        public float x { get; set; }
+        public float y { get; set; }
+        public float z { get; set; }
+    }
+
+    public struct Quaternion
+    {
+        public float x { get; set; }
+        public float y { get; set; }
+        public float z { get; set; }
+        public float w { get; set; }
+    }
+
     public class Dummy : IDummyItem
     {
         [XmlElement(ElementName = "hasValue")]

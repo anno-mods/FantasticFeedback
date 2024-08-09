@@ -38,6 +38,8 @@ namespace FeedbackEditor
     {
         public DummyGroup DummyRoot { get; private set; }
 
+        public bool CanSave { get; private set; } = false; 
+
         public MainWindow()
         {
             DataContext = this;
@@ -72,6 +74,23 @@ namespace FeedbackEditor
                 FcFileService.Instance.SetCurrentFile(file);
                 NodeView.ShowDefaultNodesView();
                 DummyRoot = file.DummyRoot;
+                CanSave = true;
+                return;
+            }
+            CanSave = false;
+        }
+
+        private void SaveFileClick(object sender, RoutedEventArgs e)
+        {
+            var picker = new Microsoft.Win32.SaveFileDialog
+            {
+                Filter = "Fc Files converted with FileDBReader (*.xml)|*.xml",
+                RestoreDirectory = true
+            };
+
+            if (true == picker.ShowDialog())
+            {
+                FcFileService.Instance.SaveCurrentFile(picker.FileName);
             }
         }
     }

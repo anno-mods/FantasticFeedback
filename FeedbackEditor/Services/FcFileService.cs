@@ -1,5 +1,6 @@
 ﻿using FeedbackEditor.Models.FC;
 using FeedbackEditor.Models.FC.Dummy;
+using FeedbackEditor.Serialization;
 using FeedbackEditor.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,15 @@ namespace FeedbackEditor.Services
             {
                 var file = _serializer.Deserialize(reader) as FcFile;
                 return file;
+            }
+        }
+
+        public void SaveCurrentFile(String filepath)
+        {
+            using var fs = File.Create(filepath);
+            using (XmlWriter writer = new FeedbackXmlWriter(XmlWriter.Create(fs)))
+            {
+                _serializer.Serialize(writer, CurrentFile);
             }
         }
 

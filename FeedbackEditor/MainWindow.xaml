@@ -51,7 +51,18 @@
                             x:Name="TimelineView"/>
         </Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Button Content="Open File" Width="100" Height="25" Margin="5" Click="OpenFileClick"/>
+            <Button Content="Open File"
+                    Width="100"
+                    Height="25"
+                    Margin="5"
+                    Click="OpenFileClick" />
+            <Button Content="Save File"
+                    Width="100"
+                    Height="25"
+                    IsEnabled="{Binding CanSave,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="5"
+                    Click="SaveFileClick"
+                    Cursor="Hand" />
         </StackPanel>
     </Grid>
 </Window>
