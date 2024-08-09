@@ -22,14 +22,14 @@ namespace FeedbackEditor.ViewModel
             Splat.Locator.CurrentMutable.Register(() => new WalkBetweenDummiesNodeView(), typeof(IViewFor<WalkBetweenDummiesActionViewModel>));
         }
 
-        private Dummy? _startDummy; 
+        private Dummy? _startDummy;
+
         public Dummy? StartDummy 
         {
             get => _startDummy;
-            set 
+            set
             {
-                Action.StartDummy = value is not null ? value.Name : "";
-                Action.StartDummyId = value is not null ? value.Id : 0;
+                UpdateModelStartDummy();
             }
         }
         public Dummy? TargetDummy 
@@ -43,6 +43,17 @@ namespace FeedbackEditor.ViewModel
         }
         public Dummy? _targetDummy { get; set; }
 
+        private bool _hasStartDummy;
+        public bool HasStartDummy
+        {
+            get => _hasStartDummy;
+            set
+            {
+                _hasStartDummy = value;
+                UpdateModelStartDummy();
+            }  
+        }
+
         public WalkBetweenDummiesAction Action { get; set; }
 
         public WalkBetweenDummiesActionViewModel(WalkBetweenDummiesAction sequenceAction) : base(sequenceAction)
@@ -50,8 +61,15 @@ namespace FeedbackEditor.ViewModel
             Action = sequenceAction;
             _startDummy = FcFileService.Instance.GetDummy(sequenceAction.StartDummyId);
             _targetDummy = FcFileService.Instance.GetDummy(sequenceAction.TargetDummyId);
+            HasStartDummy = StartDummy is not null;
 
             Name = "Walk Between Dummies";
+        }
+
+        private void UpdateModelStartDummy()
+        {
+            Action.StartDummy = StartDummy is not null && HasStartDummy ? StartDummy.Name : "";
+            Action.StartDummyId = StartDummy is not null && HasStartDummy ? StartDummy.Id : 0;
         }
     }
 }
