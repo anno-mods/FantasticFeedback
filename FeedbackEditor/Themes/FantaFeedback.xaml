@@ -199,9 +199,11 @@
                             </Grid>
                         </ScrollViewer>
 
-                        <Grid Grid.Column="1" Grid.Row="2" Background="#000000" >
-                            <ScrollBar x:Name="PART_HozitontalScroll" Orientation="Horizontal" Background="Transparent"/>
-                        </Grid>
+                        <ScrollBar x:Name="PART_HozitontalScroll"
+                                   Orientation="Horizontal"
+                                   Grid.Column="1"
+                                   Style="{StaticResource MaterialDesignScrollBar}"
+                                   Grid.Row="2" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

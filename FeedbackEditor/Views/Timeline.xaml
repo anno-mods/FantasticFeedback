@@ -15,7 +15,6 @@
             <converter:ChannelSelectableConverter x:Key="ChannelSelectable" />
         </Grid.Resources>
         <tt:Timelines x:Name="Timelines" 
-                      Grid.Row="1"
                       RowHeight="40"
                       HeaderWidth="250"
                       RulerHeight="0"

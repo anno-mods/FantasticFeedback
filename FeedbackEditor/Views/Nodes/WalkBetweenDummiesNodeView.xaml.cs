@@ -1,4 +1,5 @@
 ﻿using FeedbackEditor.Models.FC.Actions;
+using FeedbackEditor.Models.FC.Dummy;
 using FeedbackEditor.ViewModel;
 using PropertyChanged;
 using ReactiveUI;
@@ -39,6 +40,7 @@ namespace FeedbackEditor.Views.Nodes
                 this.WhenAnyValue(v => v.ViewModel).BindTo(this, v => v.NodeView.ViewModel).DisposeWith(d);
             });
         }
+
         public WalkBetweenDummiesActionViewModel ViewModel
         {
             get => (WalkBetweenDummiesActionViewModel)GetValue(ViewModelProperty);

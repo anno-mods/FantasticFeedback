@@ -1,4 +1,5 @@
 ﻿using FeedbackEditor.Models.FC;
+using FeedbackEditor.Models.FC.Dummy;
 using FeedbackEditor.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace FeedbackEditor.Services
 {
     public class FcFileService
     {
-        public static FcFileService Instance 
-        { 
-            get; 
+        public static FcFileService Instance
+        {
+            get;
             private set;
         } = new FcFileService();
         public FcFile CurrentFile { get; private set; }
@@ -30,7 +31,7 @@ namespace FeedbackEditor.Services
             CurrentFile = new FcFile();
         }
 
-        public String GetActorName(FeedbackConfig config) 
+        public String GetActorName(FeedbackConfig config)
         {
             var index = CurrentFile.FeedbackDefinition.FeedbackConfigs.IndexOf(config);
 
@@ -46,6 +47,11 @@ namespace FeedbackEditor.Services
         public void TrySetActorName(FeedbackConfig config, String NewName)
         {
             throw new NotImplementedException();
+        }
+
+        public Dummy? GetDummy(int id)
+        {
+            return CurrentFile.DummyRoot.GetContainedDummies().Where(x => x.Id == id).FirstOrDefault();
         }
 
         public FcFile LoadFcFile(String datapath)

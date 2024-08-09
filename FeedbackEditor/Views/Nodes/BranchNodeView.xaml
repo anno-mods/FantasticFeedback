@@ -11,7 +11,8 @@
     <Grid>
         <views:NodeView x:Name="NodeView"
                         BorderBrush="{StaticResource BranchActionAccentColorBrush}"
-                        Background="{StaticResource BranchActionColorBrush}">
+                        Background="{StaticResource BranchActionColorBrush}"
+                        CornerRadius="15">
             <views:NodeView.TrailingControlPresenterStyle>
                 <Style TargetType="ContentPresenter">
                     <Setter Property="ContentTemplate">

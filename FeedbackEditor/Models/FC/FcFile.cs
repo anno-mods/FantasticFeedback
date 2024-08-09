@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FeedbackEditor.Models.FC.Dummy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,10 @@ namespace FeedbackEditor.Models.FC
     [XmlRoot("Content")]
     public class FcFile
     {
+        [XmlElement]
+        public DummyGroup DummyRoot { get; set; }
+        [XmlElement]
+        public int IdCounter { get; set; }
         [XmlElement]
         public FeedbackDefinition FeedbackDefinition { get; set; }
         [XmlElement]

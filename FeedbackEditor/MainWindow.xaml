@@ -5,45 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FeedbackEditor"
         xmlns:views="clr-namespace:FeedbackEditor.Views"
+        xmlns:fcModel="clr-namespace:FeedbackEditor.Models.FC.Dummy"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid ShowGridLines="True"
-          Background="DarkSlateGray">
+        Title="MainWindow"
+        Height="450"
+        Width="800">
+    <Grid Background="DarkSlateGray">
+        <Grid.Resources>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition MinHeight ="100"/>
             <RowDefinition Height="Auto" />
             <RowDefinition MinHeight="100" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width ="300"/>
+            </Grid.ColumnDefinitions>
             <views:Sequence HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             x:Name="NodeView" />
+            <TreeView Grid.Column="1"
+                      Style="{StaticResource MaterialDesignTreeView}"
+                      ItemsSource="{Binding DummyRoot.Children, UpdateSourceTrigger = PropertyChanged}"
+                      ItemContainerStyle="{StaticResource MaterialDesignTreeViewItem}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type fcModel:IDummyItem}"
+                                              ItemsSource="{Binding Children}">
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
         </Grid>
         <GridSplitter Grid.Row="1"
-                      BorderThickness="0"
-                      Grid.ColumnSpan="2"
-                      Height="6"
-                      Background="Transparent"
-                      BorderBrush="Transparent"
+                      Height="5"
                       ResizeDirection="Rows"
-                      HorizontalAlignment="Stretch">
-            <GridSplitter.Template>
-                <ControlTemplate TargetType="{x:Type GridSplitter}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}"
-                            Width="{TemplateBinding Width}">
-                        <Border Height="3"
-                                Width="50"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                BorderThickness="1 0"
-                                Background="White"
-                                BorderBrush="Cyan">
-                        </Border>
-                    </Border>
-                </ControlTemplate>
-            </GridSplitter.Template>
+                      HorizontalAlignment="Stretch"
+                      Style="{StaticResource MaterialDesignGridSplitter}">
         </GridSplitter>
         <Grid Grid.Row="2"
               HorizontalAlignment="Stretch">

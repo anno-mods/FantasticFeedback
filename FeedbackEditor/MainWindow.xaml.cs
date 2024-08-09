@@ -25,20 +25,23 @@ using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Serialization;
 using static System.Net.WebRequestMethods;
+using FeedbackEditor.Models.FC.Dummy;
+using PropertyChanged;
 
 namespace FeedbackEditor
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    [AddINotifyPropertyChangedInterface]
     public partial class MainWindow : Window
     {
+        public DummyGroup DummyRoot { get; private set; }
+
         public MainWindow()
         {
-            InitializeComponent();
             DataContext = this;
-
-            FcFileService.Instance.LoadFcFile("costume_factory_01.xml");
+            InitializeComponent();
             
             TimelineView.SelectionChanged += OnSelectedLoopChanged;
         }
@@ -68,6 +71,7 @@ namespace FeedbackEditor
                     throw new InvalidDataException("The Fc File loaded is invalid");
                 FcFileService.Instance.SetCurrentFile(file);
                 NodeView.ShowDefaultNodesView();
+                DummyRoot = file.DummyRoot;
             }
         }
     }

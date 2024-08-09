@@ -10,14 +10,21 @@
              x:Name="WalkBetweenDummiesView"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <views:NodeView x:Name="NodeView" BorderBrush="{StaticResource WalkActionAccentColorBrush}" Background="{StaticResource WalkActionColorBrush}">
+        <views:NodeView x:Name="NodeView"
+                        BorderBrush="{StaticResource WalkActionAccentColorBrush}" 
+                        Background="{StaticResource WalkActionColorBrush}"
+                        CornerRadius="15">
             <views:NodeView.TrailingControlPresenterStyle>
                 <Style TargetType="ContentPresenter">
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical" Margin="10">
-                                    <Label Content="Walk Sequence:"></Label>
+                                <StackPanel Orientation="Vertical"
+                                            Margin="10">
+                                    <TextBlock Text="Walk Sequence"
+                                               Margin="5"
+                                               Style="{StaticResource MaterialDesignTextBlock}"
+                                               VerticalAlignment="Center" />
                                     <ComboBox ItemsSource="{Binding Source={StaticResource SequenceIdValues}}"
                                               SelectedItem="{Binding DataContext.ViewModel.Action.WalkSequence, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
                                               Height="30"
@@ -26,41 +33,65 @@
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
-                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="1.5*" />
+                                            <ColumnDefinition Width="50" />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
                                             <RowDefinition />
                                             <RowDefinition />
                                         </Grid.RowDefinitions>
-                                        <Label Content="Speed Factor"
-                                               VerticalAlignment="Center"/>
-                                        <controls:NumericSpinner Value="0"
+                                        <TextBlock Text="Speed Factor"
+                                                   Margin="5"
+                                                   Style="{StaticResource MaterialDesignTextBlock}"
+                                                   VerticalAlignment="Center" />
+                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.SpeedFactorF, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
                                                                  Grid.Column="1"
                                                                  Decimals="2"
                                                                  Step="0.05"
+                                                                 Grid.ColumnSpan="2"
                                                                  MinValue="0"
                                                                  MaxValue="5"
                                                                  Height="32"
                                                                  Margin="3"
                                                                  ValueChanged="NumericSpinner_ValueChanged">
                                         </controls:NumericSpinner>
-                                        <Label Content="Start Dummy" 
-                                               Grid.Row="1"
-                                               VerticalAlignment="Center"/>
-                                        <ComboBox Height="30"
-                                                  Margin="3"
-                                                  Grid.Row="1"
-                                                  Grid.Column="1"
-                                                  VerticalContentAlignment="Center"></ComboBox>
-                                        <Label Content="End Dummy"
-                                               Grid.Row="2"
-                                               VerticalAlignment="Center"/>
-                                        <ComboBox Height="30"
-                                                  Margin="3"
-                                                  Grid.Row="2"
-                                                  Grid.Column="1"
-                                                  VerticalContentAlignment="Center"></ComboBox>
+                                        <!-- Start Dummy Picker -->
+                                        <TextBlock Text="Start:"
+                                                   Grid.Row="1"
+                                                   Margin="5"
+                                                   Style="{StaticResource MaterialDesignTextBlock}"
+                                                   VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding DataContext.ViewModel.StartDummy.Name, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
+                                                   Style="{StaticResource MaterialDesignTextBlock}"
+                                                   VerticalAlignment="Center"
+                                                   Grid.Row="2"
+                                                   Margin="3"
+                                                   Grid.Column="1"/>
+                                        <Button Grid.Row="1"
+                                                Margin="3"
+                                                Grid.Column="2"
+                                                Background="{StaticResource WalkActionAccentColorBrush}"
+                                                BorderThickness="0"
+                                                Style="{StaticResource MaterialDesignRaisedButton}"></Button>
+                                        <!-- End Dummy Picker -->
+                                        <TextBlock Text="End:"
+                                                   Grid.Row="2"
+                                                   Margin="5"
+                                                   Style="{StaticResource MaterialDesignTextBlock}"
+                                                   VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding DataContext.ViewModel.TargetDummy.Name, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
+                                                   Style="{StaticResource MaterialDesignTextBlock}"
+                                                   VerticalAlignment="Center"
+                                                   Margin="3"
+                                                   Grid.Row="2"
+                                                   Grid.Column="1"/>
+                                        <Button Background="{StaticResource WalkActionAccentColorBrush}"
+                                                BorderThickness="0"
+                                                Margin="3"
+                                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                                Grid.Row="2"
+                                                Grid.Column="2"></Button>
                                     </Grid>
 
                                     

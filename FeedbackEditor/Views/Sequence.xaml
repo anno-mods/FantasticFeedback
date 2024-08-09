@@ -111,7 +111,6 @@
                 <Button  Click="OnLayoutButtonClick"
                         Margin="5"
                          Height="50"
-                         Background="{StaticResource ButtonColorBrush}"
                          Width="50"
                          IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
@@ -127,7 +126,6 @@
                         Click="OnAddButtonClick"
                         Margin="10,5"
                         Width="70"
-                        Background="{StaticResource ButtonColorBrush}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                         Height="70"
                         IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">

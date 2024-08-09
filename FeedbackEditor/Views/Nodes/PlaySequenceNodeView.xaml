@@ -10,7 +10,10 @@
              x:Name="PlaySequenceView"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <views:NodeView x:Name="NodeView" BorderBrush="{StaticResource PlayActionAccentColorBrush}" Background="{StaticResource PlayActionColorBrush}">
+        <views:NodeView x:Name="NodeView"
+                        BorderBrush="{StaticResource PlayActionAccentColorBrush}"
+                        Background="{StaticResource PlayActionColorBrush}"
+                        CornerRadius="15">
             <views:NodeView.TrailingControlPresenterStyle>
                 <Style TargetType="ContentPresenter">
                     <Setter Property="ContentTemplate">
