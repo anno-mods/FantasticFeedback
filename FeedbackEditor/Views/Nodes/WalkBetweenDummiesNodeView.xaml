@@ -70,6 +70,7 @@
                                                Grid.Row="2"
                                                IsEnabled="{Binding DataContext.ViewModel.HasStartDummy, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
                                                Margin="5"
+                                               ToolTip="Drag and Drop a Dummy from the Right Side into the box to set the Start Dummy"
                                                Style="{StaticResource MaterialDesignLabel}"
                                                VerticalAlignment="Center"/>
                                         <TextBox Grid.Row="2"
@@ -88,6 +89,7 @@
                                         </TextBox>
                                         <Label Content="End:"
                                                Grid.Row="3"
+                                               ToolTip="Drag and Drop a Dummy from the Right Side into the box to set an End Dummy"
                                                Margin="5"
                                                Style="{StaticResource MaterialDesignLabel}"
                                                VerticalAlignment="Center" />
