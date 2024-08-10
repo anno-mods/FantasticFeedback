@@ -22,6 +22,7 @@ namespace FeedbackEditor.ViewModel.Nodes
         public EntryNodeViewModel()
         {
             FollowupActionOutput = new NodeOutputViewModel();
+            FollowupActionOutput.MaxConnections = 1;
             Outputs.Add(FollowupActionOutput);
 
             FollowupActionOutput.Name = "Next Action";

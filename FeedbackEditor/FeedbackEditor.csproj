@@ -36,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Nodes\FadeNodeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Nodes\BranchNodeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

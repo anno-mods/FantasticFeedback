@@ -1,18 +1,9 @@
 ﻿using DynamicData;
-using DynamicData.Binding;
 using FeedbackEditor.Models.FC.Actions;
 using FeedbackEditor.Views.Nodes;
 using NodeNetwork.ViewModels;
-using NodeNetwork.Views;
 using PropertyChanged;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace FeedbackEditor.ViewModel.Nodes.SequenceActions
 {

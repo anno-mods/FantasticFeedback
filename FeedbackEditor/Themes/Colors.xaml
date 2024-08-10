@@ -35,6 +35,12 @@
     <SolidColorBrush x:Key="PlayAnyActionAccentColorBrush"
                      Color="Lavender" />
 
+    <Color x:Key="FadeActionColor">Peru</Color>
+    <SolidColorBrush x:Key="FadeActionColorBrush"
+                     Color="{StaticResource FadeActionColor}" />
+    <SolidColorBrush x:Key="FadeActionAccentColorBrush"
+                     Color="Goldenrod" />
+
 
     <Color x:Key="BranchActionColor">ForestGreen</Color>
     <SolidColorBrush x:Key="BranchActionColorBrush"

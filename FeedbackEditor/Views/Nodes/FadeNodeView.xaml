@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="FeedbackEditor.Views.Nodes.FadeNodeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FeedbackEditor.Views.Nodes"
+             xmlns:views="clr-namespace:NodeNetwork.Views;assembly=NodeNetwork"
+             xmlns:controls="clr-namespace:Stopbyte.Controls"
+             mc:Ignorable="d"
+             x:Name="FadeView"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <views:NodeView x:Name="NodeView"
+                        BorderBrush="{StaticResource FadeActionAccentColorBrush}"
+                        CornerRadius="15">
+            <views:NodeView.Background>
+                <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="0,1">
+                    <GradientStop Color="{StaticResource FadeActionColor}" />
+                    <GradientStop Color="{StaticResource NodeBackground}"
+                                  Offset="0.5" />
+                </LinearGradientBrush>
+            </views:NodeView.Background>
+            <views:NodeView.TrailingControlPresenterStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <Grid Margin="10,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Content="Fade to Visibile" 
+                                              Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                              Background="{StaticResource FadeActionAccentColorBrush}"
+                                              HorizontalAlignment="Left"
+                                              IsChecked="{Binding DataContext.ViewModel.Action.ShowObject, UpdateSourceTrigger=PropertyChanged, ElementName=FadeView}"
+                                              Margin="5"
+                                              Grid.ColumnSpan="2"/>
+                                    <Label Content="Time Offset"
+                                           Grid.Row="1"
+                                           Margin="5"
+                                           Style="{StaticResource MaterialDesignLabel}">
+                                        
+                                    </Label>
+                                    <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.TimeOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=FadeView}"
+                                                             Grid.Row="1"
+                                                             Grid.Column="1"
+                                                             ValueChanged="NumericSpinner_ValueChanged"
+                                                             Decimals="1"    
+                                                             MinValue="0"
+                                                             MinWidth="80"
+                                                             Step="1"
+                                                             Margin="5">
+                                    </controls:NumericSpinner>
+                                </Grid>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </views:NodeView.TrailingControlPresenterStyle>
+        </views:NodeView>
+    </Grid>
+</UserControl>

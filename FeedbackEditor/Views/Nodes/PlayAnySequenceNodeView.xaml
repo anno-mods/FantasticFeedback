@@ -9,7 +9,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              x:Name="PlaySequenceView"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <Grid>
         <views:NodeView x:Name="NodeView"
                         BorderBrush="{StaticResource PlayAnyActionAccentColorBrush}"
@@ -83,7 +84,7 @@
                                                Margin="3"
                                                Style="{StaticResource MaterialDesignLabel}"/>
                                         <controls:NumericSpinner Grid.Column="1"
-                                                                 Value="{Binding DataContext.ViewModel.Action.MinPlayCount, ElementName=PlaySequenceView}"
+                                                                 Value="{Binding DataContext.ViewModel.Action.MinPlayCount, Mode=TwoWay, ElementName=PlaySequenceView}"
                                                                  x:Name="MinPlayCount"
                                                                  ValueChanged="NumericSpinner_ValueChanged"
                                                                  Decimals="0"
@@ -96,7 +97,7 @@
                                                Grid.Row="1"
                                                Margin="3"
                                                Style="{StaticResource MaterialDesignLabel}"/>
-                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.MaxPlayCount, ElementName=PlaySequenceView}"
+                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.MaxPlayCount, Mode=TwoWay, ElementName=PlaySequenceView}"
                                                                  Grid.Row="1"
                                                                  Grid.Column="1"
                                                                  ValueChanged="NumericSpinner_ValueChanged"
@@ -108,7 +109,7 @@
                                                Grid.Row="2"
                                                Margin="3"
                                                Style="{StaticResource MaterialDesignLabel}" />
-                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.MinPlayTime, ElementName=PlaySequenceView}"
+                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.MinPlayTime, Mode=TwoWay, ElementName=PlaySequenceView}"
                                                                  Grid.Row="2"
                                                                  Grid.Column="1"
                                                                  ValueChanged="NumericSpinner_ValueChanged"
@@ -120,7 +121,7 @@
                                                Grid.Row="3"
                                                Margin="3"
                                                Style="{StaticResource MaterialDesignLabel}" />
-                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.MaxPlayTime, ElementName=PlaySequenceView}"
+                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.MaxPlayTime, Mode=TwoWay, ElementName=PlaySequenceView}"
                                                                  Grid.Row="3"
                                                                  Grid.Column="1"
                                                                  ValueChanged="NumericSpinner_ValueChanged"

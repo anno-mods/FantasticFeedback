@@ -200,6 +200,15 @@ namespace FeedbackEditor.Views
             ShowAddPanel = false;
         }
 
+        private void OnAddFadeButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (HasNetwork)
+            {
+                _currentLoop?.AddEmpty<FadeAction>();
+            }
+            ShowAddPanel = false;
+        }
+
         private void NetworkView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
         }

@@ -76,6 +76,7 @@ namespace FeedbackEditor.Views
         public DataTemplate GenericSequenceAction { get; set; }
         public DataTemplate BranchAction { get; set; }
         public DataTemplate PlayAnySequenceAction { get; set; }
+        public DataTemplate FadeAction { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -90,6 +91,7 @@ namespace FeedbackEditor.Views
                 ActionType.WALK_BETWEEN_DUMMIES => WalkBetweenDummiesAction,
                 ActionType.BRANCH => BranchAction,
                 ActionType.PLAY_ANY_SEQUENCE => PlayAnySequenceAction,
+                ActionType.FADE => FadeAction,
                 _ => GenericSequenceAction
             };
         }

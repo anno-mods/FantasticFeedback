@@ -180,6 +180,7 @@ namespace FeedbackEditor.Models.FC.Actions
                 ActionType.PLAY_SEQUENCE => typeof(PlaySequenceAction),
                 ActionType.BRANCH => typeof(BranchAction),
                 ActionType.PLAY_ANY_SEQUENCE => typeof(PlayAnySequenceAction),
+                ActionType.FADE => typeof(FadeAction),
                 _ => typeof(SequenceAction)
             };
         }
