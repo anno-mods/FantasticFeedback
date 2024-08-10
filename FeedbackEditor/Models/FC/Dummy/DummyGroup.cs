@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace FeedbackEditor.Models.FC.Dummy
 {
     [AddINotifyPropertyChangedInterface]
-    public class DummyGroup : IDummyItem
+    public class DummyGroup
     {
         [XmlElement(ElementName = "hasValue")]
         public bool HasValue { get; set; } = true;
@@ -21,21 +21,6 @@ namespace FeedbackEditor.Models.FC.Dummy
 
         [XmlArrayItem("i")]
         public List<Dummy> Dummies { get; set; } = new();
-
-        [XmlIgnore]
-        public DummyItemType DummyType { get; } = DummyItemType.Group;
-
-        [XmlIgnore]
-        [DependsOn(nameof(Dummies))]
-        public IList<IDummyItem> Children 
-        { 
-            get => Groups.Cast<IDummyItem>()
-                        .ToList()
-                        .Concat(
-                            Dummies.Cast<IDummyItem>()
-                                    .ToList())
-                        .ToList();
-        }
 
         public IEnumerable<Dummy> GetContainedDummies() 
         {

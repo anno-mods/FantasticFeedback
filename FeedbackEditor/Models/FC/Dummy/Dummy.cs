@@ -19,7 +19,7 @@ namespace FeedbackEditor.Models.FC.Dummy
         public float w { get; set; }
     }
 
-    public class Dummy : IDummyItem
+    public class Dummy
     {
         [XmlElement(ElementName = "hasValue")]
         public bool HasValue { get; set; } = true;
@@ -38,9 +38,5 @@ namespace FeedbackEditor.Models.FC.Dummy
 
         public int HeightAdaptionMode { get; set; }
 
-        [XmlIgnore]
-        public DummyItemType DummyType { get; } = DummyItemType.Dummy;
-        [XmlIgnore]
-        public IList<IDummyItem> Children { get; } = new List<IDummyItem>();
     }
 }

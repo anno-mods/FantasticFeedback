@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FeedbackEditor.Models.FC.Dummy
+namespace FeedbackEditor.ViewModel.Dummies
 {
     public enum DummyItemType { Group, Dummy }
     public interface IDummyItem

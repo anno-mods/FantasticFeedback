@@ -27,6 +27,7 @@ using System.Xml.Serialization;
 using static System.Net.WebRequestMethods;
 using FeedbackEditor.Models.FC.Dummy;
 using PropertyChanged;
+using FeedbackEditor.ViewModel.Dummies;
 
 namespace FeedbackEditor
 {
@@ -36,7 +37,7 @@ namespace FeedbackEditor
     [AddINotifyPropertyChangedInterface]
     public partial class MainWindow : Window
     {
-        public DummyGroup DummyRoot { get; private set; }
+        public DummyGroupViewModel DummyRoot { get; private set; }
 
         public bool CanSave { get; private set; } = false; 
 
@@ -73,7 +74,7 @@ namespace FeedbackEditor
                     throw new InvalidDataException("The Fc File loaded is invalid");
                 FcFileService.Instance.SetCurrentFile(file);
                 NodeView.ShowDefaultNodesView();
-                DummyRoot = file.DummyRoot;
+                DummyRoot = new DummyGroupViewModel(file.DummyRoot);
                 CanSave = true;
                 return;
             }
@@ -92,6 +93,11 @@ namespace FeedbackEditor
             {
                 FcFileService.Instance.SaveCurrentFile(picker.FileName);
             }
+        }
+
+        private void TreeView_PreviewDragLeave(object sender, DragEventArgs e)
+        {
+
         }
     }
 }
