@@ -15,17 +15,24 @@
     <SolidColorBrush x:Key="DefaultActionAccentColorBrush"
                      Color="GreenYellow" />
 
+    <Color x:Key="NodeBackground">#454545</Color>
 
+    <Color x:Key="WalkActionColor">DarkRed</Color>
     <SolidColorBrush x:Key="WalkActionColorBrush"
-                     Color="DarkRed" />
+                     Color="{StaticResource WalkActionColor}" />
     <SolidColorBrush x:Key="WalkActionAccentColorBrush"
                      Color="Red" />
+
+    <Color x:Key="PlayActionColor">DarkCyan</Color>
     <SolidColorBrush x:Key="PlayActionColorBrush"
-                     Color="DarkCyan" />
+                     Color="{StaticResource PlayActionColor}" />
     <SolidColorBrush x:Key="PlayActionAccentColorBrush"
                      Color="MediumTurquoise" />
+
+
+    <Color x:Key="BranchActionColor">ForestGreen</Color>
     <SolidColorBrush x:Key="BranchActionColorBrush"
-                     Color="ForestGreen" />
+                     Color="{StaticResource BranchActionColor}" />
     <SolidColorBrush x:Key="BranchActionAccentColorBrush"
                      Color="Lime" />
     <SolidColorBrush x:Key="TextColorBrush" 

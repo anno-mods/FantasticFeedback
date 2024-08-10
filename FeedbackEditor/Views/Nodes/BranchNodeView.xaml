@@ -11,8 +11,15 @@
     <Grid>
         <views:NodeView x:Name="NodeView"
                         BorderBrush="{StaticResource BranchActionAccentColorBrush}"
-                        Background="{StaticResource BranchActionColorBrush}"
                         CornerRadius="15">
+            <views:NodeView.Background>
+                <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="0,1">
+                    <GradientStop Color="{StaticResource BranchActionColor}" />
+                    <GradientStop Color="{StaticResource NodeBackground}"
+                                  Offset="0.4" />
+                </LinearGradientBrush>
+            </views:NodeView.Background>
             <views:NodeView.TrailingControlPresenterStyle>
                 <Style TargetType="ContentPresenter">
                     <Setter Property="ContentTemplate">
