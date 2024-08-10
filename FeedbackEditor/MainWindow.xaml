@@ -9,8 +9,9 @@
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
+        Style="{StaticResource MaterialDesignWindow}"
         Width="800">
-    <Grid Background="DarkSlateGray">
+    <Grid>
         <Grid.Resources>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -27,6 +28,7 @@
                             VerticalAlignment="Stretch"
                             x:Name="NodeView" />
             <TreeView Grid.Column="1"
+                      Background="{DynamicResource MaterialDesign.Brush.Secondary}"
                       Style="{StaticResource MaterialDesignTreeView}"
                       ItemsSource="{Binding DummyRoot.Children, UpdateSourceTrigger = PropertyChanged}"
                       ItemContainerStyle="{StaticResource MaterialDesignTreeViewItem}">
@@ -49,6 +51,7 @@
         <GridSplitter Grid.Row="1"
                       Height="5"
                       ResizeDirection="Rows"
+                      Background="{DynamicResource MaterialDesign.Brush.Primary}"
                       HorizontalAlignment="Stretch"
                       Style="{StaticResource MaterialDesignGridSplitter}">
         </GridSplitter>
