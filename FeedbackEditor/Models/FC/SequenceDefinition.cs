@@ -11,8 +11,6 @@ namespace FeedbackEditor.Models.FC
         [XmlElement(ElementName = "hasValue")]
         public bool HasValue { get; set; }
 
-        public FeedbackState DefaultState { get; set; }
-
         [XmlIgnore]
         public IEnumerable<Loop> Loops {
             get {

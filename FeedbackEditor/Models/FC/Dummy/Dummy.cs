@@ -36,7 +36,7 @@ namespace FeedbackEditor.Models.FC.Dummy
 
         public int Id { get; set; }
 
-        public int HeightAdaptionMode { get; set; }
+        public int HeightAdaptationMode { get; set; }
 
     }
 }

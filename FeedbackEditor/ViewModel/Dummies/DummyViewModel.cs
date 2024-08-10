@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FeedbackEditor.Models.FC.Dummy;
 using System.Xml.Serialization;
+using System.Windows.Forms;
 
 namespace FeedbackEditor.ViewModel.Dummies
 {

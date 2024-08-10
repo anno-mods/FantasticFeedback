@@ -33,8 +33,15 @@
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type viewmodel:IDummyItem}"
                                               ItemsSource="{Binding Children}" >
-                        <TextBlock Text="{Binding Name}"
-                                   ></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"
+                                       MouseMove="OnDummyMouseMove"></TextBlock>
+                            <TextBlock Text="  |  "
+                                       MouseMove="OnDummyMouseMove"></TextBlock>
+                            <TextBlock Text="{Binding DummyType}"
+                                       MouseMove="OnDummyMouseMove"
+                                       FontStyle="Italic"></TextBlock>                            
+                        </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>

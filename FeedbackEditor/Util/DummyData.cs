@@ -32,7 +32,7 @@ namespace FeedbackEditor.Util
                 HasValue = true,
                 AssetVariationList = new AssetVariationList()
                 {
-                    GuidVariationList = { { 100637, -1 } }
+                    GuidVariationList = { ( 100637, -1 ) }
                 },
                 MainObject = false,
                 FeedbackLoops = new() {
@@ -42,19 +42,20 @@ namespace FeedbackEditor.Util
                 {
                     new SequenceDefinition()
                     {
-                        HasValue = true,
-                        DefaultState = new FeedbackState()
-                        {
-                            DummyID = 0,
-                            DummyName = "kek",
-                            FadeVisibility = true,
-                            ResetToDefaultEveryLoop = true,
-                            SequenceID = SequenceID.idle01,
-                            StartDummyGroup = "kekgroup",
-                            Visible = true,
-                        },
+                        
                         Loop0 = new Loop() 
                         {
+                            HasValue = true,
+                            DefaultState = new FeedbackState()
+                            {
+                                DummyID = 0,
+                                DummyName = "kek",
+                                FadeVisibility = true,
+                                ResetToDefaultEveryLoop = true,
+                                SequenceID = SequenceID.idle01,
+                                StartDummyGroup = "kekgroup",
+                                Visible = true,
+                            },
                             ElementContainer = new()
                             {
                                 Elements = new () {
@@ -89,7 +90,7 @@ namespace FeedbackEditor.Util
                 HasValue = true,
                 AssetVariationList = new AssetVariationList()
                 {
-                    GuidVariationList = { { 500, -1 } }
+                    GuidVariationList = { (500, -1) }
                 },
                 MainObject = false,
                 FeedbackLoops = new() {
@@ -99,20 +100,20 @@ namespace FeedbackEditor.Util
                 {
                     new SequenceDefinition()
                     {
-                        HasValue = true,
-                        DefaultState = new FeedbackState()
-                        {
-                            DummyID = 0,
-                            DummyName = "kek",
-                            FadeVisibility = true,
-                            ResetToDefaultEveryLoop = true,
-                            SequenceID = SequenceID.work02,
-                            StartDummyGroup = "kekgroup",
-                            Visible = true,
-                        },
                         Loop0 =
                         new Loop() 
-                        {
+                        {   
+                            HasValue = true,
+                            DefaultState = new FeedbackState()
+                            {
+                                DummyID = 0,
+                                DummyName = "kek",
+                                FadeVisibility = true,
+                                ResetToDefaultEveryLoop = true,
+                                SequenceID = SequenceID.work02,
+                                StartDummyGroup = "kekgroup",
+                                Visible = true,
+                            },
                             ElementContainer = new()
                             {
                                 Elements = new () {

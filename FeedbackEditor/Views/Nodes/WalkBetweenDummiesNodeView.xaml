@@ -34,7 +34,6 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
                                             <ColumnDefinition Width="1.5*" />
-                                            <ColumnDefinition Width="50" />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -60,9 +59,9 @@
                                         <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
                                                   Grid.Row="1"
                                                   FontSize="12"
+                                                  Grid.ColumnSpan="2"
                                                   HorizontalAlignment="Left"
                                                   Margin="5"
-                                                  Grid.ColumnSpan="2"
                                                   Background="{StaticResource WalkActionAccentColorBrush}"
                                                   Content="Has Start Dummy"
                                                   IsChecked="{Binding DataContext.ViewModel.HasStartDummy, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}" />
@@ -73,37 +72,38 @@
                                                Margin="5"
                                                Style="{StaticResource MaterialDesignLabel}"
                                                VerticalAlignment="Center"/>
-                                        <Label Content="{Binding DataContext.ViewModel.StartDummy.Name, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
-                                               Style="{StaticResource MaterialDesignLabel}"
-                                               VerticalAlignment="Center"
-                                               Grid.Row="2" IsEnabled="{Binding DataContext.ViewModel.HasStartDummy, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
-                                               Margin="3"
-                                               Grid.Column="1" />
-                                        <Button Grid.Row="2"
-                                                Margin="3"
-                                                Grid.Column="2"
-                                                Background="{StaticResource WalkActionAccentColorBrush}"
-                                                BorderThickness="0"
-                                                IsEnabled="{Binding DataContext.ViewModel.HasStartDummy, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
-                                                Style="{StaticResource MaterialDesignRaisedButton}"></Button>
-                                        <!-- End Dummy Picker -->
+                                        <TextBox Grid.Row="2"
+                                                 Grid.Column="1"
+                                                 Text="{Binding DataContext.ViewModel.StartDummy.Name, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
+                                                 AllowDrop="{Binding DataContext.ViewModel.HasStartDummy, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
+                                                 IsEnabled="{Binding DataContext.ViewModel.HasStartDummy, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
+                                                 Background="Transparent"
+                                                 IsReadOnly="True"
+                                                 Drop="OnStartDummyDropped"
+                                                 PreviewDragOver="OnPreviewDropAcceptOnlyDummies"
+                                                 BorderBrush="{StaticResource WalkActionAccentColorBrush}"
+                                                 BorderThickness="1"
+                                                 Margin="3"
+                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                                        </TextBox>
                                         <Label Content="End:"
                                                Grid.Row="3"
                                                Margin="5"
                                                Style="{StaticResource MaterialDesignLabel}"
                                                VerticalAlignment="Center" />
-                                        <Label Content="{Binding DataContext.ViewModel.TargetDummy.Name, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
-                                               Style="{StaticResource MaterialDesignLabel}"
-                                               VerticalAlignment="Center"
-                                               Margin="3"
-                                               Grid.Row="3"
-                                               Grid.Column="1"/>
-                                        <Button Background="{StaticResource WalkActionAccentColorBrush}"
-                                                BorderThickness="0"
-                                                Margin="3"
-                                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                                Grid.Row="3"
-                                                Grid.Column="2"></Button>
+                                        <TextBox Grid.Row="3"
+                                                 Grid.Column="1"
+                                                 Text="{Binding DataContext.ViewModel.TargetDummy.Name, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
+                                                 AllowDrop="True"
+                                                 Background="Transparent"
+                                                 IsReadOnly="True"
+                                                 Drop="OnEndDummyDropped"
+                                                 PreviewDragOver="OnPreviewDropAcceptOnlyDummies"
+                                                 BorderBrush="{StaticResource WalkActionAccentColorBrush}"
+                                                 BorderThickness="1"
+                                                 Margin="3"
+                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                                        </TextBox>
                                     </Grid>
 
                                     

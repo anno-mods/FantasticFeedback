@@ -29,6 +29,7 @@ namespace FeedbackEditor.ViewModel
             get => _startDummy;
             set
             {
+                _startDummy = value;
                 UpdateModelStartDummy();
             }
         }
@@ -37,11 +38,12 @@ namespace FeedbackEditor.ViewModel
             get => _targetDummy;
             set
             {
+                _targetDummy = value;
                 Action.TargetDummy = value is not null ? value.Name : "";
                 Action.TargetDummyId = value is not null ? value.Id : 0;
             }
         }
-        public Dummy? _targetDummy { get; set; }
+        private Dummy? _targetDummy { get; set; }
 
         private bool _hasStartDummy;
         public bool HasStartDummy

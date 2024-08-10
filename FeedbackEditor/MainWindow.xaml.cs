@@ -99,5 +99,17 @@ namespace FeedbackEditor
         {
 
         }
+
+        private void OnDummyMouseMove(object sender, MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                if (sender is TextBlock text && text.DataContext is IDummyItem item)
+                {
+                    DragDrop.DoDragDrop(text, item, DragDropEffects.Move);
+                }
+            }
+        }
     }
 }

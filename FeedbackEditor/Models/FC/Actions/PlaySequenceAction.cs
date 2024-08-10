@@ -13,7 +13,7 @@ namespace FeedbackEditor.Models.FC.Actions
     [AddINotifyPropertyChangedInterface]
     public class PlaySequenceAction : SequenceAction
     {
-        [XmlElement("IdleSequenceID")]
+        [XmlElement("m_IdleSequenceID")]
         [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
         [DoNotNotify]
         public int SequenceIDForSerializing
@@ -30,8 +30,8 @@ namespace FeedbackEditor.Models.FC.Actions
         public override ActionType ElementType { get; set; } = ActionType.PLAY_SEQUENCE;
 
         public int MinPlayCount { get; set; } = 1;
+        public int MinPlayTime { get; set; } = 0;
         public int MaxPlayCount { get; set; } = 0;
-        public int MinPlayTime { get; set; } = 0; 
         public int MaxPlayTime { get; set; } = 0;
         public bool ResetStartTime { get; set; } = false;
     }

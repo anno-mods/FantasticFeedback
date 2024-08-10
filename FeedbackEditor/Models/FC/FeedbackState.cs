@@ -26,6 +26,8 @@ namespace FeedbackEditor.Models.FC
             set => SequenceID = (SequenceID)value;
         }
 
+        public bool ForceSequenceRestart { get; set; }
+
         public bool Visible { get; set; }
 
         public bool FadeVisibility { get; set; }

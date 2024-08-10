@@ -14,7 +14,7 @@ namespace FeedbackEditor.Models.FC
 {
     public class AssetVariationList : IXmlSerializable
     {
-        public Dictionary<int, int> GuidVariationList { get; set; } = new();
+        public List<(int, int)> GuidVariationList { get; set; } = new();
 
         public String Lol { get; set; }
 
@@ -79,7 +79,8 @@ namespace FeedbackEditor.Models.FC
                 var split = extract.Split(' ');
                 for (int i = 0; i < split.Length; i += 2)
                 {
-                    GuidVariationList.Add(int.Parse(split[i]), int.Parse(split[i + 1]));
+                    var tuple = (int.Parse(split[i]), int.Parse(split[i + 1]));
+                    GuidVariationList.Add(tuple);
                 }
             }
             catch

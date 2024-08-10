@@ -1,6 +1,7 @@
 ﻿using FeedbackEditor.Models.FC.Actions;
 using FeedbackEditor.Models.FC.Dummy;
 using FeedbackEditor.ViewModel;
+using FeedbackEditor.ViewModel.Dummies;
 using PropertyChanged;
 using ReactiveUI;
 using System;
@@ -56,6 +57,31 @@ namespace FeedbackEditor.Views.Nodes
         private void NumericSpinner_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void OnStartDummyDropped(object sender, DragEventArgs e)
+        {
+            var vm = e.Data.GetData(typeof(DummyViewModel)) as DummyViewModel;
+
+            if (vm != null)
+            {
+                ViewModel.StartDummy = vm.Dummy;
+            }
+        }
+
+        private void OnEndDummyDropped(object sender, DragEventArgs e)
+        {
+            var vm = e.Data.GetData(typeof(DummyViewModel)) as DummyViewModel;
+
+            if (vm != null)
+            {
+                ViewModel.TargetDummy = vm.Dummy;
+            }
+        }
+
+        private void OnPreviewDropAcceptOnlyDummies(object sender, DragEventArgs e)
+        {
+            e.Handled = e.Data.GetData(typeof(DummyViewModel)) is DummyViewModel;
         }
     }
 }

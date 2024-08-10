@@ -16,11 +16,13 @@ namespace FeedbackEditor.Models.FC.Dummy
 
         public String Name { get; set; } = "";
 
+
         [XmlArrayItem("i")]
         public List<DummyGroup> Groups { get; set; } = new();
 
         [XmlArrayItem("i")]
         public List<Dummy> Dummies { get; set; } = new();
+        public int Id { get; set; }
 
         public IEnumerable<Dummy> GetContainedDummies() 
         {
