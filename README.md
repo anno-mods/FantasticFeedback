@@ -6,6 +6,33 @@
 - Create your Feedback Loops with a Node based Editor
 - Export the entire Thing
 
+# THIS EDITOR IS NOT PRODUCTION-READY UNDER ANY CIRCUMSTANCE
+
+# What it can currently do
+- Import Fc Files converted with FileDBReader (needs interpretation using FcFile.xml)
+- Export into that format
+- Supports ElementTypes `Walk (0)`, `Play Sequence (1)`, `Branch (3)`, `Fade (6)`, `Play Any Sequence (12)`. **All other Sequences and their data are currently lost, except for their Element Type when doing an import.**
+- Manipulate and Add Sequence Elements in existing loops, for existing actors.
+
+# Planned Features
+- Manipulating and Adding Actors
+- Adding Sequences
+- Controlling the `[Root Object]`
+- Supporting all other Element Types. I currently know of:
+  - `Walk (0)`
+  - `Play Sequence (1)`
+  - `Wait (2)`
+  - `Branch (3)`
+  - `Walk Spline (4)`
+  - `Fade (6)`
+  - `Barrier (7)`
+  - `Scale (9)`
+  - `Play Any Sequence (12)`
+  - `Follow Spline Any Walk Sequence (15)`
+ 
+- This implies there is 5,8,10,11,13,14 which I have not encountered so far. If you encounter one of them in your fc files please let me know, including info in which vanilla file you spotted it.
+
+
 # Credits
 
 - [NodeNetwork by Wouterdek](https://github.com/Wouterdek/NodeNetwork)
