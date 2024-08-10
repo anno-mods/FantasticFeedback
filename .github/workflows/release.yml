@@ -36,7 +36,7 @@ jobs:
 
       - name: Package
         run: |
-          tar -caf iModYourAnno.zip -C ./Build/ *
+          tar -caf FantasticFeedback.zip -C ./Build/ *
         
       - name: Create Release
         id: create_release
