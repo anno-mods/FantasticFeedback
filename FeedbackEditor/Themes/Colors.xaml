@@ -29,6 +29,12 @@
     <SolidColorBrush x:Key="PlayActionAccentColorBrush"
                      Color="MediumTurquoise" />
 
+    <Color x:Key="PlayAnyActionColor">SlateBlue</Color>
+    <SolidColorBrush x:Key="PlayAnyActionColorBrush"
+                     Color="{StaticResource PlayAnyActionColor}" />
+    <SolidColorBrush x:Key="PlayAnyActionAccentColorBrush"
+                     Color="Lavender" />
+
 
     <Color x:Key="BranchActionColor">ForestGreen</Color>
     <SolidColorBrush x:Key="BranchActionColorBrush"

@@ -191,6 +191,15 @@ namespace FeedbackEditor.Views
             ShowAddPanel = false;
         }
 
+        private void OnAddPlayAnyButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (HasNetwork)
+            {
+                _currentLoop?.AddEmpty<PlayAnySequenceAction>();
+            }
+            ShowAddPanel = false;
+        }
+
         private void NetworkView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
         }

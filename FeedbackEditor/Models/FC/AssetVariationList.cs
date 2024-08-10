@@ -13,45 +13,40 @@ using System.Xml.Serialization;
 
 namespace FeedbackEditor.Models.FC
 {
-    public class AssetVariationList : IXmlSerializable
+    public class AssetVariationList
     {
+        [XmlIgnore]
         public List<(int, int)> GuidVariationList { get; set; } = new();
 
-        public string AssetGroupNames { get; set; }
-
-        public XmlSchema? GetSchema()
+        [XmlElement("GuidVariationList")]
+        public String GuidVariationListForSerialization
         {
-            return null; 
-        }
-
-        public void ReadXml(XmlReader reader)
-        {
-            var tempReader = reader.ReadSubtree();
-
-            while (tempReader.Read())
+            get
             {
-                if (tempReader.NodeType != XmlNodeType.Element)
-                    continue;
-                if (tempReader.Name == nameof(GuidVariationList))
+                var list = new List<int>();
+                foreach (var tuple in GuidVariationList)
                 {
-                    XElement? el = XNode.ReadFrom(tempReader) as XElement;
-                    GuidVariationList = CdataHelper.ParseValues(el.Value);
+                    list.Add(tuple.Item1);
+                    list.Add(tuple.Item2);
                 }
-                if (reader.Name == nameof(AssetGroupNames))
+                return CdataHelper.BuildCdataString(list);
+            }
+            set
+            {
+                GuidVariationList = new();
+                if (value.Count() % 2 != 0)
                 {
-                    XElement? el = XNode.ReadFrom(tempReader) as XElement;
-                    AssetGroupNames = el.Value;
+                    Console.WriteLine("Attempted to set GUIDVariationlist with a non-even number of CDATA entries | " + value);
+                }
+                var values = CdataHelper.ParseValues(value);
+                for (int i = 0; i < values.Count(); i += 2)
+                {
+                    var tuple = (values[i], values[i + 1]);
+                    GuidVariationList.Add(tuple);
                 }
             }
-            reader.ReadEndElement();
-            int i = 0; 
         }
 
-        public void WriteXml(XmlWriter writer)
-        {
-            var cdata = CdataHelper.BuildCdataString(GuidVariationList);
-            writer.WriteElementString(nameof(GuidVariationList), cdata);
-            writer.WriteElementString(nameof(AssetGroupNames), AssetGroupNames);
-        }
+        public string AssetGroupNames { get; set; }
     }
 }

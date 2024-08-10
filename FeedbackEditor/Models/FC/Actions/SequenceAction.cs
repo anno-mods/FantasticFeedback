@@ -179,6 +179,7 @@ namespace FeedbackEditor.Models.FC.Actions
                 ActionType.WALK_BETWEEN_DUMMIES => typeof(WalkBetweenDummiesAction),
                 ActionType.PLAY_SEQUENCE => typeof(PlaySequenceAction),
                 ActionType.BRANCH => typeof(BranchAction),
+                ActionType.PLAY_ANY_SEQUENCE => typeof(PlayAnySequenceAction),
                 _ => typeof(SequenceAction)
             };
         }

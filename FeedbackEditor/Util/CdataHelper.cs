@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DynamicData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +10,18 @@ namespace FeedbackEditor.Util
 {
     class CdataHelper
     {
-        public static List<(int, int)> ParseValues(String cdata)
+        public static List<int> ParseValues(String cdata)
         {
-            var list = new List<(int, int)>();
+            var list = new List<int>();
 
             var match = Regex.Match(cdata, @"CDATA\[([0-9\s-]+)\]");
             try
             {
                 var extract = match.Groups[1].Value;
                 var split = extract.Split(' ');
-                for (int i = 0; i < split.Length; i += 2)
+                for (int i = 0; i < split.Length; i ++)
                 {
-                    var tuple = (int.Parse(split[i]), int.Parse(split[i + 1]));
-                    list.Add(tuple);
+                    list.Add(int.Parse(split[i]));
                 }
             }
             catch
@@ -31,20 +31,18 @@ namespace FeedbackEditor.Util
             return list; 
         }
 
-        public static String BuildCdataString(List<(int, int)> values)
+        public static String BuildCdataString(IEnumerable<int> values)
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("CDATA[");
             var first = true;
-            foreach (var (key, value) in values)
+            foreach (var value in values)
             {
                 if (!first)
                 {
                     builder.Append(' ');
                 }
                 first = false;
-                builder.Append(key);
-                builder.Append(' ');
                 builder.Append(value);
             }
             builder.Append(']');

@@ -37,6 +37,7 @@
                         Background="White"
                         BorderBrush="{StaticResource PlayActionAccentColorBrush}"
                         BorderThickness="2"
+                        ToolTip="Plays a fixed Sequence"
                         Click="OnAddSequenceButtonClick"
                         materialDesign:ButtonAssist.CornerRadius="20"
                         IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
@@ -55,6 +56,33 @@
                                    VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Button>
+
+                <Button x:Name="AddPlayAnySequenceNode"
+                        Height="40"
+                        Margin="5"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                        Background="White"
+                        BorderBrush="{StaticResource PlayAnyActionAccentColorBrush}"
+                        BorderThickness="2"
+                        Click="OnAddPlayAnyButtonClick"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        ToolTip="Plays a randomly picked Sequence from a List"
+                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                    <StackPanel Orientation="Horizontal"
+                                Margin="-5,0,0,0">
+                        <materialDesign:PackIcon Kind="PlaylistPlay"
+                                                 Foreground="{StaticResource PlayAnyActionColorBrush}"
+                                                 VerticalAlignment="Center"
+                                                 Height="30"
+                                                 Width="30"
+                                                 HorizontalAlignment="Center">
+                        </materialDesign:PackIcon>
+                        <TextBlock Text="Play Any Sequence"
+                                   Foreground="Black"
+                                   Margin="2"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button>
                 <Button x:Name="AddWalkNode"
                         Height="40"
                         Margin="5"
@@ -63,6 +91,7 @@
                         Background="White"
                         BorderBrush="{StaticResource WalkActionAccentColorBrush}"
                         BorderThickness="2"
+                        ToolTip="Walks from Dummy A to Dummy B, using a fixed Walk Sequence"
                         materialDesign:ButtonAssist.CornerRadius="20"
                         IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
                     <StackPanel Orientation="Horizontal"
@@ -88,6 +117,7 @@
                         BorderBrush="{StaticResource BranchActionAccentColorBrush}"
                         BorderThickness="2"
                         Click="OnAddBranchButtonClick"
+                        ToolTip="Plays all actions in one of the branches and then returns to the main flow of events"
                         materialDesign:ButtonAssist.CornerRadius="20"
                         IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
                     <StackPanel Orientation="Horizontal"

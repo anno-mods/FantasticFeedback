@@ -73,22 +73,10 @@
                                     <StackPanel Orientation="Horizontal"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
-                                        <TextBlock Text="Walk: "
+                                        <TextBlock Text="Walk"
                                                    HorizontalAlignment="Center"
                                                    FontWeight="Bold"
                                                    Foreground="{StaticResource TextColorBrush}"
-                                                   FontSize="13" />
-                                        <TextBlock Text="{Binding SequenceAction.StartDummy}"
-                                                   Foreground="{StaticResource TextColorBrush}"
-                                                   HorizontalAlignment="Center"
-                                                   FontSize="13" />
-                                        <TextBlock Text=" -> "
-                                                   Foreground="{StaticResource TextColorBrush}"
-                                                   HorizontalAlignment="Center"
-                                                   FontSize="13" />
-                                        <TextBlock Text="{Binding SequenceAction.TargetDummy}"
-                                                   Foreground="{StaticResource TextColorBrush}"
-                                                   HorizontalAlignment="Center"
                                                    FontSize="13" />
                                     </StackPanel>
                                 </Border>
@@ -120,6 +108,27 @@
                             </Grid>
                         </DataTemplate>
                     </local:TempDataTemplateSeletor.PlaySequenceAction>
+                    <local:TempDataTemplateSeletor.PlayAnySequenceAction>
+                        <DataTemplate DataType="{x:Type vm:SequenceActionNodeViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource PlayAnyActionAccentColorBrush}"
+                                        CornerRadius="15"
+                                        Margin="0,2"
+                                        Background="{StaticResource PlayAnyActionColorBrush}">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Play Any"
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </local:TempDataTemplateSeletor.PlayAnySequenceAction>
                     <local:TempDataTemplateSeletor.GenericSequenceAction>
                         <DataTemplate  DataType="{x:Type vm:SequenceActionNodeViewModel}">
                             <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
