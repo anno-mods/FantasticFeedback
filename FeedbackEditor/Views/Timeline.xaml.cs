@@ -77,6 +77,10 @@ namespace FeedbackEditor.Views
         public DataTemplate BranchAction { get; set; }
         public DataTemplate PlayAnySequenceAction { get; set; }
         public DataTemplate FadeAction { get; set; }
+        public DataTemplate ScaleAction { get; set; }
+        public DataTemplate WaitAction { get; set; }
+        public DataTemplate BarrierAction { get; set; }
+        public DataTemplate TurnAction { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -92,6 +96,10 @@ namespace FeedbackEditor.Views
                 ActionType.BRANCH => BranchAction,
                 ActionType.PLAY_ANY_SEQUENCE => PlayAnySequenceAction,
                 ActionType.FADE => FadeAction,
+                ActionType.WAIT => WaitAction,
+                ActionType.TURN_TO => TurnAction,
+                ActionType.BARRIER => BarrierAction,
+                ActionType.SCALE => ScaleAction,
                 _ => GenericSequenceAction
             };
         }

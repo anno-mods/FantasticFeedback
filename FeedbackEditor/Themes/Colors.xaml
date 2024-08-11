@@ -49,7 +49,7 @@
 
     <Color x:Key="ScaleActionColor">PaleVioletRed</Color>
     <SolidColorBrush x:Key="ScaleActionColorBrush"
-                     Color="{StaticResource WaitActionColor}" />
+                     Color="{StaticResource ScaleActionColor}" />
     <SolidColorBrush x:Key="ScaleActionAccentColorBrush"
                      Color="Thistle" />
 

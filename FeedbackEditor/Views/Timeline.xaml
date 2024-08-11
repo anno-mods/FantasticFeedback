@@ -192,6 +192,90 @@
                             </Grid>
                         </DataTemplate>
                     </local:TempDataTemplateSeletor.BranchAction>
+                    <local:TempDataTemplateSeletor.ScaleAction>
+                        <DataTemplate  DataType="{x:Type vm:SequenceActionNodeViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource ScaleActionAccentColorBrush}"
+                                        CornerRadius="15"
+                                        Margin="0,2"
+                                        Background="{StaticResource ScaleActionColorBrush}">
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Set Scale"
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </local:TempDataTemplateSeletor.ScaleAction>
+                    <local:TempDataTemplateSeletor.WaitAction>
+                        <DataTemplate  DataType="{x:Type vm:SequenceActionNodeViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource WaitActionAccentColorBrush}"
+                                        CornerRadius="15"
+                                        Margin="0,2"
+                                        Background="{StaticResource WaitActionColorBrush}">
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Wait"
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </local:TempDataTemplateSeletor.WaitAction>
+                    <local:TempDataTemplateSeletor.BarrierAction>
+                        <DataTemplate  DataType="{x:Type vm:SequenceActionNodeViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource BarrierActionAccentColorBrush}"
+                                        CornerRadius="15"
+                                        Margin="0,2"
+                                        Background="{StaticResource BarrierActionColorBrush}">
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Barrier"
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </local:TempDataTemplateSeletor.BarrierAction>
+                    <local:TempDataTemplateSeletor.TurnAction>
+                        <DataTemplate  DataType="{x:Type vm:SequenceActionNodeViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource TurnActionAccentColorBrush}"
+                                        CornerRadius="15"
+                                        Margin="0,2"
+                                        Background="{StaticResource TurnActionColorBrush}">
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Turn"
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </local:TempDataTemplateSeletor.TurnAction>
                 </local:TempDataTemplateSeletor>
             </tt:Timelines.TimeItemTemplateSelector>
             <tt:Timelines.TimePlayerTemplate>
