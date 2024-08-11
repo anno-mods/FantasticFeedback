@@ -36,6 +36,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Nodes\BarrierNodeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Nodes\WaitNodeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Nodes\ScaleNodeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Nodes\FadeNodeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

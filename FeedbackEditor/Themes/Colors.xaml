@@ -17,11 +17,11 @@
 
     <Color x:Key="NodeBackground">#454545</Color>
 
-    <Color x:Key="WalkActionColor">DarkRed</Color>
+    <Color x:Key="WalkActionColor">Firebrick</Color>
     <SolidColorBrush x:Key="WalkActionColorBrush"
                      Color="{StaticResource WalkActionColor}" />
     <SolidColorBrush x:Key="WalkActionAccentColorBrush"
-                     Color="Red" />
+                     Color="Salmon" />
 
     <Color x:Key="PlayActionColor">DarkCyan</Color>
     <SolidColorBrush x:Key="PlayActionColorBrush"
@@ -40,6 +40,25 @@
                      Color="{StaticResource FadeActionColor}" />
     <SolidColorBrush x:Key="FadeActionAccentColorBrush"
                      Color="Goldenrod" />
+
+    <Color x:Key="WaitActionColor">RoyalBlue</Color>
+    <SolidColorBrush x:Key="WaitActionColorBrush"
+                     Color="{StaticResource WaitActionColor}" />
+    <SolidColorBrush x:Key="WaitActionAccentColorBrush"
+                     Color="SteelBlue" />
+
+    <Color x:Key="ScaleActionColor">PaleVioletRed</Color>
+    <SolidColorBrush x:Key="ScaleActionColorBrush"
+                     Color="{StaticResource WaitActionColor}" />
+    <SolidColorBrush x:Key="ScaleActionAccentColorBrush"
+                     Color="Thistle" />
+
+    <Color x:Key="BarrierActionColor">DarkRed</Color>
+    <SolidColorBrush x:Key="BarrierActionColorBrush"
+                     Color="{StaticResource BarrierActionColor}" />
+    <SolidColorBrush x:Key="BarrierActionAccentColorBrush"
+                     Color="Tomato" />
+
 
 
     <Color x:Key="BranchActionColor">ForestGreen</Color>

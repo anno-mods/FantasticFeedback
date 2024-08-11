@@ -23,6 +23,12 @@ namespace FeedbackEditor.ViewModel.Nodes
                 viewModel = new PlayAnySequenceActionNodeViewModel((PlayAnySequenceAction)action);
             if (action is FadeAction)
                 viewModel = new FadeActionNodeViewModel((FadeAction)action);
+            if (action is BarrierAction)
+                viewModel = new BarrierActionNodeViewModel((BarrierAction)action);
+            if (action is ScaleAction)
+                viewModel = new ScaleActionNodeViewModel((ScaleAction)action);
+            if (action is WaitAction)
+                viewModel = new WaitActionNodeViewModel((WaitAction)action);
             return viewModel;
         }
     }

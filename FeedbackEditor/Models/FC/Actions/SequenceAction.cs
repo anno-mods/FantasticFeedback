@@ -169,20 +169,4 @@ namespace FeedbackEditor.Models.FC.Actions
             SequenceIDValues = Enum.GetValues<SequenceID>().Cast<SequenceID>().ToList();
         }
     }
-
-    public class SequenceActionFactory
-    {
-        public Type GetTypeOfAction(ActionType actionType)
-        {
-            return actionType switch
-            {
-                ActionType.WALK_BETWEEN_DUMMIES => typeof(WalkBetweenDummiesAction),
-                ActionType.PLAY_SEQUENCE => typeof(PlaySequenceAction),
-                ActionType.BRANCH => typeof(BranchAction),
-                ActionType.PLAY_ANY_SEQUENCE => typeof(PlayAnySequenceAction),
-                ActionType.FADE => typeof(FadeAction),
-                _ => typeof(SequenceAction)
-            };
-        }
-    }
 }

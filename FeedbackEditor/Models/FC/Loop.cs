@@ -32,8 +32,6 @@ namespace FeedbackEditor.Models.FC
             return null; 
         }
 
-        static SequenceActionFactory _factory = new SequenceActionFactory();
-
         public void ReadXml(XmlReader reader)
         {
             var clonedReader = reader.ReadSubtree();
@@ -57,7 +55,7 @@ namespace FeedbackEditor.Models.FC
 
             using (XmlReader readerForSerialization = new XmlNodeReader(node))
             {
-                var action = _factory.GetTypeOfAction(actionType!.Value);
+                var action = SequenceActionFactory.GetTypeOfAction(actionType!.Value);
 
                 XmlSerializer serializer = new(action);
                 var sequenceObject = serializer.Deserialize(readerForSerialization) as SequenceAction;

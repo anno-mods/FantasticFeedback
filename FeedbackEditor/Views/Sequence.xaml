@@ -25,142 +25,226 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal"
+            <!-- Main Row -->
+            <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         Grid.Column="1"
                         Visibility="{Binding ShowAddPanel, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}">
-                <Button x:Name="AddPlaySequenceNode"
-                        Height="40"
-                        Margin="5"
-                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                        Background="White"
-                        BorderBrush="{StaticResource PlayActionAccentColorBrush}"
-                        BorderThickness="2"
-                        ToolTip="Plays a fixed Sequence"
-                        Click="OnAddSequenceButtonClick"
-                        materialDesign:ButtonAssist.CornerRadius="20"
-                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
-                    <StackPanel Orientation="Horizontal"
-                                Margin="-5,0,0,0">
-                        <materialDesign:PackIcon Kind="Play"
-                                                 Foreground="{StaticResource PlayActionColorBrush}"
-                                                 VerticalAlignment="Center"
-                                                 Height="30"
-                                                 Width="30"
-                                                 HorizontalAlignment="Center">
-                        </materialDesign:PackIcon>
-                        <TextBlock Text="Play Sequence"
-                                   Foreground="Black"
-                                   Margin="2"
-                                   VerticalAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </Button>
 
-                <Button x:Name="AddPlayAnySequenceNode"
-                        Height="40"
-                        Margin="5"
-                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                        Background="White"
-                        BorderBrush="{StaticResource PlayAnyActionAccentColorBrush}"
-                        BorderThickness="2"
-                        Click="OnAddPlayAnyButtonClick"
-                        materialDesign:ButtonAssist.CornerRadius="20"
-                        ToolTip="Plays a randomly picked Sequence from a List"
-                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
-                    <StackPanel Orientation="Horizontal"
-                                Margin="-5,0,0,0">
-                        <materialDesign:PackIcon Kind="PlaylistPlay"
-                                                 Foreground="{StaticResource PlayAnyActionColorBrush}"
-                                                 VerticalAlignment="Center"
-                                                 Height="30"
-                                                 Width="30"
-                                                 HorizontalAlignment="Center">
-                        </materialDesign:PackIcon>
-                        <TextBlock Text="Play Any Sequence"
-                                   Foreground="Black"
-                                   Margin="2"
-                                   VerticalAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="AddWalkNode"
-                        Height="40"
-                        Margin="5"
-                        Click="OnAddWalkButtonClick"
-                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                        Background="White"
-                        BorderBrush="{StaticResource WalkActionAccentColorBrush}"
-                        BorderThickness="2"
-                        ToolTip="Walks from Dummy A to Dummy B, using a fixed Walk Sequence"
-                        materialDesign:ButtonAssist.CornerRadius="20"
-                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
-                    <StackPanel Orientation="Horizontal"
-                                Margin="-5,0,0,0">
-                        <materialDesign:PackIcon Kind="Walk"
-                                                 Foreground="{StaticResource WalkActionColorBrush}"
-                                                 VerticalAlignment="Center"
-                                                 Height="30"
-                                                 Width="30"
-                                                 HorizontalAlignment="Center">
-                        </materialDesign:PackIcon>
-                        <TextBlock Text="Walk"
-                                   Foreground="Black"
-                                   Margin="2"
-                                   VerticalAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="AddBranchNode"
-                        Height="40"
-                        Margin="5"
-                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                        Background="White"
-                        BorderBrush="{StaticResource BranchActionAccentColorBrush}"
-                        BorderThickness="2"
-                        Click="OnAddBranchButtonClick"
-                        ToolTip="Plays all actions in one of the branches and then returns to the main flow of events"
-                        materialDesign:ButtonAssist.CornerRadius="20"
-                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
-                    <StackPanel Orientation="Horizontal"
-                                Margin="-5,0,0,0">
-                        <materialDesign:PackIcon Kind="ShareVariant"
-                                                 Foreground="{StaticResource BranchActionColorBrush}"
-                                                 VerticalAlignment="Center"
-                                                 Height="30"
-                                                 Width="30"
-                                                 HorizontalAlignment="Center">
-                        </materialDesign:PackIcon>
-                        <TextBlock Text="Branch"
-                                   Foreground="Black"
-                                   Margin="2"
-                                   VerticalAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="AddFadeNode"
-                        Height="40"
-                        Margin="5"
-                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                        Background="White"
-                        BorderBrush="{StaticResource FadeActionAccentColorBrush}"
-                        BorderThickness="2"
-                        Click="OnAddFadeButtonClick"
-                        ToolTip="Fades In/Out Actor Visibility"
-                        materialDesign:ButtonAssist.CornerRadius="20"
-                        IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
-                    <StackPanel Orientation="Horizontal"
-                                Margin="-5,0,0,0">
-                        <materialDesign:PackIcon Kind="Visibility"
-                                                 Foreground="{StaticResource FadeActionColorBrush}"
-                                                 VerticalAlignment="Center"
-                                                 Height="30"
-                                                 Width="30"
-                                                 HorizontalAlignment="Center">
-                        </materialDesign:PackIcon>
-                        <TextBlock Text="Fade In/Out"
-                                   Foreground="Black"
-                                   Margin="2"
-                                   VerticalAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </Button>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="AddScaleNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource WaitActionAccentColorBrush}"
+                            BorderThickness="2"
+                            ToolTip="Sets Actor Scale to a random Number inside a predefined Range"
+                            Click="OnAddScaleButtonClick"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="Resize"
+                                                     Foreground="{StaticResource WaitActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Scale"
+                                       Foreground="Black"
+                                       Margin="8,2,2,2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="AddBarrierNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource BarrierActionAccentColorBrush}"
+                            BorderThickness="2"
+                            ToolTip="Even this tools Developer has no idea what a Barrier does."
+                            Click="OnAddBarrierButtonClick"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="Forbid"
+                                                     Foreground="{StaticResource BarrierActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Barrier"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="AddPlaySequenceNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource PlayActionAccentColorBrush}"
+                            BorderThickness="2"
+                            ToolTip="Plays a fixed Sequence"
+                            Click="OnAddSequenceButtonClick"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="Play"
+                                                     Foreground="{StaticResource PlayActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Play Sequence"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="AddPlayAnySequenceNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource PlayAnyActionAccentColorBrush}"
+                            BorderThickness="2"
+                            Click="OnAddPlayAnyButtonClick"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            ToolTip="Plays a randomly picked Sequence from a List"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="PlaylistPlay"
+                                                     Foreground="{StaticResource PlayAnyActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Play Any Sequence"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="AddWalkNode"
+                            Height="40"
+                            Margin="5"
+                            Click="OnAddWalkButtonClick"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource WalkActionAccentColorBrush}"
+                            BorderThickness="2"
+                            ToolTip="Walks from Dummy A to Dummy B, using a fixed Walk Sequence"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="Walk"
+                                                     Foreground="{StaticResource WalkActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Walk"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="AddBranchNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource BranchActionAccentColorBrush}"
+                            BorderThickness="2"
+                            Click="OnAddBranchButtonClick"
+                            ToolTip="Plays all actions in one of the branches and then returns to the main flow of events"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="ShareVariant"
+                                                     Foreground="{StaticResource BranchActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Branch"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="AddFadeNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource FadeActionAccentColorBrush}"
+                            BorderThickness="2"
+                            Click="OnAddFadeButtonClick"
+                            ToolTip="Fades In/Out Actor Visibility"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="Visibility"
+                                                     Foreground="{StaticResource FadeActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Fade In/Out"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="AddWaitNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource WaitActionAccentColorBrush}"
+                            BorderThickness="2"
+                            ToolTip="Waits for a random duration picked from a predefined range."
+                            Click="OnAddWaitButtonClick"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="Hourglass"
+                                                     Foreground="{StaticResource WaitActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Wait"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Left">

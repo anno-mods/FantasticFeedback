@@ -165,49 +165,38 @@ namespace FeedbackEditor.Views
             ShowAddPanel = !ShowAddPanel;
         }
 
-        private void OnAddSequenceButtonClick(object sender, RoutedEventArgs e)
+        private void OnAnyAddButtonClick<T>(object sender, RoutedEventArgs e) where T : SequenceAction, new()
         {
-            if (HasNetwork) {
-                _currentLoop?.AddEmpty<PlaySequenceAction>();
+            if (HasNetwork)
+            {
+                _currentLoop?.AddEmpty<T>();
             }
             ShowAddPanel = false;
         }
+
+        private void OnAddSequenceButtonClick(object sender, RoutedEventArgs e)
+            => OnAnyAddButtonClick<PlaySequenceAction>(sender, e);
 
         private void OnAddWalkButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (HasNetwork)
-            {
-                _currentLoop?.AddEmpty<WalkBetweenDummiesAction>();
-            }
-            ShowAddPanel = false;
-        }
+            => OnAnyAddButtonClick<WalkBetweenDummiesAction>(sender, e);
 
         private void OnAddBranchButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (HasNetwork)
-            {
-                _currentLoop?.AddEmpty<BranchAction>();
-            }
-            ShowAddPanel = false;
-        }
+            => OnAnyAddButtonClick<BranchAction>(sender, e);
 
         private void OnAddPlayAnyButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (HasNetwork)
-            {
-                _currentLoop?.AddEmpty<PlayAnySequenceAction>();
-            }
-            ShowAddPanel = false;
-        }
+            => OnAnyAddButtonClick<PlayAnySequenceAction>(sender, e);
 
         private void OnAddFadeButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (HasNetwork)
-            {
-                _currentLoop?.AddEmpty<FadeAction>();
-            }
-            ShowAddPanel = false;
-        }
+            => OnAnyAddButtonClick<FadeAction>(sender, e);
+
+        private void OnAddWaitButtonClick(object sender, RoutedEventArgs e)
+            => OnAnyAddButtonClick<WaitAction>(sender, e);
+
+        private void OnAddScaleButtonClick(object sender, RoutedEventArgs e)
+            => OnAnyAddButtonClick<ScaleAction>(sender, e);
+
+        private void OnAddBarrierButtonClick(object sender, RoutedEventArgs e)
+            => OnAnyAddButtonClick<BarrierAction>(sender, e);
 
         private void NetworkView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
