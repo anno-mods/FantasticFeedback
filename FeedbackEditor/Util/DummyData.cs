@@ -36,7 +36,7 @@ namespace FeedbackEditor.Util
                 },
                 MainObject = false,
                 FeedbackLoops = new() {
-                    new FeedbackLoop() { k = false, v = false }
+                    new FeedbackLoop() { KeyIndex = 0, ValueIndex = 0 }
                 },
                 SequenceDefinitions = new()
                 {
@@ -94,7 +94,7 @@ namespace FeedbackEditor.Util
                 },
                 MainObject = false,
                 FeedbackLoops = new() {
-                    new FeedbackLoop() { k = false, v = false }
+                    new FeedbackLoop() { KeyIndex = 0, ValueIndex = 0 }
                 },
                 SequenceDefinitions = new()
                 {

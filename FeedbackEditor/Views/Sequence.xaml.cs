@@ -198,6 +198,9 @@ namespace FeedbackEditor.Views
         private void OnAddBarrierButtonClick(object sender, RoutedEventArgs e)
             => OnAnyAddButtonClick<BarrierAction>(sender, e);
 
+        private void OnAddTurnButtonClick(object sender, RoutedEventArgs e)
+            => OnAnyAddButtonClick<TurnAction>(sender, e);
+
         private void NetworkView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
         }

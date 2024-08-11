@@ -59,6 +59,12 @@
     <SolidColorBrush x:Key="BarrierActionAccentColorBrush"
                      Color="Tomato" />
 
+    <Color x:Key="TurnActionColor">OliveDrab</Color>
+    <SolidColorBrush x:Key="TurnActionColorBrush"
+                     Color="{StaticResource TurnActionColor}" />
+    <SolidColorBrush x:Key="TurnActionAccentColorBrush"
+                     Color="YellowGreen" />
+
 
 
     <Color x:Key="BranchActionColor">ForestGreen</Color>

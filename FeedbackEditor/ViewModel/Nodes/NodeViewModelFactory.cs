@@ -29,6 +29,8 @@ namespace FeedbackEditor.ViewModel.Nodes
                 viewModel = new ScaleActionNodeViewModel((ScaleAction)action);
             if (action is WaitAction)
                 viewModel = new WaitActionNodeViewModel((WaitAction)action);
+            if (action is TurnAction)
+                viewModel = new TurnActionNodeViewModel((TurnAction)action);
             return viewModel;
         }
     }

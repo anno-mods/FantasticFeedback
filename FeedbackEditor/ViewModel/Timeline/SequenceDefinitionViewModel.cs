@@ -26,13 +26,23 @@ namespace FeedbackEditor.ViewModel.Timeline
 
         public SequenceDefinitionViewModel(SequenceDefinition sequenceDefinition) : this()
         {
-            var loopCount = 0;
-            foreach (var loop in sequenceDefinition.Loops)
+            if (sequenceDefinition.Loop0 is Loop loop0)
             {
-                var loopViewModel = new LoopViewModel(loop);
-                loopViewModel.ChannelName = "Loop" + loopCount;
-                AddLoop(loopViewModel);
-                loopCount++;
+                var loop0Vm = new LoopViewModel(loop0);
+                AddLoop(loop0Vm);
+                loop0Vm.ChannelName = "Intro Loop";
+            }
+            if (sequenceDefinition.Loop1 is Loop loop1)
+            {
+                var loop1Vm = new LoopViewModel(loop1);
+                AddLoop(loop1Vm);
+                loop1Vm.ChannelName = "Running Loop";
+            }
+            if (sequenceDefinition.Loop2 is Loop loop2)
+            {
+                var loop2Vm = new LoopViewModel(loop2);
+                AddLoop(loop2Vm);
+                loop2Vm.ChannelName = "Outro Loop";
             }
         }
 

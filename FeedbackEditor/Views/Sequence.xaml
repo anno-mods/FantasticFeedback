@@ -85,6 +85,32 @@
                                        VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button x:Name="AddTurnNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource TurnActionAccentColorBrush}"
+                            BorderThickness="2"
+                            ToolTip="Turns the Actor towards a Dummy"
+                            Click="OnAddTurnButtonClick"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="TurnRight"
+                                                     Foreground="{StaticResource TurnActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Turn to"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="AddPlaySequenceNode"

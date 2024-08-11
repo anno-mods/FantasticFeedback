@@ -32,10 +32,13 @@ namespace FeedbackEditor.Models.FC
         }
 
         [XmlElement]
+        //Initializer Loop
         public Loop? Loop0 { get; set; }
         [XmlElement]
+        //Running Sequence Loop
         public Loop? Loop1 { get; set; }
         [XmlElement]
+        //Destroy Loop
         public Loop? Loop2 { get; set; }
 
 

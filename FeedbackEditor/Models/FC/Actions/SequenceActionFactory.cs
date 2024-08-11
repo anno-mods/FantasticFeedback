@@ -20,6 +20,7 @@ namespace FeedbackEditor.Models.FC.Actions
                 ActionType.WAIT => typeof(WaitAction),
                 ActionType.SCALE => typeof(ScaleAction),
                 ActionType.BARRIER => typeof(BarrierAction),
+                ActionType.TURN_TO => typeof(TurnAction),
                 _ => typeof(SequenceAction)
             };
         }
