@@ -18,6 +18,12 @@ namespace FeedbackEditor.Models.FC
         public FeedbackState DefaultState { get; set; }
 
         public ElementContainer ElementContainer { get; set; }
+
+        public Loop()
+        {
+            DefaultState = new FeedbackState();
+            ElementContainer= new ElementContainer();
+        }
     }
 
 

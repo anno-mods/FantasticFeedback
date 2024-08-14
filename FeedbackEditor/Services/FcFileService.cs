@@ -42,12 +42,18 @@ namespace FeedbackEditor.Services
                 //special case where RootObject is a seperate thing
             }
 
-            return CurrentFile.ActorNames.Names[index];
+            return CurrentFile.ActorNames.Names.ElementAtOrDefault(index) ?? "Unnamed Actor";
         }
 
         public void TrySetActorName(FeedbackConfig config, String NewName)
         {
-            throw new NotImplementedException();
+            var index = CurrentFile.FeedbackDefinition.FeedbackConfigs.IndexOf(config);
+            if (CurrentFile.ActorNames.Names.Count != CurrentFile.FeedbackDefinition.FeedbackConfigs.Count)
+            {
+                index += 1;
+                //special case where RootObject is a seperate thing
+            }
+            CurrentFile.ActorNames.Names[index] = NewName;
         }
 
         public Dummy? GetDummy(int id)

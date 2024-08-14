@@ -20,7 +20,7 @@ namespace FeedbackEditor.Models.FC.Actions
 
         public ScaleAction()
         {
-            ElementType = ActionType.FADE;
+            ElementType = ActionType.SCALE;
         }
     }
 }

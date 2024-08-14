@@ -19,13 +19,11 @@ namespace FeedbackEditor.ViewModel.Timeline
         public Thickness OffsetOverride => new Thickness(30, 3, 3, 3);
         public ChannelType ChannelType { get; } = ChannelType.SEQUENCE;
 
-        public SequenceDefinitionViewModel()
-        {
+        public SequenceDefinition SequenceDefinition { get; set; }
 
-        }
-
-        public SequenceDefinitionViewModel(SequenceDefinition sequenceDefinition) : this()
+        public SequenceDefinitionViewModel(SequenceDefinition sequenceDefinition)
         {
+            SequenceDefinition = sequenceDefinition;
             if (sequenceDefinition.Loop0 is Loop loop0)
             {
                 var loop0Vm = new LoopViewModel(loop0);

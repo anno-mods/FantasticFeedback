@@ -16,18 +16,23 @@ namespace FeedbackEditor.ViewModel
     [AddINotifyPropertyChangedInterface]
     public class FeedbackConfigViewModel : TimeLinesDataBase, IChannel
     {
-        public string ChannelName { get; set; } = "Unnamed Actor";
+        public string ChannelName 
+        { 
+            get => FcFileService.Instance.GetActorName(FeedbackConfig);
+            set => FcFileService.Instance.TrySetActorName(FeedbackConfig, value);
+        }
         public Thickness OffsetOverride => new Thickness(20, 3, 3, 3);
         public ChannelType ChannelType { get; } = ChannelType.ACTOR;
 
-        public FeedbackConfigViewModel()
-        {
+        public FeedbackConfig FeedbackConfig { get; }
 
-        }
-
-        public FeedbackConfigViewModel(FeedbackConfig feedbackConfig) : this() 
+        public FeedbackConfigViewModel(FeedbackConfig feedbackConfig)
         {
-            ChannelName = FcFileService.Instance.GetActorName(feedbackConfig);
+            FeedbackConfig = feedbackConfig;
+            if (ChannelName is null || ChannelName == "")
+            {
+                ChannelName = "Unnamed Actor";
+            }
             foreach (var sequenceDefinition in feedbackConfig.SequenceDefinitions)
             {
                 AddSequenceDefinition(new SequenceDefinitionViewModel(sequenceDefinition));

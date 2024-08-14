@@ -3,6 +3,7 @@ using FeedbackEditor.Models.FC.Actions;
 using FeedbackEditor.Services;
 using FeedbackEditor.ViewModel;
 using FeedbackEditor.ViewModel.Timeline;
+using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -13,23 +14,33 @@ namespace FeedbackEditor.Views
 {
     /// summary>
     /// Interaktionslogik für Timeline.xaml
+    ///  <summary>
+    /// summary>
+    /// </summary>
     /// 
+    [AddINotifyPropertyChangedInterface]
     public partial class Timeline : UserControl
     {
         public ObservableCollection<FeedbackConfigViewModel> FeedbackConfigs { get; set; } = new();
 
-        private LoopViewModel? _selectedLoop; 
-        public LoopViewModel? SelectedLoop 
-        { 
-            get => _selectedLoop; 
-            private set 
-            { 
-                _selectedLoop= value;
+        [DoNotNotify]
+        private LoopViewModel? _selectedLoop;
+        [DoNotNotify]
+        public LoopViewModel? SelectedLoop
+        {
+            get => _selectedLoop;
+            private set
+            {
+                _selectedLoop = value;
                 SelectionChanged.Invoke(this, SelectedLoop);
             }
         }
 
         public event EventHandler<LoopViewModel?> SelectionChanged = delegate { };
+
+        public bool CanAddSequence { get; private set; }
+
+        public FeedbackConfigViewModel? SelectedActor { get; private set; }
 
         public Timeline()
         {
@@ -52,6 +63,8 @@ namespace FeedbackEditor.Views
             if (sender is not RadioButton button)
                 return;
 
+            CanAddSequence = button.DataContext is FeedbackConfigViewModel feedbackConfigViewModel;
+            SelectedActor = CanAddSequence ? button.DataContext as FeedbackConfigViewModel : null;
             if (button.DataContext is LoopViewModel viewModel)
             {
                 if (viewModel is null)
@@ -66,6 +79,53 @@ namespace FeedbackEditor.Views
             {
                 SelectedLoop = null;
             }
+
+        }
+
+        private void AddActorButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (FcFileService.Instance.CurrentFile is null)
+                return;
+            var feedbackConfig = new FeedbackConfig();
+            feedbackConfig.SequenceDefinitions.Add(new SequenceDefinition()
+            {
+                Loop0 = new Loop(),
+                Loop1 = new Loop(),
+                Loop2 = new Loop()
+            });
+            FcFileService.Instance.CurrentFile.FeedbackDefinition.FeedbackConfigs.Add(feedbackConfig);
+            var vm = new FeedbackConfigViewModel(feedbackConfig);
+            FeedbackConfigs.Add(vm);
+        }
+
+        private void AddSequenceButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (FcFileService.Instance.CurrentFile is null)
+                return;
+
+            var sequenceDefinition = new SequenceDefinition()
+            {
+                Loop0 = new Loop(),
+                Loop1 = new Loop(),
+                Loop2 = new Loop()
+            };
+            var viewModel = new SequenceDefinitionViewModel(sequenceDefinition);
+            SelectedActor?.AddSequenceDefinition(viewModel);
+        }
+    }
+
+    public class ChannelTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate ActorChannelTemplate { get; set; }
+        public DataTemplate LoopChannelTemplate { get; set;}
+
+        public override DataTemplate SelectTemplate(object item, DependencyObject container) 
+        {
+            if (item is FeedbackConfigViewModel)
+            {
+                return ActorChannelTemplate;
+            }
+            else return LoopChannelTemplate;
         }
     }
 

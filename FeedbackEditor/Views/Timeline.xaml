@@ -7,6 +7,7 @@
              xmlns:vm="clr-namespace:FeedbackEditor.ViewModel"
              xmlns:converter="clr-namespace:FeedbackEditor.Converters"
              xmlns:tt="clr-namespace:TimeLines;assembly=Timelines"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -14,9 +15,54 @@
             <converter:ChannelColorConverter x:Key="ChannelColor" />
             <converter:ChannelSelectableConverter x:Key="ChannelSelectable" />
         </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="20,2,2,2"
+                    Click="AddActorButtonClick">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Add" 
+                                             Height="32"
+                                             VerticalAlignment="Center"
+                                             Foreground="{StaticResource TextColorBrush}"/>
+                    <TextBlock Text="Add Actor"
+                               Margin="2"
+                               Style="{StaticResource MaterialDesignTextBlock}"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Margin="2"
+                    Click="AddSequenceButtonClick"
+                    IsEnabled="{Binding CanAddSequence, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="ViewSequential"
+                                             Height="32"
+                                             VerticalAlignment="Center"
+                                             Foreground="{StaticResource TextColorBrush}" />
+                    <TextBlock Text="Add Sequence"
+                               Margin="2"
+                               Style="{StaticResource MaterialDesignTextBlock}"></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Margin="2"
+                    Click="AddSequenceButtonClick"
+                    Background="Red"
+                    IsEnabled="False">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Trash"
+                                             Height="32"
+                                             VerticalAlignment="Center"
+                                             Foreground="{StaticResource TextColorBrush}"
+                                             Cursor="" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
         <tt:Timelines x:Name="Timelines" 
                       RowHeight="40"
                       HeaderWidth="250"
+                      Grid.Row="1"
                       RulerHeight="0"
                       ItemsSource="{Binding FeedbackConfigs}">
             <tt:Timelines.ItemTemplate>
@@ -24,7 +70,7 @@
                                           ItemsSource="{Binding Childs, UpdateSourceTrigger=PropertyChanged}">
                     <RadioButton GroupName="Loops"
                                  Click="ChooseLoop"
-                                 IsEnabled="{Binding ChannelType, Converter={StaticResource ChannelSelectable}}">
+                                 IsEnabled="True">
                         <RadioButton.Template>
                             <ControlTemplate TargetType="RadioButton">
                                 <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}"
@@ -34,16 +80,35 @@
                                             Background="{Binding ChannelType, Converter={StaticResource ChannelColor}}"
                                             x:Name="BackgroundBorder"
                                             BorderBrush="{StaticResource LoopChannelHighlightedBorderColorBrush}">
-
-                                        <TextBlock FontSize="13"
-                                                   Grid.Row="0"
-                                                   Text="{Binding ChannelName}"
-                                                   Foreground="White"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center" />
+                                        <Grid>
+                                            <TextBox FontSize="13"
+                                                     IsEnabled="{Binding ChannelType, Converter={StaticResource ChannelSelectable}}"
+                                                     Text="{Binding ChannelName, UpdateSourceTrigger=PropertyChanged}"
+                                                     Foreground="White"
+                                                     x:Name="NameTextField"
+                                                     HorizontalAlignment="Center"
+                                                     VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding ChannelName}"
+                                                       Foreground="White"
+                                                       x:Name="NameTextBlock"
+                                                       Visibility="Hidden"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="13" />
+                                        </Grid>
                                     </Border>
                                 </Grid>
                                 <ControlTemplate.Triggers>
+                                    <Trigger Property="IsEnabled"
+                                             SourceName="NameTextField"
+                                             Value="False">
+                                        <Setter TargetName="NameTextBlock"
+                                                Property="Visibility"
+                                                Value="Visible" />
+                                        <Setter TargetName="NameTextField"
+                                                Property="Visibility"
+                                                Value="Hidden" />
+                                    </Trigger>
                                     <Trigger Property="IsChecked"
                                              Value="True">
                                         <Setter TargetName="BackgroundBorder"

@@ -12,13 +12,13 @@ namespace FeedbackEditor.Models.FC
     public class FcFile
     {
         [XmlElement]
-        public DummyGroup DummyRoot { get; set; }
+        public DummyGroup DummyRoot { get; set; } = new();
         [XmlElement]
         public int IdCounter { get; set; }
         [XmlElement]
-        public FeedbackDefinition FeedbackDefinition { get; set; }
+        public FeedbackDefinition FeedbackDefinition { get; set; } = new();
         [XmlElement]
-        public ActorNames ActorNames { get; set; }
+        public ActorNames ActorNames { get; set; } = new();
     }
 
 }

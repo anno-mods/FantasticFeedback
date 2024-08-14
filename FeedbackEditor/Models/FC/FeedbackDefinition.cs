@@ -10,6 +10,6 @@ namespace FeedbackEditor.Models.FC
     public class FeedbackDefinition
     {
         [XmlArrayItem("i")]
-        public List<FeedbackConfig> FeedbackConfigs { get; set; } 
+        public List<FeedbackConfig> FeedbackConfigs { get; set; } = new();
     }
 }
