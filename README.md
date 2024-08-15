@@ -11,6 +11,8 @@
 # What it can currently do
 - Import Fc Files converted with FileDBReader (needs interpretation using FcFile.xml)
 - Export into that format
+- Add and remove Actors
+- Add and Remove Sequences
 - Supports ElementTypes:.
   - `Walk (0)`
   - `Play Sequence (1)`
@@ -24,8 +26,6 @@
 - Manipulate and Add Sequence Elements in existing loops, for existing actors.
 
 # Planned Features
-- Manipulating and Adding Actors
-- Adding Sequences
 - Controlling the `[Root Object]`
 - Supporting all other Element Types. I know that those two also exist, which will be implemented with all the spline stuff:
   - `Walk Spline (4)`
