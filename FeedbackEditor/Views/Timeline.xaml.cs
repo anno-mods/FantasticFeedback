@@ -6,6 +6,7 @@ using FeedbackEditor.ViewModel.Timeline;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -47,7 +48,7 @@ namespace FeedbackEditor.Views
         private TimeLinesDataBase? SelectedTimeLinesData = null; 
 
         [DependsOn(nameof(SelectedActor))]
-        public bool CanDelete { get => SelectedActor is not null; }
+        public bool CanDelete { get => SelectedActor is not null || SelectedSequence is not null; }
 
         public Timeline()
         {
@@ -139,8 +140,20 @@ namespace FeedbackEditor.Views
                 SelectedActor = null;
                 CanAddSequence = false;
             }
+            else if (SelectedSequence is not null)
+            {
+                var actor = GetParentActor(SelectedSequence);
+                actor?.Childs.Remove(SelectedSequence);
+                actor?.FeedbackConfig.SequenceDefinitions.Remove(SelectedSequence.SequenceDefinition);
+                SelectedSequence = null;
+            }
             Timelines.CreateTimelineControls();
             Timelines.Redraw();
+        }
+
+        private FeedbackConfigViewModel? GetParentActor(SequenceDefinitionViewModel sequenceAction)
+        {
+            return FeedbackConfigs.FirstOrDefault(x => x.Childs.Contains(sequenceAction));        
         }
     }
 
