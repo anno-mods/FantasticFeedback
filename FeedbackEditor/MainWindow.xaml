@@ -73,9 +73,17 @@
         </GridSplitter>
         <Grid Grid.Row="2"
               HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
             <views:Timeline HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            x:Name="TimelineView"/>
+                            x:Name="TimelineView"
+                            x:FieldModifier="public"/>
+            <views:LoopSettingsView DisplayedLoop="{Binding ElementName=TimelineView, Path=SelectedLoop, UpdateSourceTrigger=PropertyChanged}" 
+                                    Grid.Column="1"
+                                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"/>
         </Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button Content="Open File"

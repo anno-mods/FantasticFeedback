@@ -1,6 +1,8 @@
 ﻿using DynamicData;
 using FeedbackEditor.Models.FC;
 using FeedbackEditor.Models.FC.Actions;
+using FeedbackEditor.Models.FC.Dummy;
+using FeedbackEditor.Services;
 using FeedbackEditor.ViewModel.Nodes;
 using NodeNetwork.ViewModels;
 using PropertyChanged;
@@ -23,6 +25,18 @@ namespace FeedbackEditor.ViewModel.Timeline
 
         public Loop Loop { get; }
 
+        private Dummy? _defaultDummy;
+
+        public Dummy? DefaultDummy 
+        {
+            get => _defaultDummy;
+            set {
+                _defaultDummy = value;
+                Loop.DefaultState.DummyName = value is not null ? value.Name : "";
+                Loop.DefaultState.DummyID = value is not null ? value.Id : 0;
+            }
+        }
+
         private List<SequenceActionTimelineViewModel> _viewModels = new(); 
 
         public LoopViewModel()
@@ -33,6 +47,7 @@ namespace FeedbackEditor.ViewModel.Timeline
         public LoopViewModel(Loop loop) : this()
         {
             Loop = loop;
+            DefaultDummy = FcFileService.Instance.GetDummy(Loop.DefaultState.DummyID);
             AddLoopElements(); 
         }
 

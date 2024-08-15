@@ -25,9 +25,7 @@ namespace FeedbackEditor.Views
     {
         public ObservableCollection<FeedbackConfigViewModel> FeedbackConfigs { get; set; } = new();
 
-        [DoNotNotify]
         private LoopViewModel? _selectedLoop;
-        [DoNotNotify]
         public LoopViewModel? SelectedLoop
         {
             get => _selectedLoop;

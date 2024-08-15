@@ -97,7 +97,6 @@ namespace FeedbackEditor
 
         private void TreeView_PreviewDragLeave(object sender, DragEventArgs e)
         {
-
         }
 
         private void OnDummyMouseMove(object sender, MouseEventArgs e)
