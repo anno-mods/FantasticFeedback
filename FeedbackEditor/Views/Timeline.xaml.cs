@@ -93,8 +93,8 @@ namespace FeedbackEditor.Views
                 Loop1 = new Loop(),
                 Loop2 = new Loop()
             });
-            FcFileService.Instance.CurrentFile.FeedbackDefinition.FeedbackConfigs.Add(feedbackConfig);
             var vm = new FeedbackConfigViewModel(feedbackConfig);
+            FcFileService.Instance.CurrentFile.FeedbackDefinition.FeedbackConfigs.Add(feedbackConfig);
             FeedbackConfigs.Add(vm);
         }
 

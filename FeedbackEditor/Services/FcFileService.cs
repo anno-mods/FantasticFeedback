@@ -32,9 +32,12 @@ namespace FeedbackEditor.Services
             CurrentFile = new FcFile();
         }
 
-        public String GetActorName(FeedbackConfig config)
+        public String? GetActorName(FeedbackConfig config)
         {
             var index = CurrentFile.FeedbackDefinition.FeedbackConfigs.IndexOf(config);
+
+            if (index == -1)
+                return null;
 
             if (CurrentFile.ActorNames.Names.Count != CurrentFile.FeedbackDefinition.FeedbackConfigs.Count)
             {
@@ -42,12 +45,16 @@ namespace FeedbackEditor.Services
                 //special case where RootObject is a seperate thing
             }
 
-            return CurrentFile.ActorNames.Names.ElementAtOrDefault(index) ?? "Unnamed Actor";
+            return CurrentFile.ActorNames.Names.ElementAtOrDefault(index);
         }
 
         public void TrySetActorName(FeedbackConfig config, String NewName)
         {
             var index = CurrentFile.FeedbackDefinition.FeedbackConfigs.IndexOf(config);
+
+            if (index == -1)
+                CurrentFile.ActorNames.Names.Add(NewName);
+
             if (CurrentFile.ActorNames.Names.Count != CurrentFile.FeedbackDefinition.FeedbackConfigs.Count)
             {
                 index += 1;
