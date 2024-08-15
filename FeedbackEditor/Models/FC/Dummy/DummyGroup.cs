@@ -28,5 +28,10 @@ namespace FeedbackEditor.Models.FC.Dummy
         {
             return Dummies.Concat(Groups.SelectMany(x => x.Dummies).ToList()).ToList();
         }
+
+        public IEnumerable<DummyGroup> GetContainedDummyGroups()
+        {
+            return Groups.Concat(Groups.SelectMany(x => x.Groups).ToList()).ToList();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FeedbackEditor.Models.FC;
+using FeedbackEditor.Models.FC.Dummy;
 using FeedbackEditor.Services;
 using FeedbackEditor.ViewModel.Timeline;
 using PropertyChanged;
@@ -26,9 +27,29 @@ namespace FeedbackEditor.ViewModel
 
         public FeedbackConfig FeedbackConfig { get; }
 
+        private DummyGroup? _multiplyActorByDummyCount;
+        public DummyGroup? MultiplyActorByDummyCount 
+        {
+            get => _multiplyActorByDummyCount;
+            set 
+            {
+                _multiplyActorByDummyCount = value;
+                FeedbackConfig.MultiplyActorByDummyCount = value?.Name ?? String.Empty;
+            }
+        
+        }
+
+        public class GuidVariation
+        {
+            public int Guid { get; set; }
+        }
+
+        public ObservableCollection<GuidVariation> GuidVariations { get; }
+
         public FeedbackConfigViewModel(FeedbackConfig feedbackConfig)
         {
             FeedbackConfig = feedbackConfig;
+            _multiplyActorByDummyCount = FcFileService.Instance.GetDummyGroup(FeedbackConfig.MultiplyActorByDummyCount);
             var index = 0;
             foreach (var sequenceDefinition in feedbackConfig.SequenceDefinitions)
             {
@@ -36,6 +57,34 @@ namespace FeedbackEditor.ViewModel
                 viewModel.ChannelName = "Unnamed Sequence " + index;
                 Childs.Add(viewModel);
             }
+
+            GuidVariations = new ObservableCollection<GuidVariation>(
+                FeedbackConfig
+                .AssetVariationList?
+                .GuidVariationList
+                .Select(x => new GuidVariation { Guid = x.Item1 })
+
+                ?? Enumerable.Empty<GuidVariation>());
+        }
+
+        public void AddActor(int actorGuid)
+        {
+            GuidVariations.Add(new GuidVariation { Guid = actorGuid });
+            UpdateModel();
+        }
+
+        public void RemoveActor(GuidVariation variation)
+        {
+            GuidVariations.Remove(variation);
+            UpdateModel();
+        }
+
+        private void UpdateModel()
+        {
+            if (FeedbackConfig?.AssetVariationList is null)
+                return;
+            FeedbackConfig.AssetVariationList.GuidVariationList
+                = GuidVariations.Select(x => (x.Guid, -1)).ToList();
         }
 
         public void AddSequenceDefinition(SequenceDefinitionViewModel sequenceDefinitionViewModel)

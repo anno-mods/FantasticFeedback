@@ -37,6 +37,11 @@ namespace FeedbackEditor.Services
             return CurrentFile.DummyRoot.GetContainedDummies().Where(x => x.Id == id).FirstOrDefault();
         }
 
+        public DummyGroup? GetDummyGroup(String id)
+        {
+            return CurrentFile.DummyRoot.GetContainedDummyGroups().Where(x => x.Name == id).FirstOrDefault();
+        }
+
         public FcFile LoadFcFile(String datapath)
         {
             using var fs1 = File.OpenRead(datapath);

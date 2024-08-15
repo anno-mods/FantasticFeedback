@@ -81,9 +81,39 @@
                             VerticalAlignment="Stretch"
                             x:Name="TimelineView"
                             x:FieldModifier="public"/>
-            <views:LoopSettingsView DisplayedLoop="{Binding ElementName=TimelineView, Path=SelectedLoop, UpdateSourceTrigger=PropertyChanged}" 
+
+            <views:LoopSettingsView DisplayedLoop="{Binding ElementName=TimelineView, Path=SelectedLoop, UpdateSourceTrigger=PropertyChanged}"
                                     Grid.Column="1"
-                                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"/>
+                                    Background="{DynamicResource MaterialDesign.Brush.Secondary}">
+                <views:LoopSettingsView.Style>
+                    <Style TargetType="views:LoopSettingsView">
+                        <Style.Triggers>
+                            <Trigger Property="DisplayedLoop"
+                                     Value="{x:Null}">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </views:LoopSettingsView.Style>
+            </views:LoopSettingsView>
+           
+            <views:ActorSettingsView DisplayedActor="{Binding ElementName=TimelineView, Path=SelectedActor, UpdateSourceTrigger=PropertyChanged}"
+                                     Grid.Column="1"
+                                     x:Name="ActorSettingsPanel"
+                                     Background="{DynamicResource MaterialDesign.Brush.Secondary}">
+                <views:ActorSettingsView.Style>
+                    <Style TargetType="views:ActorSettingsView">
+                        <Style.Triggers>
+                            <Trigger Property="DisplayedActor"
+                                     Value="{x:Null}">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </views:ActorSettingsView.Style>
+            </views:ActorSettingsView>
         </Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button Content="Open File"

@@ -1,0 +1,224 @@
+﻿<UserControl x:Class="FeedbackEditor.Views.ActorSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FeedbackEditor.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="clr-namespace:Stopbyte.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid  Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Actor Properties" 
+                   FontWeight="Bold"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"></TextBlock>
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Disabled">
+
+            <StackPanel Orientation="Vertical">
+
+                <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                          Grid.Row="1"
+                          FontSize="12"
+                          Grid.ColumnSpan="2"
+                          HorizontalAlignment="Left"
+                          Margin="5"
+                          ToolTip="If set, ignores the Objects rotation in X and Z direction. The only Rotation considered then is around the vertical (Y) axis."
+                          Content="Ignore Object XZ Rotation"
+                          IsChecked="{Binding DisplayedActor.FeedbackConfig.IgnoreRootObjectXZRotation, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                          Grid.Row="1"
+                          FontSize="12"
+                          Grid.ColumnSpan="2"
+                          HorizontalAlignment="Left"
+                          Margin="5"
+                          Content="Always Visible"
+                          IsChecked="{Binding DisplayedActor.FeedbackConfig.IsAlwaysVisibleActor, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                          Grid.Row="1"
+                          FontSize="12"
+                          Grid.ColumnSpan="2"
+                          HorizontalAlignment="Left"
+                          Margin="5"
+                          ToolTip="If set, the object's visual scale also affects the movement speed. Example: an Object with a scale of 2.0 will move twice as fast."
+                          Content="Scale Movement Speed by Object Scale"
+                          IsChecked="{Binding DisplayedActor.FeedbackConfig.IsAlwaysVisibleActor, UpdateSourceTrigger=PropertyChanged}" />
+                <Separator Height="20" />
+                <TextBlock Text="GUID Variations"
+                           HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           Margin="5"></TextBlock>
+                <ItemsControl ItemsSource="{Binding DisplayedActor.GuidVariations, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Guid}"
+                                           HorizontalAlignment="Left"
+                                           Margin="5"
+                                           VerticalAlignment="Center" />
+                                <Button Grid.Column="1"
+                                        Style="{StaticResource MaterialDesignFlatLightButton}"
+                                        DataContext="{Binding}"
+                                        Click="OnRemoveGuidClick">
+                                    <materialDesign:PackIcon Kind="RemoveBold"
+                                                             Foreground="Red"
+                                                             Height="24"
+                                                             Width="24"
+                                                             Margin="-10"
+                                                             VerticalAlignment="Center">
+                                    </materialDesign:PackIcon>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        Margin="3"
+                        Cursor="Hand"
+                        Click="OnAddGuidClick">
+                    <materialDesign:PackIcon Kind="PlusBold"
+                                             Foreground="White">
+
+                    </materialDesign:PackIcon>
+                </Button>
+                <Separator Height="20" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Number of Actors"
+                           HorizontalAlignment="Left"
+                           Margin="5"
+                           Style="{StaticResource MaterialDesignLabel}"
+                           VerticalAlignment="Center"
+                           ToolTip="The Number of Persons behaving like this Actor"></Label>
+                    <controls:NumericSpinner Value="{Binding DisplayedActor.FeedbackConfig.ActorCount, UpdateSourceTrigger=PropertyChanged}"
+                                             Grid.Column="1"
+                                             Decimals="0"
+                                             Step="1"
+                                             MinValue="0"
+                                             MaxValue="5"
+                                             Height="32"
+                                             Margin="3"
+                                             ValueChanged="NumericSpinner_ValueChanged">
+                    </controls:NumericSpinner>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Max. Actors"
+                           HorizontalAlignment="Left"
+                           Margin="5"
+                           Style="{StaticResource MaterialDesignLabel}"
+                           VerticalAlignment="Center"
+                           ToolTip="The maximum number of Persons behaving like this Actor"></Label>
+                    <controls:NumericSpinner Value="{Binding DisplayedActor.FeedbackConfig.MaxActorCount, UpdateSourceTrigger=PropertyChanged}"
+                                             Grid.Column="1"
+                                             Decimals="0"
+                                             Step="1"
+                                             MinValue="0"
+                                             MaxValue="5"
+                                             Height="32"
+                                             Margin="3"
+                                             ValueChanged="NumericSpinner_ValueChanged">
+                    </controls:NumericSpinner>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Create Chance (%)"
+                           HorizontalAlignment="Left"
+                           Margin="5"
+                           Style="{StaticResource MaterialDesignLabel}"
+                           VerticalAlignment="Center"
+                           ToolTip="The chance with which this Actor is spawned."></Label>
+                    <controls:NumericSpinner Value="{Binding DisplayedActor.FeedbackConfig.CreateChance, UpdateSourceTrigger=PropertyChanged}"
+                                             Grid.Column="1"
+                                             Decimals="0"
+                                             Step="1"
+                                             MinValue="0"
+                                             MaxValue="100"
+                                             Height="32"
+                                             Margin="3"
+                                             ValueChanged="NumericSpinner_ValueChanged">
+                    </controls:NumericSpinner>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Group"
+                               HorizontalAlignment="Left"
+                               Margin="10"
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap"
+                               FontSize="13"
+                               ToolTip="If set, one actor will be spawned for each Dummy in the linked Group. You can Drag and Drop a Group from the Dummies Panel."></TextBlock>
+                    <TextBox Grid.Column="1"
+                             Text="{Binding DisplayedActor.MultiplyActorByDummyCount.Name, UpdateSourceTrigger=PropertyChanged}"
+                             AllowDrop="True"
+                             Background="Transparent"
+                             IsReadOnly="True"
+                             PreviewDragOver="OnPreviewDropAcceptOnlyDummyGroups"
+                             Drop="OnDefaultStateDummyDropped"
+                             BorderThickness="1"
+                             ToolTip="Drag and Drop a Dummy Group from the Dummy Panel to set this Dummy Group"
+                             Margin="3"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <Button Grid.Column="2"
+                            Click="OnClearMultiplyByDummyClick"
+                            Style="{StaticResource MaterialDesignFlatLightButton}"
+                            Height="50"
+                            ToolTip="Clear DummyGroup">
+                        <materialDesign:PackIcon Kind="RemoveBold"
+                                                 Foreground="Red"
+                                                 Height="24"
+                                                 Width="24"
+                                                 Margin="-10"
+                                                 VerticalAlignment="Center">
+
+                        </materialDesign:PackIcon>
+                    </Button>
+                </Grid>
+
+                <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                          Grid.Row="1"
+                          FontSize="12"
+                          Grid.ColumnSpan="2"
+                          HorizontalAlignment="Left"
+                          Margin="5"
+                          Content="Ignore Forced Actor Variation"
+                          IsChecked="{Binding DisplayedActor.FeedbackConfig.IgnoreForceActorVariation, UpdateSourceTrigger=PropertyChanged}" />
+
+                <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                          Grid.Row="1"
+                          FontSize="12"
+                          Grid.ColumnSpan="2"
+                          HorizontalAlignment="Left"
+                          Margin="5"
+                          Content="Ignore Distance Scaling"
+                          ToolTip="Some Actors grow larger at higher zoom levels to increase their visibility. If checked, this behavior is disabled for this actor."
+                          IsChecked="{Binding DisplayedActor.FeedbackConfig.IgnoreDistanceScale, UpdateSourceTrigger=PropertyChanged}" />
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
