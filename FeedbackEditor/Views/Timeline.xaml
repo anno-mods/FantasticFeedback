@@ -47,9 +47,9 @@
             </Button>
 
             <Button Margin="2"
-                    Click="AddSequenceButtonClick"
+                    Click="RemoveButtonClick"
                     Background="Red"
-                    IsEnabled="False">
+                    IsEnabled="{Binding CanDelete, UpdateSourceTrigger=PropertyChanged}">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Trash"
                                              Height="32"
@@ -69,7 +69,7 @@
                 <HierarchicalDataTemplate DataType="{x:Type tt:TimeLinesDataBase}"
                                           ItemsSource="{Binding Childs, UpdateSourceTrigger=PropertyChanged}">
                     <RadioButton GroupName="Loops"
-                                 Click="ChooseLoop"
+                                 Click="ChooseLoopClick"
                                  IsEnabled="True">
                         <RadioButton.Template>
                             <ControlTemplate TargetType="RadioButton">

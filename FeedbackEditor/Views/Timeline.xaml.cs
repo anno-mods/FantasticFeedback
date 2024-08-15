@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using TimeLines;
 
 namespace FeedbackEditor.Views
 {
@@ -41,6 +42,12 @@ namespace FeedbackEditor.Views
         public bool CanAddSequence { get; private set; }
 
         public FeedbackConfigViewModel? SelectedActor { get; private set; }
+        public SequenceDefinitionViewModel? SelectedSequence { get; private set; }
+
+        private TimeLinesDataBase? SelectedTimeLinesData = null; 
+
+        [DependsOn(nameof(SelectedActor))]
+        public bool CanDelete { get => SelectedActor is not null; }
 
         public Timeline()
         {
@@ -58,7 +65,7 @@ namespace FeedbackEditor.Views
             };
         }
 
-        private void ChooseLoop(object sender, RoutedEventArgs e)
+        private void ChooseLoopClick(object sender, RoutedEventArgs e)
         {
             if (sender is not RadioButton button)
                 return;
@@ -74,12 +81,14 @@ namespace FeedbackEditor.Views
                     return;
 
                 SelectedLoop = viewModel;
+                SelectedSequence = null;
             }
             else if (button.DataContext is SequenceDefinitionViewModel sequenceDefinition)
             {
                 SelectedLoop = null;
+                SelectedSequence = sequenceDefinition;
             }
-
+            SelectedTimeLinesData = button.DataContext as TimeLinesDataBase;
         }
 
         private void AddActorButtonClick(object sender, RoutedEventArgs e)
@@ -93,9 +102,10 @@ namespace FeedbackEditor.Views
                 Loop1 = new Loop(),
                 Loop2 = new Loop()
             });
+            FcFileService.Instance.AddActor(feedbackConfig, "Unnamed Actor");
             var vm = new FeedbackConfigViewModel(feedbackConfig);
-            FcFileService.Instance.CurrentFile.FeedbackDefinition.FeedbackConfigs.Add(feedbackConfig);
             FeedbackConfigs.Add(vm);
+            Timelines.Redraw();
         }
 
         private void AddSequenceButtonClick(object sender, RoutedEventArgs e)
@@ -111,21 +121,26 @@ namespace FeedbackEditor.Views
             };
             var viewModel = new SequenceDefinitionViewModel(sequenceDefinition);
             SelectedActor?.AddSequenceDefinition(viewModel);
+            if(SelectedTimeLinesData is not null)
+                SelectedTimeLinesData.IsExpanded = true;
+            Timelines.CreateTimelineControls();
+            Timelines.Redraw();
         }
-    }
 
-    public class ChannelTemplateSelector : DataTemplateSelector
-    {
-        public DataTemplate ActorChannelTemplate { get; set; }
-        public DataTemplate LoopChannelTemplate { get; set;}
-
-        public override DataTemplate SelectTemplate(object item, DependencyObject container) 
+        private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
-            if (item is FeedbackConfigViewModel)
+            if (FcFileService.Instance.CurrentFile is null)
+                return;
+
+            if (SelectedActor is not null)
             {
-                return ActorChannelTemplate;
+                FcFileService.Instance.RemoveActor(SelectedActor.FeedbackConfig);
+                FeedbackConfigs.Remove(SelectedActor);
+                SelectedActor = null;
+                CanAddSequence = false;
             }
-            else return LoopChannelTemplate;
+            Timelines.CreateTimelineControls();
+            Timelines.Redraw();
         }
     }
 

@@ -32,34 +32,56 @@ namespace FeedbackEditor.Services
             CurrentFile = new FcFile();
         }
 
-        public String? GetActorName(FeedbackConfig config)
+        private int GetNameIndex(FeedbackConfig config)
         {
             var index = CurrentFile.FeedbackDefinition.FeedbackConfigs.IndexOf(config);
-
             if (index == -1)
-                return null;
-
+                return -1;
             if (CurrentFile.ActorNames.Names.Count != CurrentFile.FeedbackDefinition.FeedbackConfigs.Count)
             {
                 index += 1;
                 //special case where RootObject is a seperate thing
             }
+            return index;
+        }
 
+        public void AddActor(FeedbackConfig config, String name)
+        { 
+            CurrentFile.ActorNames.Names.Add(name);
+            CurrentFile.FeedbackDefinition.FeedbackConfigs.Add(config);
+        }
+
+        public void RemoveActor(FeedbackConfig config)
+        {
+            if (!CurrentFile.FeedbackDefinition.FeedbackConfigs.Contains(config))
+            {
+                Console.WriteLine($"Cannot remove actor {config} because it does not exist");
+                return;
+            }
+            var index = GetNameIndex(config);
+            //index shouldn't be -1 here because we checked contains
+            CurrentFile.ActorNames.Names.RemoveAt(index);
+            var feedbackConfigIndex = CurrentFile.FeedbackDefinition.FeedbackConfigs.IndexOf(config);
+            CurrentFile.FeedbackDefinition.FeedbackConfigs.RemoveAt(feedbackConfigIndex);
+        }
+
+        public String? GetActorName(FeedbackConfig config)
+        {
+            var index = GetNameIndex(config);
+            if (index == -1)
+                return null;
             return CurrentFile.ActorNames.Names.ElementAtOrDefault(index);
         }
 
         public void TrySetActorName(FeedbackConfig config, String NewName)
         {
-            var index = CurrentFile.FeedbackDefinition.FeedbackConfigs.IndexOf(config);
-
+            var index = GetNameIndex(config);
             if (index == -1)
-                CurrentFile.ActorNames.Names.Add(NewName);
-
-            if (CurrentFile.ActorNames.Names.Count != CurrentFile.FeedbackDefinition.FeedbackConfigs.Count)
             {
-                index += 1;
-                //special case where RootObject is a seperate thing
+                CurrentFile.ActorNames.Names.Add(NewName);
+                return;
             }
+            
             CurrentFile.ActorNames.Names[index] = NewName;
         }
 
