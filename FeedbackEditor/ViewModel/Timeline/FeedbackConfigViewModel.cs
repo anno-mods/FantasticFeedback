@@ -18,7 +18,7 @@ namespace FeedbackEditor.ViewModel
     {
         public string ChannelName 
         { 
-            get => FcFileService.Instance.GetActorName(FeedbackConfig);
+            get => FcFileService.Instance.GetActorName(FeedbackConfig) ?? String.Empty;
             set => FcFileService.Instance.TrySetActorName(FeedbackConfig, value);
         }
         public Thickness OffsetOverride => new Thickness(20, 3, 3, 3);
@@ -29,10 +29,6 @@ namespace FeedbackEditor.ViewModel
         public FeedbackConfigViewModel(FeedbackConfig feedbackConfig)
         {
             FeedbackConfig = feedbackConfig;
-            if (ChannelName is null || ChannelName == "")
-            {
-                ChannelName = "Unnamed Actor";
-            }
             foreach (var sequenceDefinition in feedbackConfig.SequenceDefinitions)
             {
                 AddSequenceDefinition(new SequenceDefinitionViewModel(sequenceDefinition));
