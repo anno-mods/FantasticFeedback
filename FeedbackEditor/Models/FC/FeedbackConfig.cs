@@ -14,7 +14,7 @@ namespace FeedbackEditor.Models.FC
 
         public AssetVariationList? AssetVariationList { get; set; }
 
-        public bool? MainObject { get; set; }
+        public bool MainObject { get; set; } = false;
 
         [XmlElement]
         public List<FeedbackLoop> FeedbackLoops { get; set; } = new();
@@ -47,5 +47,26 @@ namespace FeedbackEditor.Models.FC
         public String? Description { get; set; }
 
         public FeedbackConfig() { }
+
+        public SequenceDefinition CreateNewSequenceDefinition()
+        {
+            var sequenceDefinition = new SequenceDefinition()
+            {
+                Loop0 = new Loop(),
+                Loop1 = new Loop(),
+                Loop2 = new Loop()
+            };
+            var index = SequenceDefinitions.Count;
+            FeedbackLoops.Add(new FeedbackLoop() { KeyIndex = index, ValueIndex = index });
+            SequenceDefinitions.Add(sequenceDefinition);
+            return sequenceDefinition;
+        }
+
+        public void RemoveSequenceDefinition(SequenceDefinition sequenceDefinition)
+        {
+            var index = SequenceDefinitions.IndexOf(sequenceDefinition);
+            FeedbackLoops.RemoveAt(index);
+            SequenceDefinitions.Remove(sequenceDefinition);
+        }
     }
 }

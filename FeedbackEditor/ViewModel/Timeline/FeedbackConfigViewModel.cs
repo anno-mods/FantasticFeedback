@@ -18,8 +18,8 @@ namespace FeedbackEditor.ViewModel
     {
         public string ChannelName 
         { 
-            get => FcFileService.Instance.GetActorName(FeedbackConfig) ?? String.Empty;
-            set => FcFileService.Instance.TrySetActorName(FeedbackConfig, value);
+            get => FcFileService.Instance.CurrentFile.GetActorName(FeedbackConfig) ?? String.Empty;
+            set => FcFileService.Instance.CurrentFile.TrySetActorName(FeedbackConfig, value);
         }
         public Thickness OffsetOverride => new Thickness(20, 3, 3, 3);
         public ChannelType ChannelType { get; } = ChannelType.ACTOR;
@@ -29,11 +29,13 @@ namespace FeedbackEditor.ViewModel
         public FeedbackConfigViewModel(FeedbackConfig feedbackConfig)
         {
             FeedbackConfig = feedbackConfig;
+            var index = 0;
             foreach (var sequenceDefinition in feedbackConfig.SequenceDefinitions)
             {
-                AddSequenceDefinition(new SequenceDefinitionViewModel(sequenceDefinition));
+                var viewModel = new SequenceDefinitionViewModel(sequenceDefinition);
+                viewModel.ChannelName = "Unnamed Sequence " + index;
+                Childs.Add(viewModel);
             }
-
         }
 
         public void AddSequenceDefinition(SequenceDefinitionViewModel sequenceDefinitionViewModel)
@@ -43,6 +45,7 @@ namespace FeedbackEditor.ViewModel
 
         public void RemoveSequenceDefinition(SequenceDefinitionViewModel sequenceDefinitionViewModel)
         {
+            FeedbackConfig.RemoveSequenceDefinition(sequenceDefinitionViewModel.SequenceDefinition);
             Childs.Remove(sequenceDefinitionViewModel);
         }
     }

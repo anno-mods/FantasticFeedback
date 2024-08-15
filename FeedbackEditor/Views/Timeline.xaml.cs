@@ -71,24 +71,11 @@ namespace FeedbackEditor.Views
             if (sender is not RadioButton button)
                 return;
 
-            CanAddSequence = button.DataContext is FeedbackConfigViewModel feedbackConfigViewModel;
+            CanAddSequence = button.DataContext is FeedbackConfigViewModel;
             SelectedActor = CanAddSequence ? button.DataContext as FeedbackConfigViewModel : null;
-            if (button.DataContext is LoopViewModel viewModel)
-            {
-                if (viewModel is null)
-                    return;
 
-                if (viewModel == SelectedLoop)
-                    return;
-
-                SelectedLoop = viewModel;
-                SelectedSequence = null;
-            }
-            else if (button.DataContext is SequenceDefinitionViewModel sequenceDefinition)
-            {
-                SelectedLoop = null;
-                SelectedSequence = sequenceDefinition;
-            }
+            SelectedLoop = button.DataContext as LoopViewModel;
+            SelectedSequence = button.DataContext as SequenceDefinitionViewModel;
             SelectedTimeLinesData = button.DataContext as TimeLinesDataBase;
         }
 
@@ -97,13 +84,8 @@ namespace FeedbackEditor.Views
             if (FcFileService.Instance.CurrentFile is null)
                 return;
             var feedbackConfig = new FeedbackConfig();
-            feedbackConfig.SequenceDefinitions.Add(new SequenceDefinition()
-            {
-                Loop0 = new Loop(),
-                Loop1 = new Loop(),
-                Loop2 = new Loop()
-            });
-            FcFileService.Instance.AddActor(feedbackConfig, "Unnamed Actor");
+            feedbackConfig.CreateNewSequenceDefinition();
+            FcFileService.Instance.CurrentFile.AddActor(feedbackConfig, "Unnamed Actor");
             var vm = new FeedbackConfigViewModel(feedbackConfig);
             FeedbackConfigs.Add(vm);
             Timelines.Redraw();
@@ -114,16 +96,14 @@ namespace FeedbackEditor.Views
             if (FcFileService.Instance.CurrentFile is null)
                 return;
 
-            var sequenceDefinition = new SequenceDefinition()
-            {
-                Loop0 = new Loop(),
-                Loop1 = new Loop(),
-                Loop2 = new Loop()
-            };
+            var sequenceDefinition = SelectedActor?.FeedbackConfig.CreateNewSequenceDefinition();
             var viewModel = new SequenceDefinitionViewModel(sequenceDefinition);
+            viewModel.ChannelName += " " + (SelectedActor?.FeedbackConfig.SequenceDefinitions.Count - 1);
             SelectedActor?.AddSequenceDefinition(viewModel);
             if(SelectedTimeLinesData is not null)
                 SelectedTimeLinesData.IsExpanded = true;
+
+            //Redraw Timelines
             Timelines.CreateTimelineControls();
             Timelines.Redraw();
         }
@@ -135,7 +115,7 @@ namespace FeedbackEditor.Views
 
             if (SelectedActor is not null)
             {
-                FcFileService.Instance.RemoveActor(SelectedActor.FeedbackConfig);
+                FcFileService.Instance.CurrentFile.RemoveActor(SelectedActor.FeedbackConfig);
                 FeedbackConfigs.Remove(SelectedActor);
                 SelectedActor = null;
                 CanAddSequence = false;

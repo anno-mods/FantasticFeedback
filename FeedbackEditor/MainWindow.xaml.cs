@@ -39,7 +39,7 @@ namespace FeedbackEditor
     {
         public DummyGroupViewModel DummyRoot { get; private set; }
 
-        public bool CanSave { get; private set; } = false; 
+        public bool CanSave { get; private set; } = true; 
 
         public MainWindow()
         {

@@ -24,14 +24,30 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width ="300"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
             <views:Sequence HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            x:Name="NodeView" />
+                            x:Name="NodeView" 
+                            Grid.RowSpan="2"/>
+            <Grid Grid.Row="0"
+                  Grid.Column="1"
+                  Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                  ToolTip="Predefined positions on which actors can move. Use Blender, Simple-Anno-Feedback-Encoding or FileDBReader + a text editor to set up your dummies, then import them into this project.">
+                <TextBlock Text="Dummies" 
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           FontSize="14"/>
+            </Grid>
             <TreeView Grid.Column="1"
                       Background="{DynamicResource MaterialDesign.Brush.Secondary}"
                       Style="{StaticResource MaterialDesignTreeView}"
                       ItemsSource="{Binding DummyRoot.Children, UpdateSourceTrigger = PropertyChanged}"
-                      ItemContainerStyle="{StaticResource MaterialDesignTreeViewItem}">
+                      ItemContainerStyle="{StaticResource MaterialDesignTreeViewItem}"
+                      Grid.Row="1">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type viewmodel:IDummyItem}"
                                               ItemsSource="{Binding Children}" >
