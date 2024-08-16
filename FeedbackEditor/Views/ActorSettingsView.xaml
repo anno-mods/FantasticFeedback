@@ -7,7 +7,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:controls="clr-namespace:Stopbyte.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="ActorPropertiesView">
     <Grid  Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -48,7 +49,7 @@
                           Margin="5"
                           ToolTip="If set, the object's visual scale also affects the movement speed. Example: an Object with a scale of 2.0 will move twice as fast."
                           Content="Scale Movement Speed by Object Scale"
-                          IsChecked="{Binding DisplayedActor.FeedbackConfig.IsAlwaysVisibleActor, UpdateSourceTrigger=PropertyChanged}" />
+                          IsChecked="{Binding DisplayedActor.FeedbackConfig.ApplyScaleToMovementSpeed, UpdateSourceTrigger=PropertyChanged}" />
                 <Separator Height="20" />
                 <TextBlock Text="GUID Variations"
                            HorizontalAlignment="Center"
@@ -62,10 +63,11 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="40" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding Guid}"
-                                           HorizontalAlignment="Left"
-                                           Margin="5"
-                                           VerticalAlignment="Center" />
+                                <TextBox Text="{Binding Guid}"
+                                         HorizontalAlignment="Stretch"
+                                         Margin="6"
+                                         PreviewTextInput="NumberValidationTextBox"
+                                         VerticalAlignment="Center" />
                                 <Button Grid.Column="1"
                                         Style="{StaticResource MaterialDesignFlatLightButton}"
                                         DataContext="{Binding}"
@@ -91,6 +93,39 @@
 
                     </materialDesign:PackIcon>
                 </Button>
+                <Separator Height="20" />
+                <TextBlock Text="Sequence Mapping"
+                           HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           Margin="5"
+                           ToolTip="Set up which Object Sequence will play which Sequence Definition here."></TextBlock>
+                <ItemsControl ItemsSource="{Binding DisplayedActor.FeedbackLoops, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding ParentSequence}" 
+                                           VerticalAlignment="Center"
+                                           FontWeight="Bold"
+                                           Margin="5"/>
+                                <TextBlock Text="plays"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center" />
+                                <ComboBox SelectedItem="{Binding Plays, UpdateSourceTrigger=PropertyChanged}"
+                                          DisplayMemberPath="ChannelName"
+                                          Grid.Column="2"
+                                          Margin="6"
+                                          ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DisplayedActor.SequenceDefinitions}">
+                                    
+                                </ComboBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
                 <Separator Height="20" />
                 <Grid>
                     <Grid.ColumnDefinitions>

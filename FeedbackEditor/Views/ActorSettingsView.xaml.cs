@@ -5,8 +5,10 @@ using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace FeedbackEditor.Views
 {
@@ -80,7 +82,13 @@ namespace FeedbackEditor.Views
             if (DisplayedActor is null)
                 return;
 
-            DisplayedActor.AddActor(12345);
+            DisplayedActor.AddActor(0);
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

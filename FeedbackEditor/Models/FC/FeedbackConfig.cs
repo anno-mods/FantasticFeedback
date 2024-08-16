@@ -16,8 +16,7 @@ namespace FeedbackEditor.Models.FC
 
         public bool MainObject { get; set; } = false;
 
-        [XmlElement]
-        public List<FeedbackLoop> FeedbackLoops { get; set; } = new();
+        public FeedbackLoops FeedbackLoops { get; set; } = new();
 
         [XmlArrayItem("i")]
         public List<SequenceDefinition> SequenceDefinitions { get; set; } = new();
@@ -57,7 +56,7 @@ namespace FeedbackEditor.Models.FC
                 Loop2 = new Loop()
             };
             var index = SequenceDefinitions.Count;
-            FeedbackLoops.Add(new FeedbackLoop() { KeyIndex = index, ValueIndex = index });
+            //FeedbackLoops.Add(new FeedbackLoops());
             SequenceDefinitions.Add(sequenceDefinition);
             return sequenceDefinition;
         }
@@ -65,7 +64,7 @@ namespace FeedbackEditor.Models.FC
         public void RemoveSequenceDefinition(SequenceDefinition sequenceDefinition)
         {
             var index = SequenceDefinitions.IndexOf(sequenceDefinition);
-            FeedbackLoops.RemoveAt(index);
+            //FeedbackLoops.RemoveAt(index);
             SequenceDefinitions.Remove(sequenceDefinition);
         }
     }

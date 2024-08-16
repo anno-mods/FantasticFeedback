@@ -35,9 +35,7 @@ namespace FeedbackEditor.Util
                     GuidVariationList = { ( 100637, -1 ) }
                 },
                 MainObject = false,
-                FeedbackLoops = new() {
-                    new FeedbackLoop() { KeyIndex = 0, ValueIndex = 0 }
-                },
+                FeedbackLoops = new FeedbackLoops(),
                 SequenceDefinitions = new()
                 {
                     new SequenceDefinition()
@@ -93,9 +91,7 @@ namespace FeedbackEditor.Util
                     GuidVariationList = { (500, -1) }
                 },
                 MainObject = false,
-                FeedbackLoops = new() {
-                    new FeedbackLoop() { KeyIndex = 0, ValueIndex = 0 }
-                },
+                FeedbackLoops = new FeedbackLoops(),
                 SequenceDefinitions = new()
                 {
                     new SequenceDefinition()

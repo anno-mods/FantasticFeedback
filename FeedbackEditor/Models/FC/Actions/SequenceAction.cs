@@ -150,7 +150,7 @@ namespace FeedbackEditor.Models.FC.Actions
     public class SequenceAction
     {
         [XmlElement(ElementName = "hasValue")]
-        public bool HasValue { get; set; }
+        public bool HasValue { get => true; set { } }
 
         [XmlIgnore]
         public virtual ActionType ElementType { get; set; }

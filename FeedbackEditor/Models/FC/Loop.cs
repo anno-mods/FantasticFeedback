@@ -13,7 +13,12 @@ namespace FeedbackEditor.Models.FC
     public class Loop
     {
         [XmlElement(ElementName = "hasValue")]
-        public bool HasValue { get; set; }
+        public bool HasValue
+        { 
+            get => ElementContainer.Elements.Count > 0; 
+            set => _hasValue = value;
+        }
+        private bool _hasValue; 
 
         public FeedbackState DefaultState { get; set; }
 

@@ -25,6 +25,8 @@ namespace FeedbackEditor.ViewModel
         public Thickness OffsetOverride => new Thickness(20, 3, 3, 3);
         public ChannelType ChannelType { get; } = ChannelType.ACTOR;
 
+        public ObservableCollection<SequenceDefinitionViewModel> SequenceDefinitions { get; } = new(); 
+
         public FeedbackConfig FeedbackConfig { get; }
 
         private DummyGroup? _multiplyActorByDummyCount;
@@ -46,6 +48,15 @@ namespace FeedbackEditor.ViewModel
 
         public ObservableCollection<GuidVariation> GuidVariations { get; }
 
+        public class FeedbackLoopEntry
+        {
+            public int ParentSequence { get; set; }
+            public SequenceDefinitionViewModel Plays { get; set; }
+        }
+
+        public ObservableCollection<FeedbackLoopEntry> FeedbackLoops { get; }
+
+
         public FeedbackConfigViewModel(FeedbackConfig feedbackConfig)
         {
             FeedbackConfig = feedbackConfig;
@@ -56,6 +67,7 @@ namespace FeedbackEditor.ViewModel
                 var viewModel = new SequenceDefinitionViewModel(sequenceDefinition);
                 viewModel.ChannelName = "Unnamed Sequence " + index;
                 Childs.Add(viewModel);
+                SequenceDefinitions.Add(viewModel);
             }
 
             GuidVariations = new ObservableCollection<GuidVariation>(
@@ -65,6 +77,16 @@ namespace FeedbackEditor.ViewModel
                 .Select(x => new GuidVariation { Guid = x.Item1 })
 
                 ?? Enumerable.Empty<GuidVariation>());
+
+            FeedbackLoops = new ObservableCollection<FeedbackLoopEntry>(
+                FeedbackConfig
+                .FeedbackLoops
+                .ReadonlyValues
+                .Select(x => new FeedbackLoopEntry()
+                {
+                    ParentSequence = x.Key,
+                    Plays = SequenceDefinitions.ElementAt(x.Value)
+                }));
         }
 
         public void AddActor(int actorGuid)
@@ -90,12 +112,14 @@ namespace FeedbackEditor.ViewModel
         public void AddSequenceDefinition(SequenceDefinitionViewModel sequenceDefinitionViewModel)
         {
             Childs.Add(sequenceDefinitionViewModel);
+            SequenceDefinitions.Add(sequenceDefinitionViewModel);
         }
 
         public void RemoveSequenceDefinition(SequenceDefinitionViewModel sequenceDefinitionViewModel)
         {
             FeedbackConfig.RemoveSequenceDefinition(sequenceDefinitionViewModel.SequenceDefinition);
             Childs.Remove(sequenceDefinitionViewModel);
+            SequenceDefinitions.Remove(sequenceDefinitionViewModel);
         }
     }
 }
