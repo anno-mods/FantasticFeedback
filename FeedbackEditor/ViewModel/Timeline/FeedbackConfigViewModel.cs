@@ -68,6 +68,7 @@ namespace FeedbackEditor.ViewModel
                 viewModel.ChannelName = "Unnamed Sequence " + index;
                 Childs.Add(viewModel);
                 SequenceDefinitions.Add(viewModel);
+                index++;
             }
 
             GuidVariations = new ObservableCollection<GuidVariation>(
