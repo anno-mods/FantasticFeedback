@@ -64,10 +64,13 @@ namespace FeedbackEditor
         private void OpenFileClick(object sender, RoutedEventArgs e)
         {
             var file = LoadFromDialog();
-            if (file is null)
-                throw new InvalidDataException("The Fc File loaded is invalid");
-            FcFileService.Instance.SetCurrentFile(file);
             NodeView.ShowDefaultNodesView();
+            if (file is null)
+            {
+                return;
+            }
+
+            FcFileService.Instance.SetCurrentFile(file);
             DummyRoot = new DummyGroupViewModel(file.DummyRoot);
             CanSave = true;
         }
