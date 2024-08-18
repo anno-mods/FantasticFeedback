@@ -128,7 +128,7 @@ namespace FeedbackEditor.Views
             {
                 var actor = GetParentActor(SelectedSequence);
                 actor?.Childs.Remove(SelectedSequence);
-                actor?.FeedbackConfig.SequenceDefinitions.Remove(SelectedSequence.SequenceDefinition);
+                actor?.FeedbackConfig.RemoveSequenceDefinition(SelectedSequence.SequenceDefinition);
                 SelectedSequence = null;
             }
             Timelines.CreateTimelineControls();

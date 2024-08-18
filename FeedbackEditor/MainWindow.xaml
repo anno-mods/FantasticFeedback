@@ -8,9 +8,9 @@
         xmlns:viewmodel="clr-namespace:FeedbackEditor.ViewModel.Dummies"
         mc:Ignorable="d"
         Title="FantasticFeedback"
-        Height="450"
+        Height="900"
         Style="{StaticResource MaterialDesignWindow}"
-        Width="800">
+        Width="1600">
     <Grid>
         <Grid.Resources>
         </Grid.Resources>

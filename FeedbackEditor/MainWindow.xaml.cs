@@ -64,11 +64,11 @@ namespace FeedbackEditor
         private void OpenFileClick(object sender, RoutedEventArgs e)
         {
             var file = LoadFromDialog();
-            NodeView.ShowDefaultNodesView();
             if (file is null)
             {
                 return;
             }
+            NodeView.ShowDefaultNodesView();
 
             FcFileService.Instance.SetCurrentFile(file);
             DummyRoot = new DummyGroupViewModel(file.DummyRoot);
@@ -79,13 +79,25 @@ namespace FeedbackEditor
         {
             var picker = new Microsoft.Win32.SaveFileDialog
             {
-                Filter = "Fc Files converted with FileDBReader (*.xml)|*.xml",
+                Filter = "Fc Files (*.fc)|*.fc|Xml Files (*.xml)|*.xml",
                 RestoreDirectory = true
             };
 
-            if (true == picker.ShowDialog())
+            if (true != picker.ShowDialog())
             {
-                FcFileLoaderService.Instance.SaveFcFile(picker.FileName, FcFileService.Instance.CurrentFile);
+                return;
+            }
+
+            var useXmlDirectly = picker.FileName.EndsWith(".xml");
+            var useConversionLogic = picker.FileName.EndsWith(".fc");
+            var xmlPath = useXmlDirectly ? picker.FileName : System.IO.Path.ChangeExtension(picker.FileName, "xml");
+            
+            FcFileLoaderService.Instance.SaveFcFile(xmlPath, FcFileService.Instance.CurrentFile);
+
+            if (useConversionLogic)
+            {
+                FileDBReaderService.Instance.ConvertXml(xmlPath);
+                System.IO.File.Delete(xmlPath);
             }
         }
 
@@ -97,23 +109,38 @@ namespace FeedbackEditor
         private void LoadDummiesClick(object sender, RoutedEventArgs e)
         {
             var file = LoadFromDialog();
+            if (file is null)
+                return;
             FcFileService.Instance.CurrentFile.DummyRoot = file.DummyRoot;
             FcFileService.Instance.SetCurrentFile(FcFileService.Instance.CurrentFile);
             DummyRoot = new DummyGroupViewModel(file.DummyRoot);
         }
 
-        private FcFile LoadFromDialog()
+        private FcFile? LoadFromDialog()
         {
             var picker = new OpenFileDialog
             {
-                Filter = "Fc Files converted with FileDBReader (*.xml)|*.xml"
+                Filter = "Fc Files (*.fc) |*.fc| Xml Files (*.xml)|*.xml"
             };
 
             if (true != picker.ShowDialog())
                 return null;
-            var file = FcFileLoaderService.Instance.LoadFcFile(picker.FileName);
+            if (!picker.FileName.EndsWith(".fc") && !picker.FileName.EndsWith(".xml"))
+                return null;
+
+            var useXmlDirectly = picker.FileName.EndsWith(".xml");
+            var useConversionLogic = picker.FileName.EndsWith(".fc");
+            var xmlPath = useXmlDirectly ? picker.FileName : System.IO.Path.ChangeExtension(picker.FileName, "xml");
+
+            if (useConversionLogic)
+            {
+                FileDBReaderService.Instance.ConvertFc(picker.FileName);
+            }
+            var file = FcFileLoaderService.Instance.LoadFcFile(xmlPath);
             if (file is null)
                 throw new InvalidDataException("The Fc File loaded is invalid");
+            if(useConversionLogic)
+                System.IO.File.Delete(xmlPath);
             return file;
         }
 
