@@ -41,6 +41,7 @@ namespace FeedbackEditor.ViewModel
         
         }
 
+        [AddINotifyPropertyChangedInterface]
         public class GuidVariation
         {
             public int Guid { get; set; }
@@ -117,7 +118,7 @@ namespace FeedbackEditor.ViewModel
             UpdateModelGuidVariations();
         }
 
-        private void UpdateModelGuidVariations()
+        public void UpdateModelGuidVariations()
         {
             if (FeedbackConfig?.AssetVariationList is null)
                 return;

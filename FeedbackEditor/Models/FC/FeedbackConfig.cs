@@ -12,7 +12,7 @@ namespace FeedbackEditor.Models.FC
         [XmlElement(ElementName = "hasValue")]
         public bool HasValue { get; set; }
 
-        public AssetVariationList? AssetVariationList { get; set; }
+        public AssetVariationList? AssetVariationList { get; set; } = new();
 
         public bool MainObject { get; set; } = false;
 

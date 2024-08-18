@@ -72,11 +72,12 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="40" />
                                 </Grid.ColumnDefinitions>
-                                <TextBox Text="{Binding Guid}"
+                                <TextBox Text="{Binding Guid, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Stretch"
                                          Margin="6"
                                          PreviewTextInput="NumberValidationTextBox"
-                                         VerticalAlignment="Center" />
+                                         VerticalAlignment="Center"
+                                         TextChanged="TextBoxGuidChanged"/>
                                 <Button Grid.Column="1"
                                         Style="{StaticResource MaterialDesignFlatLightButton}"
                                         DataContext="{Binding}"

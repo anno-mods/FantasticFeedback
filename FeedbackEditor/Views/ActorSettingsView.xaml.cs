@@ -125,5 +125,10 @@ namespace FeedbackEditor.Views
                 }
             }
         }
+
+        private void TextBoxGuidChanged(object sender, TextChangedEventArgs e)
+        {
+           DisplayedActor?.UpdateModelGuidVariations();
+        }
     }
 }

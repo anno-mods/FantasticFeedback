@@ -47,6 +47,6 @@ namespace FeedbackEditor.Models.FC
             }
         }
 
-        public string AssetGroupNames { get; set; }
+        public string AssetGroupNames { get; set; } = "";
     }
 }
