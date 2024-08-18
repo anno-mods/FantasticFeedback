@@ -88,6 +88,7 @@ namespace FeedbackEditor.ViewModel
                 .CurrentFile
                 .FeedbackDefinition
                 .ValidSequenceIDs
+                .OrderBy(x => x)
                 .Select(x => {
                     bool supportsSequence = FeedbackConfig.FeedbackLoops.ReadonlyValues.ContainsKey(x);
                     return new FeedbackLoopEntry()
