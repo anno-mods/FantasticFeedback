@@ -33,7 +33,7 @@ namespace FeedbackEditor.Services
         {
             Process process = new Process();
             process.StartInfo.FileName = Properties.Settings.Default.FileDBReaderPath;
-            process.StartInfo.Arguments = @$"fctohex -f {fcPath} -d -y -i FcFile.xml";
+            process.StartInfo.Arguments = @$"fctohex -f ""{fcPath}"" -d -y -i FcFile.xml";
             process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             process.StartInfo.UseShellExecute = true;
             process.Start();
@@ -44,7 +44,7 @@ namespace FeedbackEditor.Services
         {
             Process process = new Process();
             process.StartInfo.FileName = Properties.Settings.Default.FileDBReaderPath;
-            process.StartInfo.Arguments = @$"hextofc -f {xmlPath} -d -y -i FcFile.xml";
+            process.StartInfo.Arguments = @$"hextofc -f ""{xmlPath}"" -d -y -i FcFile.xml";
             process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             process.StartInfo.UseShellExecute = true;
             process.Start();
