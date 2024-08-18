@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="FileDBReaderPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"C:\Program Files\FileDBReader\FileDBReader.exe"</Value>
+      <Value Profile="(Default)">C:\Program Files</Value>
     </Setting>
   </Settings>
 </SettingsFile>

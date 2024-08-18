@@ -28,6 +28,7 @@ using static System.Net.WebRequestMethods;
 using FeedbackEditor.Models.FC.Dummy;
 using PropertyChanged;
 using FeedbackEditor.ViewModel.Dummies;
+using FeedbackEditor.Views;
 
 namespace FeedbackEditor
 {
@@ -79,7 +80,7 @@ namespace FeedbackEditor
         {
             var picker = new Microsoft.Win32.SaveFileDialog
             {
-                Filter = "Fc Files (*.fc)|*.fc|Xml Files (*.xml)|*.xml",
+                Filter = (FileDBReaderService.Instance.IsInstalled() ? "Fc Files (*.fc)|*.fc|" : "") +  "Xml Files (*.xml)|*.xml",
                 RestoreDirectory = true
             };
 
@@ -106,6 +107,12 @@ namespace FeedbackEditor
             NewFile();
         }
 
+        private void SetupFileDBReaderClick(object sender, RoutedEventArgs e)
+        {
+            FileDBReaderSettingsPopup popup = new FileDBReaderSettingsPopup();
+            popup.ShowDialog();
+        }
+
         private void LoadDummiesClick(object sender, RoutedEventArgs e)
         {
             var file = LoadFromDialog();
@@ -120,7 +127,7 @@ namespace FeedbackEditor
         {
             var picker = new OpenFileDialog
             {
-                Filter = "Fc Files (*.fc) |*.fc| Xml Files (*.xml)|*.xml"
+                Filter = (FileDBReaderService.Instance.IsInstalled() ? "Fc Files (*.fc)|*.fc|" : "") + "Xml Files (*.xml)|*.xml",
             };
 
             if (true != picker.ShowDialog())

@@ -25,7 +25,7 @@ namespace FeedbackEditor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"C:\\Program Files\\FileDBReader\\FileDBReader.exe\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files")]
         public string FileDBReaderPath {
             get {
                 return ((string)(this["FileDBReaderPath"]));

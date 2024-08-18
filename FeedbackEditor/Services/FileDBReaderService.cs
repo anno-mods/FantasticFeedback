@@ -18,7 +18,7 @@ namespace FeedbackEditor.Services
             if (Properties.Settings.Default.FileDBReaderPath == String.Empty)
                 return false;
             var exeExists = File.Exists(Properties.Settings.Default.FileDBReaderPath);
-            var fcFileInterpreterPath = Path.Combine(Path.GetPathRoot(Properties.Settings.Default.FileDBReaderPath) ?? "", "FileFormats", "FcFile.xml");
+            var fcFileInterpreterPath = Path.Combine(Path.GetDirectoryName(Properties.Settings.Default.FileDBReaderPath) ?? "", "FileFormats", "FcFile.xml");
             var fcFileExists = File.Exists(fcFileInterpreterPath);
             return exeExists && fcFileExists;
         }

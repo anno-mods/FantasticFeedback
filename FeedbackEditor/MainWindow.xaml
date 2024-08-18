@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:FeedbackEditor"
         xmlns:views="clr-namespace:FeedbackEditor.Views"
         xmlns:viewmodel="clr-namespace:FeedbackEditor.ViewModel.Dummies"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="FantasticFeedback"
         Height="900"
@@ -138,10 +139,12 @@
             <Button Content="Open File"
                     Height="25"
                     Margin="5"
+                    Foreground="{StaticResource TextColorBrush}"
                     Click="OpenFileClick" />
             <Button Content="Save File"
                     Height="25"
                     IsEnabled="{Binding CanSave,UpdateSourceTrigger=PropertyChanged}"
+                    Foreground="{StaticResource TextColorBrush}"
                     Margin="5"
                     Click="SaveFileClick"
                     Cursor="Hand" />
@@ -149,12 +152,23 @@
                     Height="25"
                     Margin="5"
                     Click="NewFileClick"
+                    Foreground="{StaticResource TextColorBrush}"
                     Cursor="Hand" />
             <Button Content="Import Dummies"
                     Height="25"
                     Margin="5"
                     Click="LoadDummiesClick"
+                    Foreground="{StaticResource TextColorBrush}"
                     Cursor="Hand" />
+            <Button Height="25"
+                    Margin="5"
+                    Click="SetupFileDBReaderClick"
+                    Cursor="Hand">
+                <materialDesign:PackIcon Kind="Settings"
+                                         Height="32"
+                                         VerticalAlignment="Center"
+                                         Foreground="{StaticResource TextColorBrush}" />
+            </Button>
         </StackPanel>
     </Grid>
 </Window>
