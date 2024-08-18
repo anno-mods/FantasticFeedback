@@ -6,7 +6,10 @@
 - Create your Feedback Loops with a Node based Editor
 - Export the entire Thing
 
-# What it can currently do
+![grafik](https://github.com/user-attachments/assets/4df3e507-0f26-4b4c-a305-228f005cd388)
+
+
+# What it can do
 - Import Fc Files, either directly or the FileDBReader converted variant.
 - Export into those formats format
 - Add and remove Actors
