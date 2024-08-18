@@ -152,7 +152,7 @@
                            Style="{StaticResource MaterialDesignLabel}"
                            VerticalAlignment="Center"
                            ToolTip="The Number of Persons behaving like this Actor"></Label>
-                    <controls:NumericSpinner Value="{Binding DisplayedActor.FeedbackConfig.ActorCount, UpdateSourceTrigger=PropertyChanged}"
+                    <controls:NumericSpinner Value="{Binding DisplayedActor.FeedbackConfig.ActorCount, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                              Grid.Column="1"
                                              Decimals="0"
                                              Step="1"
@@ -174,7 +174,7 @@
                            Style="{StaticResource MaterialDesignLabel}"
                            VerticalAlignment="Center"
                            ToolTip="The maximum number of Persons behaving like this Actor"></Label>
-                    <controls:NumericSpinner Value="{Binding DisplayedActor.FeedbackConfig.MaxActorCount, UpdateSourceTrigger=PropertyChanged}"
+                    <controls:NumericSpinner Value="{Binding DisplayedActor.FeedbackConfig.MaxActorCount, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                              Grid.Column="1"
                                              Decimals="0"
                                              Step="1"
@@ -196,7 +196,7 @@
                            Style="{StaticResource MaterialDesignLabel}"
                            VerticalAlignment="Center"
                            ToolTip="The chance with which this Actor is spawned."></Label>
-                    <controls:NumericSpinner Value="{Binding DisplayedActor.FeedbackConfig.CreateChance, UpdateSourceTrigger=PropertyChanged}"
+                    <controls:NumericSpinner Value="{Binding DisplayedActor.FeedbackConfig.CreateChance, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                              Grid.Column="1"
                                              Decimals="0"
                                              Step="1"

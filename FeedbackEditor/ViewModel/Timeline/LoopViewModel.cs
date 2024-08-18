@@ -37,6 +37,18 @@ namespace FeedbackEditor.ViewModel.Timeline
             }
         }
 
+        private DummyGroup? _startDummyGroup;
+
+        public DummyGroup? StartDummyGroup
+        {
+            get => _startDummyGroup;
+            set
+            {
+                _startDummyGroup = value;
+                Loop.DefaultState.StartDummyGroup = value is not null ? value.Name : "";
+            }
+        }
+
         private List<SequenceActionTimelineViewModel> _viewModels = new(); 
 
         public LoopViewModel()
@@ -48,6 +60,7 @@ namespace FeedbackEditor.ViewModel.Timeline
         {
             Loop = loop;
             DefaultDummy = FcFileService.Instance.GetDummy(Loop.DefaultState.DummyID);
+            StartDummyGroup = FcFileService.Instance.GetDummyGroup(Loop.DefaultState.StartDummyGroup);
             AddLoopElements(); 
         }
 

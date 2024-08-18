@@ -48,6 +48,11 @@ namespace FeedbackEditor.Views
             e.Handled = e.Data.GetData(typeof(DummyViewModel)) is DummyViewModel;
         }
 
+        private void OnPreviewDropAcceptOnlyDummyGroups(object sender, DragEventArgs e)
+        {
+            e.Handled = e.Data.GetData(typeof(DummyGroupViewModel)) is DummyGroupViewModel;
+        }
+
         private void OnDefaultStateDummyDropped(object sender, DragEventArgs e)
         {
             var vm = e.Data.GetData(typeof(DummyViewModel)) as DummyViewModel;
@@ -58,10 +63,26 @@ namespace FeedbackEditor.Views
             }
         }
 
+        private void OnStartDummyGroupDropped(object sender, DragEventArgs e)
+        {
+            var vm = e.Data.GetData(typeof(DummyGroupViewModel)) as DummyGroupViewModel;
+
+            if (vm != null && DisplayedLoop is not null)
+            {
+                DisplayedLoop.StartDummyGroup = vm.DummyGroup;
+            }
+        }
+
         private void OnClearDefaultDummyClick(object sender, RoutedEventArgs e)
         {
             if(DisplayedLoop is not null)
                 DisplayedLoop.DefaultDummy = null;
+        }
+
+        private void OnClearStartDummyGroupClick(object sender, RoutedEventArgs e)
+        {
+            if (DisplayedLoop is not null)
+                DisplayedLoop.StartDummyGroup = null;
         }
     }
 }

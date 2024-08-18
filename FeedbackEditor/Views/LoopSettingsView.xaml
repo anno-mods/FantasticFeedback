@@ -16,9 +16,9 @@
                    Margin="5"/>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Label Content="Position:"
                        Margin="5"
@@ -47,6 +47,22 @@
 
                     </materialDesign:PackIcon>
                 </Button>
+            </Grid>
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="Default Sequence:"
+                       Margin="5"
+                       VerticalAlignment="Center"></Label>
+                <ComboBox ItemsSource="{Binding Source={StaticResource SequenceIdValues}}"
+                          Height="30"
+                          Margin="5"
+                          Grid.Column="1"
+                          SelectedItem="{Binding DisplayedLoop.Loop.DefaultState.SequenceID, UpdateSourceTrigger=PropertyChanged}"
+                          VerticalContentAlignment="Center"></ComboBox>
             </Grid>
             <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
                       Grid.Row="1"
@@ -80,6 +96,41 @@
                       Margin="5"
                       Content="Reset to Default Loop"
                       IsChecked="{Binding DisplayedLoop.Loop.DefaultState.ResetToDefaultEveryLoop, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Start Dummy Group:"
+                       Margin="5"
+                       VerticalAlignment="Center"></Label>
+                <TextBox Grid.Column="1"
+                         Text="{Binding DisplayedLoop.StartDummyGroup.Name, UpdateSourceTrigger=PropertyChanged}"
+                         AllowDrop="True"
+                         Background="Transparent"
+                         IsReadOnly="True"
+                         Drop="OnStartDummyGroupDropped"
+                         PreviewDragOver="OnPreviewDropAcceptOnlyDummyGroups"
+                         BorderThickness="1"
+                         ToolTip="Drag and Drop a Dummy from the Dummy Panel to set the Default Dummy"
+                         Margin="3"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                <Button Grid.Column="2"
+                        Click="OnClearStartDummyGroupClick"
+                        Style="{StaticResource MaterialDesignFlatLightButton}"
+                        Height="50">
+                    <materialDesign:PackIcon Kind="RemoveBold"
+                                             Foreground="Red"
+                                             Height="24"
+                                             Width="24"
+                                             Margin="-10"
+                                             VerticalAlignment="Center">
+
+                    </materialDesign:PackIcon>
+                </Button>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>

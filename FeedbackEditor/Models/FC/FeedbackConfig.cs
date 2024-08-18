@@ -10,7 +10,7 @@ namespace FeedbackEditor.Models.FC
     public class FeedbackConfig
     {
         [XmlElement(ElementName = "hasValue")]
-        public bool HasValue { get; set; }
+        public bool HasValue { get; set; } = true;
 
         public AssetVariationList? AssetVariationList { get; set; } = new();
 
