@@ -22,7 +22,6 @@ namespace FeedbackEditor.Services
         } = new FcFileService();
         public FcFile CurrentFile { get; private set; }
 
-        private XmlSerializer _serializer = new XmlSerializer(typeof(FcFile));
 
         public event EventHandler<FcFile> FileLoaded = delegate { };
 
@@ -40,28 +39,6 @@ namespace FeedbackEditor.Services
         public DummyGroup? GetDummyGroup(String id)
         {
             return CurrentFile.DummyRoot.GetContainedDummyGroups().Where(x => x.Name == id).FirstOrDefault();
-        }
-
-        public FcFile LoadFcFile(String datapath)
-        {
-            using var fs1 = File.OpenRead(datapath);
-            using (XmlReader reader = XmlReader.Create(fs1))
-            {
-                var file = _serializer.Deserialize(reader) as FcFile;
-                return file;
-            }
-        }
-
-        public void SaveCurrentFile(String filepath)
-        {
-            var settings = new XmlWriterSettings();
-            settings.OmitXmlDeclaration = true;
-            settings.Indent = true;
-            using var fs = File.Create(filepath);
-            using (XmlWriter writer = new FeedbackXmlWriter(XmlWriter.Create(fs, settings)))
-            {
-                _serializer.Serialize(writer, CurrentFile);
-            }
         }
 
         public void SetCurrentFile(FcFile file)

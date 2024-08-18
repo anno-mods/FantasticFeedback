@@ -21,6 +21,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Margin="20,2,2,2"
+                    IsEnabled="{Binding CanAddActor, UpdateSourceTrigger=PropertyChanged}"
                     Click="AddActorButtonClick">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Add" 

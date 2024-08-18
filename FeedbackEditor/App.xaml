@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:FeedbackEditor"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:StyleAlias="clr-namespace:FeedbackEditor.Models.FC.Actions"
+             xmlns:modelsFc="clr-namespace:FeedbackEditor.Models.FC"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -24,7 +25,15 @@
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="StyleAlias:SequenceID" />
                 </ObjectDataProvider.MethodParameters>
-                
+
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="FeedbackSequenceTypeValues"
+                                MethodName="GetValues"
+                                ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="modelsFc:FeedbackSequenceType" />
+                </ObjectDataProvider.MethodParameters>
+
             </ObjectDataProvider>
         </ResourceDictionary>
         

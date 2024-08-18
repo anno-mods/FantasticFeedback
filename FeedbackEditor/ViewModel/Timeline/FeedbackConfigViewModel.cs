@@ -50,12 +50,11 @@ namespace FeedbackEditor.ViewModel
 
         public class FeedbackLoopEntry
         {
-            public int ParentSequence { get; set; }
-            public SequenceDefinitionViewModel Plays { get; set; }
+            public FeedbackSequenceType ParentSequence { get; set; }
+            public SequenceDefinitionViewModel? Plays { get; set; }
         }
 
-        public ObservableCollection<FeedbackLoopEntry> FeedbackLoops { get; }
-
+        public ObservableCollection<FeedbackLoopEntry> FeedbackLoops { get; private set; }
 
         public FeedbackConfigViewModel(FeedbackConfig feedbackConfig)
         {
@@ -65,7 +64,7 @@ namespace FeedbackEditor.ViewModel
             foreach (var sequenceDefinition in feedbackConfig.SequenceDefinitions)
             {
                 var viewModel = new SequenceDefinitionViewModel(sequenceDefinition);
-                viewModel.ChannelName = "Unnamed Sequence " + index;
+                viewModel.ChannelName = "Sequence " + index;
                 Childs.Add(viewModel);
                 SequenceDefinitions.Add(viewModel);
                 index++;
@@ -78,36 +77,62 @@ namespace FeedbackEditor.ViewModel
                 .Select(x => new GuidVariation { Guid = x.Item1 })
 
                 ?? Enumerable.Empty<GuidVariation>());
+            InitFeedbackLoops();
+        }
 
+        public void InitFeedbackLoops()
+        {
             FeedbackLoops = new ObservableCollection<FeedbackLoopEntry>(
-                FeedbackConfig
-                .FeedbackLoops
-                .ReadonlyValues
-                .Select(x => new FeedbackLoopEntry()
-                {
-                    ParentSequence = x.Key,
-                    Plays = SequenceDefinitions.ElementAt(x.Value)
+                FcFileService
+                .Instance
+                .CurrentFile
+                .FeedbackDefinition
+                .ValidSequenceIDs
+                .Select(x => {
+                    bool supportsSequence = FeedbackConfig.FeedbackLoops.ReadonlyValues.ContainsKey(x);
+                    return new FeedbackLoopEntry()
+                    {
+                        ParentSequence = x,
+                        Plays = supportsSequence ?
+                            SequenceDefinitions.ElementAt(
+                                FeedbackConfig
+                                .FeedbackLoops
+                                .ReadonlyValues
+                                .GetValueOrDefault(x))
+                            : null
+                    };
                 }));
         }
 
         public void AddActor(int actorGuid)
         {
             GuidVariations.Add(new GuidVariation { Guid = actorGuid });
-            UpdateModel();
+            UpdateModelGuidVariations();
         }
 
         public void RemoveActor(GuidVariation variation)
         {
             GuidVariations.Remove(variation);
-            UpdateModel();
+            UpdateModelGuidVariations();
         }
 
-        private void UpdateModel()
+        private void UpdateModelGuidVariations()
         {
             if (FeedbackConfig?.AssetVariationList is null)
                 return;
             FeedbackConfig.AssetVariationList.GuidVariationList
                 = GuidVariations.Select(x => (x.Guid, -1)).ToList();
+        }
+
+        public void UpdateModelFeedbackLoops()
+        {
+            FeedbackConfig.FeedbackLoops.Clear();
+            foreach (var feedbackLoopEntry in FeedbackLoops)
+            {
+                if (feedbackLoopEntry.Plays is null)
+                    continue;
+                FeedbackConfig.FeedbackLoops.SetValue(feedbackLoopEntry.ParentSequence, SequenceDefinitions.IndexOf(feedbackLoopEntry.Plays));
+            }
         }
 
         public void AddSequenceDefinition(SequenceDefinitionViewModel sequenceDefinitionViewModel)

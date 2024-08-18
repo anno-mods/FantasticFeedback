@@ -47,6 +47,7 @@ namespace FeedbackEditor
             InitializeComponent();
             
             TimelineView.SelectionChanged += OnSelectedLoopChanged;
+            NewFile();
         }
 
         public void OnSelectedLoopChanged(object? sender, LoopViewModel? selectedLoop)
@@ -62,23 +63,13 @@ namespace FeedbackEditor
 
         private void OpenFileClick(object sender, RoutedEventArgs e)
         {
-            var picker = new OpenFileDialog
-            {
-                Filter = "Fc Files converted with FileDBReader (*.xml)|*.xml"
-            };
-
-            if (true == picker.ShowDialog())
-            {
-                var file = FcFileService.Instance.LoadFcFile(picker.FileName);
-                if (file is null)
-                    throw new InvalidDataException("The Fc File loaded is invalid");
-                FcFileService.Instance.SetCurrentFile(file);
-                NodeView.ShowDefaultNodesView();
-                DummyRoot = new DummyGroupViewModel(file.DummyRoot);
-                CanSave = true;
-                return;
-            }
-            CanSave = false;
+            var file = LoadFromDialog();
+            if (file is null)
+                throw new InvalidDataException("The Fc File loaded is invalid");
+            FcFileService.Instance.SetCurrentFile(file);
+            NodeView.ShowDefaultNodesView();
+            DummyRoot = new DummyGroupViewModel(file.DummyRoot);
+            CanSave = true;
         }
 
         private void SaveFileClick(object sender, RoutedEventArgs e)
@@ -91,8 +82,46 @@ namespace FeedbackEditor
 
             if (true == picker.ShowDialog())
             {
-                FcFileService.Instance.SaveCurrentFile(picker.FileName);
+                FcFileLoaderService.Instance.SaveFcFile(picker.FileName, FcFileService.Instance.CurrentFile);
             }
+        }
+
+        private void NewFileClick(object sender, RoutedEventArgs e)
+        {
+            NewFile();
+        }
+
+        private void LoadDummiesClick(object sender, RoutedEventArgs e)
+        {
+            var file = LoadFromDialog();
+            FcFileService.Instance.CurrentFile.DummyRoot = file.DummyRoot;
+            FcFileService.Instance.SetCurrentFile(FcFileService.Instance.CurrentFile);
+            DummyRoot = new DummyGroupViewModel(file.DummyRoot);
+        }
+
+        private FcFile LoadFromDialog()
+        {
+            var picker = new OpenFileDialog
+            {
+                Filter = "Fc Files converted with FileDBReader (*.xml)|*.xml"
+            };
+
+            if (true != picker.ShowDialog())
+                return null;
+            var file = FcFileLoaderService.Instance.LoadFcFile(picker.FileName);
+            if (file is null)
+                throw new InvalidDataException("The Fc File loaded is invalid");
+            return file;
+        }
+
+        private void NewFile()
+        {
+            var file = new FcFile();
+            FcFileService.Instance.SetCurrentFile(file);
+            NodeView.ShowDefaultNodesView();
+            DummyRoot = new DummyGroupViewModel(file.DummyRoot);
+            CanSave = true;
+
         }
 
         private void TreeView_PreviewDragLeave(object sender, DragEventArgs e)

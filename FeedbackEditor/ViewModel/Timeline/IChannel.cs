@@ -11,7 +11,8 @@ namespace FeedbackEditor.ViewModel.Timeline
     {
         ACTOR,
         SEQUENCE,
-        LOOP
+        LOOP,
+        FEEDBACKDEFINITION
     }
     public interface IChannel
     {

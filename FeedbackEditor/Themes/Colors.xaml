@@ -6,6 +6,8 @@
                      Color="DarkSlateGray" />
     <SolidColorBrush x:Key="LoopChannelColorBrush"
                      Color="#FF478080" />
+    <SolidColorBrush x:Key="FeedbackDefinitionChannelColorBrush"
+                     Color="MidnightBlue" />
     <SolidColorBrush x:Key="LoopChannelHighlightedColorBrush"
                      Color="#FF007575" />
     <SolidColorBrush x:Key="LoopChannelHighlightedBorderColorBrush"
@@ -13,7 +15,7 @@
     <SolidColorBrush x:Key="DefaultActionColorBrush"
                      Color="DarkOliveGreen"/>
     <SolidColorBrush x:Key="DefaultActionAccentColorBrush"
-                     Color="GreenYellow" />
+                     Color="GreenYellow" /> 
 
     <Color x:Key="NodeBackground">#454545</Color>
 

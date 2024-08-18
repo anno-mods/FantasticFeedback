@@ -15,7 +15,7 @@ namespace FeedbackEditor.ViewModel.Timeline
     [AddINotifyPropertyChangedInterface]
     public class SequenceDefinitionViewModel : TimeLinesDataBase, IChannel
     {
-        public string ChannelName { get; set; } = "Unnamed Sequence";
+        public string ChannelName { get; set; } = "Sequence";
         public Thickness OffsetOverride => new Thickness(30, 3, 3, 3);
         public ChannelType ChannelType { get; } = ChannelType.SEQUENCE;
 

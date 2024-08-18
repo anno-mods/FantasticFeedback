@@ -15,7 +15,7 @@ namespace FeedbackEditor.Models.FC
     {
         [XmlElement("k")]
         //Index of the SequenceDefinition that should be active
-        public List<int> KeyIndices
+        public List<int> FeedbackSequences
         {
             get;
             set;
@@ -29,27 +29,45 @@ namespace FeedbackEditor.Models.FC
             set;
         } = new();
 
-        public IReadOnlyDictionary<int, int> ReadonlyValues 
-        { 
-            get => KeyIndices.Zip(ValueIndices).ToDictionary(x => x.First, y => y.Second);
+        public IReadOnlyDictionary<FeedbackSequenceType, int> ReadonlyValues
+        {
+            get => FeedbackSequences
+                .Where(x => Enum.IsDefined(typeof(FeedbackSequenceType), x))
+                .Cast<FeedbackSequenceType>()
+                .Zip(ValueIndices)
+                .ToDictionary(x => x.First, y => y.Second);
         }
 
-        public bool ContainsKey(int Key) => KeyIndices.Contains(Key);
+        public bool ContainsKey(int Key) => FeedbackSequences.Contains(Key);
 
-        public int GetValue(int Key) => ValueIndices.ElementAt(KeyIndices.IndexOf(Key));
+        public int GetValue(int Key) => ValueIndices.ElementAt(FeedbackSequences.IndexOf(Key));
 
-        public void SetValue(int Key, int Value)
+        public void SetValue(FeedbackSequenceType Key, int Value)
         {
-            if (ContainsKey(Key))
+            if (ContainsKey((int)Key))
             {
-                var index = KeyIndices.IndexOf(Key);
+                var index = FeedbackSequences.IndexOf((int)Key);
                 ValueIndices.RemoveAt(index);
                 ValueIndices.Insert(index, Value);
                 return;
             }
 
-            KeyIndices.Add(Key);
+            FeedbackSequences.Add((int)Key);
             ValueIndices.Add(Value);
+        }
+
+        public void Remove(FeedbackSequenceType Key)
+        { 
+            if(ContainsKey((int)Key))
+            { 
+                FeedbackSequences.Remove((int)Key);
+            }
+        }
+
+        public void Clear()
+        {
+            FeedbackSequences.Clear();
+            ValueIndices.Clear();
         }
     }
 }

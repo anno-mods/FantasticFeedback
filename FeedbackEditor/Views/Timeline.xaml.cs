@@ -23,7 +23,7 @@ namespace FeedbackEditor.Views
     [AddINotifyPropertyChangedInterface]
     public partial class Timeline : UserControl
     {
-        public ObservableCollection<FeedbackConfigViewModel> FeedbackConfigs { get; set; } = new();
+        public ObservableCollection<TimeLinesDataBase> Channels { get; set; } = new();
 
         private LoopViewModel? _selectedLoop;
         public LoopViewModel? SelectedLoop
@@ -39,8 +39,10 @@ namespace FeedbackEditor.Views
         public event EventHandler<LoopViewModel?> SelectionChanged = delegate { };
 
         public bool CanAddSequence { get; private set; }
+        public bool CanAddActor { get; private set; }
 
         public FeedbackConfigViewModel? SelectedActor { get; private set; }
+        public FeedbackDefinitionViewModel? SelectedFile { get; private set; }
         public SequenceDefinitionViewModel? SelectedSequence { get; private set; }
 
         private TimeLinesDataBase? SelectedTimeLinesData = null; 
@@ -52,14 +54,15 @@ namespace FeedbackEditor.Views
         {
             InitializeComponent();
             DataContext = this;
-            Timelines.ItemsSource = FeedbackConfigs;
+            Timelines.ItemsSource = Channels;
 
             FcFileService.Instance.FileLoaded += (sender, file) => {
-                FeedbackConfigs.Clear();
+                Channels.Clear();
+                Channels.Add(new FeedbackDefinitionViewModel(file.FeedbackDefinition));
                 file.FeedbackDefinition.FeedbackConfigs.ForEach(x =>
                 {
                     var vm = new FeedbackConfigViewModel(x);
-                    FeedbackConfigs.Add(vm);
+                    Channels.Add(vm);
                 });
             };
         }
@@ -71,10 +74,13 @@ namespace FeedbackEditor.Views
 
             CanAddSequence = button.DataContext is FeedbackConfigViewModel;
             SelectedActor = CanAddSequence ? button.DataContext as FeedbackConfigViewModel : null;
-
+            SelectedFile = button.DataContext as FeedbackDefinitionViewModel;
+            CanAddActor = SelectedFile is not null;
             SelectedLoop = button.DataContext as LoopViewModel;
             SelectedSequence = button.DataContext as SequenceDefinitionViewModel;
             SelectedTimeLinesData = button.DataContext as TimeLinesDataBase;
+
+            SelectedActor?.InitFeedbackLoops();
         }
 
         private void AddActorButtonClick(object sender, RoutedEventArgs e)
@@ -85,7 +91,7 @@ namespace FeedbackEditor.Views
             feedbackConfig.CreateNewSequenceDefinition();
             FcFileService.Instance.CurrentFile.AddActor(feedbackConfig, "Unnamed Actor");
             var vm = new FeedbackConfigViewModel(feedbackConfig);
-            FeedbackConfigs.Add(vm);
+            Channels.Add(vm);
             Timelines.Redraw();
         }
 
@@ -114,7 +120,7 @@ namespace FeedbackEditor.Views
             if (SelectedActor is not null)
             {
                 FcFileService.Instance.CurrentFile.RemoveActor(SelectedActor.FeedbackConfig);
-                FeedbackConfigs.Remove(SelectedActor);
+                Channels.Remove(SelectedActor);
                 SelectedActor = null;
                 CanAddSequence = false;
             }
@@ -131,7 +137,7 @@ namespace FeedbackEditor.Views
 
         private FeedbackConfigViewModel? GetParentActor(SequenceDefinitionViewModel sequenceAction)
         {
-            return FeedbackConfigs.FirstOrDefault(x => x.Childs.Contains(sequenceAction));        
+            return Channels.FirstOrDefault(x => x.Childs.Contains(sequenceAction)) as FeedbackConfigViewModel;        
         }
     }
 

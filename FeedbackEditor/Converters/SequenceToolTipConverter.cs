@@ -4,25 +4,24 @@ using System.Windows.Data;
 using System.Windows;
 using System.Windows.Media;
 using FeedbackEditor.ViewModel.Timeline;
+using FeedbackEditor.Models.FC;
 
 namespace FeedbackEditor.Converters
 {
-    [ValueConversion(typeof(ChannelType), typeof(Brush))]
-    public class ChannelColorConverter : IValueConverter
+    [ValueConversion(typeof(FeedbackSequenceType), typeof(String))]
+    public class SequenceToolTipConverter : IValueConverter
     {
         public object Convert(object value, Type TargetType, object parameter, CultureInfo Culture)
         {
-            ChannelType type = (ChannelType)value;
+            FeedbackSequenceType type = (FeedbackSequenceType)value;
 
             try
             {
                 return type switch
                 {
-                    ChannelType.ACTOR => Application.Current.Resources["ActorChannelColorBrush"],
-                    ChannelType.SEQUENCE => Application.Current.Resources["SequenceChannelColorBrush"],
-                    ChannelType.LOOP => Application.Current.Resources["LoopChannelColorBrush"],
-                    ChannelType.FEEDBACKDEFINITION => Application.Current.Resources["FeedbackDefinitionChannelColorBrush"],
-                    _ => "Red"
+                    FeedbackSequenceType.Default => "Default/Idle State of the Building. Played by default for any Building",
+                    FeedbackSequenceType.Work => "Working State of the Building. Autoplayed for factories when productivity > 0%",
+                    _ => $"No Autoplay, activate using ActionStartObjectSequence with StartLocalFeedbackSequence={type}"
                 };
             }
             catch (Exception ex)

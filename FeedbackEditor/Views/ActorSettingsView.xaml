@@ -23,7 +23,16 @@
                       HorizontalScrollBarVisibility="Disabled">
 
             <StackPanel Orientation="Vertical">
-
+                <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                          Grid.Row="1"
+                          FontSize="12"
+                          Grid.ColumnSpan="2"
+                          HorizontalAlignment="Left"
+                          Margin="5"
+                          ToolTip="Set this for one of your actors to set the [Root Object] (and preferably name that actor such) of the fc file"
+                          Content="Main Object"
+                          Checked="CheckBox_Checked"
+                          IsChecked="{Binding DisplayedActor.FeedbackConfig.MainObject, UpdateSourceTrigger=PropertyChanged}" />
                 <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
                           Grid.Row="1"
                           FontSize="12"
@@ -98,14 +107,14 @@
                            HorizontalAlignment="Center"
                            FontWeight="Bold"
                            Margin="5"
-                           ToolTip="Set up which Object Sequence will play which Sequence Definition here."></TextBlock>
+                           ToolTip="Set up which Feedback Sequence will play which Actor Definition here. Note: Feedback Sequences have absolutely nothing to do with CFG sequences. They are their own thing. Default and Work are automatically played, everything else requires manual setup. For detailed explanation, visit the Anno Modding Guide on Github."></TextBlock>
                 <ItemsControl ItemsSource="{Binding DisplayedActor.FeedbackLoops, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0.7*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{Binding ParentSequence}" 
@@ -118,7 +127,11 @@
                                 <ComboBox SelectedItem="{Binding Plays, UpdateSourceTrigger=PropertyChanged}"
                                           DisplayMemberPath="ChannelName"
                                           Grid.Column="2"
+                                          materialDesign:TextFieldAssist.HasClearButton="True"
                                           Margin="6"
+                                          materialDesign:HintAssist.Hint="Nothing"
+                                          SelectionChanged="OnActorSequenceSelectionChanged"
+                                          Style="{StaticResource MaterialDesignComboBox}"
                                           ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DisplayedActor.SequenceDefinitions}">
                                     
                                 </ComboBox>

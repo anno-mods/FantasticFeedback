@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:FeedbackEditor.Views"
         xmlns:viewmodel="clr-namespace:FeedbackEditor.ViewModel.Dummies"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="FantasticFeedback"
         Height="450"
         Style="{StaticResource MaterialDesignWindow}"
         Width="800">
@@ -22,7 +22,7 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width ="300"/>
+                <ColumnDefinition Width ="350"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
@@ -75,12 +75,16 @@
               HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="350" />
             </Grid.ColumnDefinitions>
             <views:Timeline HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             x:Name="TimelineView"
                             x:FieldModifier="public"/>
+            <Grid Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                  Grid.Column="1">
+                
+            </Grid>
 
             <views:LoopSettingsView DisplayedLoop="{Binding ElementName=TimelineView, Path=SelectedLoop, UpdateSourceTrigger=PropertyChanged}"
                                     Grid.Column="1"
@@ -98,7 +102,7 @@
                 </views:LoopSettingsView.Style>
             </views:LoopSettingsView>
            
-            <views:ActorSettingsView DisplayedActor="{Binding ElementName=TimelineView, Path=SelectedActor, UpdateSourceTrigger=PropertyChanged}"
+            <views:ActorSettingsView DisplayedActor="{Binding ElementName=TimelineView, Path=SelectedActor, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                      Grid.Column="1"
                                      x:Name="ActorSettingsPanel"
                                      Background="{DynamicResource MaterialDesign.Brush.Secondary}">
@@ -114,19 +118,42 @@
                     </Style>
                 </views:ActorSettingsView.Style>
             </views:ActorSettingsView>
+            <views:FileSettingsView DisplayedFile="{Binding ElementName=TimelineView, Path=SelectedFile, UpdateSourceTrigger=PropertyChanged}"
+                                     Grid.Column="1"
+                                     x:Name="FileSettingsPanel">
+                <views:FileSettingsView.Style>
+                    <Style TargetType="views:FileSettingsView">
+                        <Style.Triggers>
+                            <Trigger Property="DisplayedFile"
+                                     Value="{x:Null}">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </views:FileSettingsView.Style>
+            </views:FileSettingsView>
         </Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button Content="Open File"
-                    Width="100"
                     Height="25"
                     Margin="5"
                     Click="OpenFileClick" />
             <Button Content="Save File"
-                    Width="100"
                     Height="25"
                     IsEnabled="{Binding CanSave,UpdateSourceTrigger=PropertyChanged}"
                     Margin="5"
                     Click="SaveFileClick"
+                    Cursor="Hand" />
+            <Button Content="New File"
+                    Height="25"
+                    Margin="5"
+                    Click="NewFileClick"
+                    Cursor="Hand" />
+            <Button Content="Import Dummies"
+                    Height="25"
+                    Margin="5"
+                    Click="LoadDummiesClick"
                     Cursor="Hand" />
         </StackPanel>
     </Grid>

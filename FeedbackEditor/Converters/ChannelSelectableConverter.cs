@@ -13,7 +13,7 @@ namespace FeedbackEditor.Converters
         public object Convert(object value, Type TargetType, object parameter, CultureInfo Culture)
         {
             ChannelType type = (ChannelType)value;
-            return type != ChannelType.LOOP;
+            return type != ChannelType.LOOP && type != ChannelType.FEEDBACKDEFINITION;
         }
 
         public object ConvertBack(object value, Type TargetType, object parameter, CultureInfo Culture)

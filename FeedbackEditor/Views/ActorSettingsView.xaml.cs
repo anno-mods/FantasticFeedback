@@ -1,4 +1,5 @@
-﻿using FeedbackEditor.ViewModel;
+﻿using FeedbackEditor.Services;
+using FeedbackEditor.ViewModel;
 using FeedbackEditor.ViewModel.Dummies;
 using PropertyChanged;
 using System;
@@ -89,6 +90,40 @@ namespace FeedbackEditor.Views
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void OnActorSequenceSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayedActor?.UpdateModelFeedbackLoops();
+            int i = 0;
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is not CheckBox checkBox)
+                return;
+            if (DisplayedActor is null)
+                return;
+
+            if (FcFileService.Instance.CurrentFile.FeedbackDefinition.FeedbackConfigs
+                .Any(x => x.MainObject && x != DisplayedActor.FeedbackConfig))
+            {
+                GenericOkayPopup popup = new GenericOkayPopup()
+                {
+                    MESSAGE = "It seems that one of the other actors is already the MainObject. Only one MainObject is allowed per File. Make this the MainObject instead?",
+                    OK_TEXT = "OK",
+                    CANCEL_TEXT = "Cancel",
+                    CancelAction = () => checkBox.IsChecked = false,
+                };
+                if (true == popup.ShowDialog())
+                {
+                    foreach (var feedbackConfig in FcFileService.Instance.CurrentFile.FeedbackDefinition.FeedbackConfigs)
+                    {
+                        feedbackConfig.MainObject = false;
+                    }
+                    DisplayedActor.FeedbackConfig.MainObject = true;
+                }
+            }
         }
     }
 }
