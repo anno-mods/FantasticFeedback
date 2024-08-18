@@ -8,6 +8,10 @@
 
 ![grafik](https://github.com/user-attachments/assets/4df3e507-0f26-4b4c-a305-228f005cd388)
 
+# Requirements 
+
+- dotnet 6.0 Runtime
+- [FileDBReader, at least Version 3.0.3](https://github.com/anno-mods/FileDBReader/releases/latest) if you want to import Fc Files directly.
 
 # What it can do
 - Import Fc Files, either directly or the FileDBReader converted variant.
