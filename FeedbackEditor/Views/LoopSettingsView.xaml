@@ -94,7 +94,8 @@
                       Grid.ColumnSpan="2"
                       HorizontalAlignment="Left"
                       Margin="5"
-                      Content="Reset to Default Loop"
+                      Content="Reset to Default on every Loop"
+                      ToolTip="If checked, the Actor will revert to it's default state when repeating this loop. If not, the new Loop starts from whatever State the Actor is currently in."
                       IsChecked="{Binding DisplayedLoop.Loop.DefaultState.ResetToDefaultEveryLoop, UpdateSourceTrigger=PropertyChanged}" />
 
             <Grid>

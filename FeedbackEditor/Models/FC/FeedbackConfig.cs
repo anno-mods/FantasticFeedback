@@ -27,11 +27,11 @@ namespace FeedbackEditor.Models.FC
 
         public bool ApplyScaleToMovementSpeed { get; set; }
 
-        public int ActorCount { get; set; }
+        public int ActorCount { get; set; } = 1;
 
-        public int MaxActorCount { get; set; }
+        public int MaxActorCount { get; set; } = 1;
 
-        public int CreateChance { get; set; }
+        public int CreateChance { get; set; } = 100;
 
         public String BoneLink { get; set; } = "BoneLink";
 

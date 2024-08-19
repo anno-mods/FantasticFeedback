@@ -41,6 +41,6 @@ namespace FeedbackEditor.Models.FC.Actions
 
         public bool UseTargetDummyDirection { get; set; }
 
-        public String DummyGroup { get; set; } = "CDATA[-1 - 1 - 1]";
+        public String DummyGroup { get; set; } = "CDATA[-1 -1 -1]";
     }
 }

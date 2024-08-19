@@ -30,6 +30,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <RowDefinition />
+                                        <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -54,6 +55,24 @@
                                                              ValueChanged="NumericSpinner_ValueChanged"
                                                              Decimals="1"    
                                                              MinValue="0"
+                                                             MinWidth="80"
+                                                             Step="1"
+                                                             Margin="5">
+                                    </controls:NumericSpinner>
+
+                                    <Label Content="Fading Mode"
+                                           Grid.Row="2"
+                                           Margin="5"
+                                           Style="{StaticResource MaterialDesignLabel}">
+
+                                    </Label>
+                                    <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.FadingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=FadeView}"
+                                                             Grid.Row="2"
+                                                             Grid.Column="1"
+                                                             ValueChanged="NumericSpinner_ValueChanged"
+                                                             Decimals="0"
+                                                             MinValue="0"
+                                                             MaxValue="2"
                                                              MinWidth="80"
                                                              Step="1"
                                                              Margin="5">

@@ -50,7 +50,7 @@
                                                Margin="5"
                                                Style="{StaticResource MaterialDesignLabel}"
                                                VerticalAlignment="Center"/>
-                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.SpeedFactorF, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}"
+                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.SpeedFactorF, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView, Mode=TwoWay}"
                                                                  Grid.Column="1"
                                                                  Decimals="2"
                                                                  Step="0.05"
@@ -110,6 +110,25 @@
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}">
                                         </TextBox>
                                     </Grid>
+
+                                    <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                              Grid.Row="1"
+                                              FontSize="12"
+                                              Grid.ColumnSpan="2"
+                                              HorizontalAlignment="Left"
+                                              Margin="5"
+                                              Background="{StaticResource WalkActionAccentColorBrush}"
+                                              Content="Walk from Current Position"
+                                              IsChecked="{Binding DataContext.ViewModel.Action.WalkFromCurrentPosition, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}" />
+                                    <CheckBox Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                              Grid.Row="1"
+                                              FontSize="12"
+                                              Grid.ColumnSpan="2"
+                                              HorizontalAlignment="Left"
+                                              Margin="5"
+                                              Background="{StaticResource WalkActionAccentColorBrush}"
+                                              Content="Use Target Dummy Direction"
+                                              IsChecked="{Binding DataContext.ViewModel.Action.UseTargetDummyDirection, UpdateSourceTrigger=PropertyChanged, ElementName=WalkBetweenDummiesView}" />
 
 
 

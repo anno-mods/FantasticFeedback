@@ -13,7 +13,7 @@ namespace FeedbackEditor.Models.FC.Actions
     public class FadeAction : SequenceAction
     {
         public bool ShowObject { get; set; }
-        public int FadingMode { get; set; }
+        public int FadingMode { get; set; } = 2;
         public int TimeOffset { get; set; }
 
         public FadeAction()
