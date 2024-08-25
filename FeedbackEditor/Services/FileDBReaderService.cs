@@ -29,7 +29,7 @@ namespace FeedbackEditor.Services
             Properties.Settings.Default.Save();
         }
 
-        public void ConvertFc(String fcPath)
+        public int ConvertFc(String fcPath)
         {
             Process process = new Process();
             process.StartInfo.FileName = Properties.Settings.Default.FileDBReaderPath;
@@ -38,6 +38,7 @@ namespace FeedbackEditor.Services
             process.StartInfo.UseShellExecute = true;
             process.Start();
             process.WaitForExit();
+            return process.ExitCode;
         }
 
         public void ConvertXml(String xmlPath)

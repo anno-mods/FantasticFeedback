@@ -139,14 +139,27 @@ namespace FeedbackEditor
             var useConversionLogic = picker.FileName.EndsWith(".fc");
             var xmlPath = useXmlDirectly ? picker.FileName : System.IO.Path.ChangeExtension(picker.FileName, "xml");
 
-            if (useConversionLogic)
+            FcFile? file = null; 
+            try
             {
-                FileDBReaderService.Instance.ConvertFc(picker.FileName);
+                if (useConversionLogic)
+                {
+                    FileDBReaderService.Instance.ConvertFc(picker.FileName);
+                }
+                file = FcFileLoaderService.Instance.LoadFcFile(xmlPath);
             }
-            var file = FcFileLoaderService.Instance.LoadFcFile(xmlPath);
-            if (file is null)
-                throw new InvalidDataException("The Fc File loaded is invalid");
-            if(useConversionLogic)
+            catch (Exception e)
+            {
+                var popup = new GenericOkayPopup()
+                {
+                    Title = "Import Error",
+                    OK_TEXT = "Okay",
+                    CANCEL_TEXT = "Cancel",
+                    MESSAGE = $"Import Error or Invalid File {xmlPath}: \n {e.Message}"
+                };
+                popup.ShowDialog();
+            }
+            if(useConversionLogic && System.IO.File.Exists(xmlPath))
                 System.IO.File.Delete(xmlPath);
             return file;
         }
