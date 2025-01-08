@@ -39,7 +39,7 @@ jobs:
         tar -caf FantasticFeedback.zip -C ./Build/ *
     
     - name: Upload Build Artifact
-      uses: actions/upload-artifact@v4.4
+      uses: actions/upload-artifact@v4
       with:
     # Artifact name
         name: FantasticFeedback
