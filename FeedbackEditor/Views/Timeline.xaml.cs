@@ -153,6 +153,8 @@ namespace FeedbackEditor.Views
         public DataTemplate WaitAction { get; set; }
         public DataTemplate BarrierAction { get; set; }
         public DataTemplate TurnAction { get; set; }
+        public DataTemplate WalkRandomAction { get; set; }
+        public DataTemplate PositionRandomAction { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -172,6 +174,8 @@ namespace FeedbackEditor.Views
                 ActionType.TURN_TO => TurnAction,
                 ActionType.BARRIER => BarrierAction,
                 ActionType.SCALE => ScaleAction,
+                ActionType.WALK_RANDOM => WalkRandomAction,
+                ActionType.TURN_RANDOM => PositionRandomAction,
                 _ => GenericSequenceAction
             };
         }

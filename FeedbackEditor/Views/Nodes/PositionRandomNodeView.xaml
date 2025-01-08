@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FeedbackEditor.Views.Nodes.TurnNodeView"
+﻿<UserControl x:Class="FeedbackEditor.Views.Nodes.PositionRandomNodeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,15 +7,15 @@
              xmlns:views="clr-namespace:NodeNetwork.Views;assembly=NodeNetwork"
              xmlns:controls="clr-namespace:Stopbyte.Controls"
              mc:Ignorable="d" 
-             x:Name="TurnView"
+             x:Name="PositionRandomView"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <views:NodeView x:Name="NodeView"
-                        BorderBrush="{StaticResource TurnActionAccentColorBrush}"
+                        BorderBrush="{StaticResource PositionRandomActionAccentColorBrush}"
                         CornerRadius="15">
             <views:NodeView.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="{StaticResource TurnActionColor}" />
+                    <GradientStop Color="{StaticResource PositionRandomActionColor}" />
                     <GradientStop Color="{StaticResource NodeBackground}" Offset="0.4"/>
                 </LinearGradientBrush>
             </views:NodeView.Background>
@@ -26,12 +26,12 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical"
                                             Margin="10">
-                                    <Label Content="Turn Sequence"
+                                    <Label Content="Walk Sequence"
                                            Margin="5"
                                            Style="{StaticResource MaterialDesignLabel}"
                                            VerticalAlignment="Center" />
                                     <ComboBox ItemsSource="{Binding Source={StaticResource SequenceIdValues}}"
-                                              SelectedItem="{Binding DataContext.ViewModel.Action.TurnSequence, UpdateSourceTrigger=PropertyChanged, ElementName=TurnView}"
+                                              SelectedItem="{Binding DataContext.ViewModel.Action.WalkSequence, UpdateSourceTrigger=PropertyChanged, ElementName=PositionRandomView}"
                                               Height="30"
                                               Margin="5"
                                               VerticalContentAlignment="Center"></ComboBox>
@@ -45,47 +45,71 @@
                                             <RowDefinition />
                                             <RowDefinition />
                                             <RowDefinition />
+                                            <RowDefinition />
                                         </Grid.RowDefinitions>
-                                        <Label Content="Turn Angle (Rad)"
+                                        <Label Content="Random Radius"
                                                Margin="5"
+                                               ToolTip="The radius around the Target Dummy in which a random target position is chosen"
                                                Style="{StaticResource MaterialDesignLabel}"
                                                VerticalAlignment="Center"/>
-                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.TurnAngleF, UpdateSourceTrigger=PropertyChanged, ElementName=TurnView}"
+                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.RandomRadius, UpdateSourceTrigger=PropertyChanged, ElementName=PositionRandomView}"
                                                                  Grid.Column="1"
                                                                  Decimals="2"
                                                                  Step="0.01"
                                                                  Grid.ColumnSpan="2"
                                                                  MinValue="0"
                                                                  MaxValue="10"
-                                                                 Height="32"                                                                 
+                                                                 Height="32"
                                                                  Margin="3"
                                                                  ValueChanged="NumericSpinner_ValueChanged">
                                         </controls:NumericSpinner>
                                         
-                                        <Label Content="Turn to Dummy"
+                                        <Label Content="Center Dummy"
                                                Grid.Row="3"
-                                               ToolTip="Drag and Drop a Dummy from the Right Side into the box to set this Dummy"
+                                               ToolTip="Dummy that defines the center of the Target Area. Drag and Drop a Dummy from the Right Side into the box to set this Dummy"
                                                Margin="5"
                                                Style="{StaticResource MaterialDesignLabel}"
                                                VerticalAlignment="Center" />
                                         <TextBox Grid.Row="3"
                                                  Grid.Column="1"
-                                                 Text="{Binding DataContext.ViewModel.TurnToDummy.Name, UpdateSourceTrigger=PropertyChanged, ElementName=TurnView}"
+                                                 Text="{Binding DataContext.ViewModel.CenterDummy.Name, UpdateSourceTrigger=PropertyChanged, ElementName=PositionRandomView}"
                                                  AllowDrop="True"
                                                  Background="Transparent"
                                                  IsReadOnly="True"
                                                  MinWidth="130"
-                                                 Drop="OnTurnDummyDropped"
+                                                 Drop="OnCenterDummyDropped"
                                                  PreviewDragOver="OnPreviewDropAcceptOnlyDummies"
                                                  BorderThickness="1"
                                                  Margin="3"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}">
                                         </TextBox>
+
+
+                                        <Label Content="Rotation"
+                                               Grid.Row="4"
+                                               ToolTip="Rotation of the Actor"
+                                               Margin="5"
+                                               Style="{StaticResource MaterialDesignLabel}" />
+                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.Rotation, UpdateSourceTrigger=PropertyChanged, ElementName=PositionRandomView}"
+                                                                 Grid.Column="1"
+                                                                 Grid.Row="4"
+                                                                 Decimals="2"
+                                                                 Step="0.01"
+                                                                 Grid.ColumnSpan="2"
+                                                                 MinValue="0"
+                                                                 MaxValue="10"
+                                                                 Height="32"
+                                                                 Margin="3"
+                                                                 ValueChanged="NumericSpinner_ValueChanged">
+                                        </controls:NumericSpinner>
                                     </Grid>
-
-
-
-
+                                    <CheckBox Content="Use random rotation"
+                                              ToolTip="Rotate the Actor randomly instead of by the specified Rotation"
+                                              Margin="5"
+                                              HorizontalAlignment="Left"
+                                              Background="{StaticResource PositionRandomActionAccentColorBrush}"
+                                              IsChecked="{Binding DataContext.ViewModel.Action.UseRandomRotation, ElementName=PositionRandomView}"
+                                              Style="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}" />
                                 </StackPanel>
                             </DataTemplate>
                         </Setter.Value>

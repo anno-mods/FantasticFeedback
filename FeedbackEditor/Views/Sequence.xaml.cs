@@ -201,6 +201,12 @@ namespace FeedbackEditor.Views
         private void OnAddTurnButtonClick(object sender, RoutedEventArgs e)
             => OnAnyAddButtonClick<TurnAction>(sender, e);
 
+        private void OnAddWalkRandomButtonClick(object sender, RoutedEventArgs e)
+            => OnAnyAddButtonClick<WalkRandomAction>(sender, e);
+
+        private void OnAddPositionRandomButtonClick(object sender, RoutedEventArgs e)
+            => OnAnyAddButtonClick<PositionRandomAction>(sender, e);
+
         private void NetworkView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
         }

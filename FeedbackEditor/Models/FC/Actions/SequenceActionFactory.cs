@@ -21,6 +21,8 @@ namespace FeedbackEditor.Models.FC.Actions
                 ActionType.SCALE => typeof(ScaleAction),
                 ActionType.BARRIER => typeof(BarrierAction),
                 ActionType.TURN_TO => typeof(TurnAction),
+                ActionType.WALK_RANDOM => typeof(WalkRandomAction),
+                ActionType.TURN_RANDOM => typeof(PositionRandomAction),
                 _ => typeof(SequenceAction)
             };
         }

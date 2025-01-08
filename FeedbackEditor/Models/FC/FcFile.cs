@@ -20,6 +20,8 @@ namespace FeedbackEditor.Models.FC
         [XmlElement]
         public ActorNames ActorNames { get; set; } = new();
 
+        public object SplineData { get; set; } = new();
+
         public void AddActor(FeedbackConfig config, String name)
         {
             ActorNames.Names.Add(name);

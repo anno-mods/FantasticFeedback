@@ -22,7 +22,9 @@ namespace FeedbackEditor.Models.FC.Actions
         BARRIER = 7,
         SCALE = 9,
         TURN_TO = 10,
+        WALK_RANDOM = 11,
         PLAY_ANY_SEQUENCE = 12,
+        TURN_RANDOM = 13,
         FOLLOW_SPLINE_ANY_SEQUENCE = 15
     }
 

@@ -342,6 +342,48 @@
                             </Grid>
                         </DataTemplate>
                     </local:TempDataTemplateSeletor.TurnAction>
+                    <local:TempDataTemplateSeletor.WalkRandomAction>
+                        <DataTemplate  DataType="{x:Type vm:SequenceActionNodeViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource WalkRandomActionAccentColorBrush}"
+                                        CornerRadius="15"
+                                        Margin="0,2"
+                                        Background="{StaticResource WalkRandomActionColorBrush}">
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Turn"
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </local:TempDataTemplateSeletor.WalkRandomAction>
+                    <local:TempDataTemplateSeletor.PositionRandomAction>
+                        <DataTemplate  DataType="{x:Type vm:SequenceActionNodeViewModel}">
+                            <Grid Height="{Binding RelativeSource={RelativeSource AncestorType=tt:Timelines}, Path=RowHeight}">
+                                <Border BorderThickness="3"
+                                        BorderBrush="{StaticResource PositionRandomActionAccentColorBrush}"
+                                        CornerRadius="15"
+                                        Margin="0,2"
+                                        Background="{StaticResource PositionRandomActionColorBrush}">
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="Position Random"
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextColorBrush}"
+                                                   FontSize="13" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </local:TempDataTemplateSeletor.PositionRandomAction>
                 </local:TempDataTemplateSeletor>
             </tt:Timelines.TimeItemTemplateSelector>
             <tt:Timelines.TimePlayerTemplate>

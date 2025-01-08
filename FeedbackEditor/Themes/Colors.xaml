@@ -67,7 +67,17 @@
     <SolidColorBrush x:Key="TurnActionAccentColorBrush"
                      Color="YellowGreen" />
 
+    <Color x:Key="WalkRandomActionColor">SlateGray</Color>
+    <SolidColorBrush x:Key="WalkRandomActionColorBrush"
+                     Color="{StaticResource WalkRandomActionColor}" />
+    <SolidColorBrush x:Key="WalkRandomActionAccentColorBrush"
+                     Color="Silver" />
 
+    <Color x:Key="PositionRandomActionColor">DarkKhaki</Color>
+    <SolidColorBrush x:Key="PositionRandomActionColorBrush"
+                     Color="{StaticResource PositionRandomActionColor}" />
+    <SolidColorBrush x:Key="PositionRandomActionAccentColorBrush"
+                     Color="NavajoWhite" />
 
     <Color x:Key="BranchActionColor">ForestGreen</Color>
     <SolidColorBrush x:Key="BranchActionColorBrush"

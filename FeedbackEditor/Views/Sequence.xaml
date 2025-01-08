@@ -111,6 +111,58 @@
                                        VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button x:Name="AddWalkRandomNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource WalkRandomActionAccentColorBrush}"
+                            BorderThickness="2"
+                            ToolTip="Walks the Actor to a Random position around a target Dummy"
+                            Click="OnAddWalkRandomButtonClick"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="RunFast"
+                                                     Foreground="{StaticResource WalkRandomActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Walk Random"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="AddPositionRandomNode"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource PositionRandomActionAccentColorBrush}"
+                            BorderThickness="2"
+                            ToolTip="Teleports the Actor to a Random position around a target Dummy"
+                            Click="OnAddPositionRandomButtonClick"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="Jump"
+                                                     Foreground="{StaticResource PositionRandomActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text=" Random Position"
+                                       Foreground="Black"
+                                       Margin="2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="AddPlaySequenceNode"

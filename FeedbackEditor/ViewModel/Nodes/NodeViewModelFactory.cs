@@ -31,6 +31,10 @@ namespace FeedbackEditor.ViewModel.Nodes
                 viewModel = new WaitActionNodeViewModel((WaitAction)action);
             if (action is TurnAction)
                 viewModel = new TurnActionNodeViewModel((TurnAction)action);
+            if (action is WalkRandomAction)
+                viewModel = new WalkRandomActionNodeViewModel((WalkRandomAction)action);
+            if (action is PositionRandomAction)
+                viewModel = new PositionRandomActionNodeViewModel((PositionRandomAction)action);
             return viewModel;
         }
     }
