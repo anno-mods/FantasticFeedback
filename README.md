@@ -26,7 +26,10 @@
   - `Fade (6)`
   - `Barrier (7)`
   - `Scale (9)`
+  - `Turn to (10)`
+  - `Walk to Random Position (11)`
   - `Play Any Sequence (12)`
+  - `Set Random Position (13)`
   - **All other Sequences and their data are currently lost, except for their Element Type when doing an import.**
 - Manipulate and Add Sequence Elements in Loops
 - 
@@ -35,7 +38,7 @@
 - Supporting all other Element Types. I know that those two also exist, which will be implemented with all the spline stuff:
   - `Walk Spline (4)`
   - `Follow Spline Any Walk Sequence (15)`
-- This also implies there is 5,8,10,11,13,14 which I have not encountered so far. If you encounter one of them in your fc files please let me know, including info in which vanilla file you spotted it.
+- This also implies there is 5,8,14 which I have not encountered so far. If you encounter one of them in your fc files please let me know, including info in which vanilla file you spotted it.
 
 # Credits
 
