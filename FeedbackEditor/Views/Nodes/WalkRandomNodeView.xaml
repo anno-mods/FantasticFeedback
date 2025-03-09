@@ -52,7 +52,7 @@
                                                ToolTip="The radius around the Target Dummy in which a random target position is chosen"
                                                Style="{StaticResource MaterialDesignLabel}"
                                                VerticalAlignment="Center"/>
-                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.RandomRadius, UpdateSourceTrigger=PropertyChanged, ElementName=WalkRandomView}"
+                                        <controls:NumericSpinner Value="{Binding DataContext.ViewModel.Action.RandomRadius, UpdateSourceTrigger=PropertyChanged, ElementName=WalkRandomView, Mode=TwoWay}"
                                                                  Grid.Column="1"
                                                                  Decimals="2"
                                                                  Step="0.01"
