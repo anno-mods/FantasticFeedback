@@ -353,7 +353,7 @@
                                     <StackPanel Orientation="Vertical"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center">
-                                        <TextBlock Text="Turn"
+                                        <TextBlock Text="Walk Random"
                                                    HorizontalAlignment="Center"
                                                    FontWeight="Bold"
                                                    Foreground="{StaticResource TextColorBrush}"
