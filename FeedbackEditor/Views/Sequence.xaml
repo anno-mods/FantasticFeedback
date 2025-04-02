@@ -325,11 +325,47 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Grid.Column="1"
+                        Visibility="{Binding ShowSpecialAddPanel, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}">
+
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="GenerateWalkSequence"
+                            Height="40"
+                            Margin="5"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                            Background="White"
+                            BorderBrush="{StaticResource WalkActionAccentColorBrush}"
+                            BorderThickness="2"
+                            ToolTip="Generate an entire Walk Sequence from a DummyGroup"
+                            Click="OnGenerateWalkSequenceButtonClick"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="-5,0,0,0">
+                            <materialDesign:PackIcon Kind="WheelchairAccessibility"
+                                                     Foreground="{StaticResource WalkActionColorBrush}"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Center">
+                            </materialDesign:PackIcon>
+                            <TextBlock Text="Generate Walk Sequence"
+                                       Foreground="Black"
+                                       Margin="8,2,2,2"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Left">
                 <Button  Click="OnLayoutButtonClick"
                         Margin="5"
                          Height="50"
                          Width="50"
+                         ToolTip="Layout"
                          IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
                     <materialDesign:PackIcon Kind="FitToScreen"
@@ -340,11 +376,40 @@
                                              HorizontalAlignment="Center">
                     </materialDesign:PackIcon>
                 </Button>
+                <Button  Click="OnSpecialAddButtonClick"
+                         Margin="5"
+                         x:Name="SpecialAddButton"
+                         Height="50"
+                         Width="50"
+                         ToolTip="Tools to generate larger sequences of Nodes"
+                         IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
+                    <materialDesign:PackIcon Kind="PlaylistPlus"
+                                             Foreground="{StaticResource TextColorBrush}"
+                                             VerticalAlignment="Center"
+                                             Height="30"
+                                             Width="30"
+                                             HorizontalAlignment="Center">
+                    </materialDesign:PackIcon>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}"
+                               BasedOn="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ShowSpecialAddPanel, UpdateSourceTrigger=PropertyChanged}"
+                                             Value="true">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Background"
+                                                Value="Green" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 <Button x:Name="AddNode"
                         Click="OnAddButtonClick"
+                        ToolTip="Add Single Nodes"
                         Margin="10,5"
                         Width="70"
-                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                         Height="70"
                         IsEnabled="{Binding HasNetwork, UpdateSourceTrigger=PropertyChanged}">
                     <materialDesign:PackIcon Kind="Plus"
@@ -354,10 +419,22 @@
                                              Width="50"
                                              HorizontalAlignment="Center">
                     </materialDesign:PackIcon>
-                </Button>
-
-                
+                    <Button.Style>
+                        <Style TargetType ="{x:Type Button}" BasedOn="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ShowAddPanel, UpdateSourceTrigger=PropertyChanged}"
+                                             Value="true">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Background"
+                                                Value="Green" />
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>                
             </StackPanel>
         </Grid>
     </Grid>
+
 </UserControl>

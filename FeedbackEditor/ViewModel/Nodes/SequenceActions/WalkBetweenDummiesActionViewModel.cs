@@ -24,7 +24,7 @@ namespace FeedbackEditor.ViewModel
 
         private Dummy? _startDummy;
 
-        public Dummy? StartDummy 
+        public Dummy? StartDummy
         {
             get => _startDummy;
             set
@@ -33,7 +33,7 @@ namespace FeedbackEditor.ViewModel
                 UpdateModelStartDummy();
             }
         }
-        public Dummy? TargetDummy 
+        public Dummy? TargetDummy
         {
             get => _targetDummy;
             set
@@ -46,6 +46,7 @@ namespace FeedbackEditor.ViewModel
         private Dummy? _targetDummy { get; set; }
 
         private bool _hasStartDummy;
+
         public bool HasStartDummy
         {
             get => _hasStartDummy;
@@ -53,7 +54,7 @@ namespace FeedbackEditor.ViewModel
             {
                 _hasStartDummy = value;
                 UpdateModelStartDummy();
-            }  
+            }
         }
 
         public WalkBetweenDummiesAction Action { get; set; }
@@ -61,9 +62,14 @@ namespace FeedbackEditor.ViewModel
         public WalkBetweenDummiesActionViewModel(WalkBetweenDummiesAction sequenceAction) : base(sequenceAction)
         {
             Action = sequenceAction;
-            _startDummy = FcFileService.Instance.GetDummy(sequenceAction.StartDummyId);
-            _targetDummy = FcFileService.Instance.GetDummy(sequenceAction.TargetDummyId);
-            HasStartDummy = StartDummy is not null;
+            this.WhenAnyValue(x => x.Action.StartDummyId).Subscribe(
+                y => {
+                    _startDummy = FcFileService.Instance.GetDummy(y);
+                    HasStartDummy = StartDummy is not null;
+                });
+
+            this.WhenAnyValue(x => x.Action.TargetDummyId).Subscribe(
+                x => TargetDummy = FcFileService.Instance.GetDummy(x));
 
             Name = "Walk Between Dummies";
         }

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
+using System.Drawing;
 
 namespace FeedbackEditor.ViewModel.Nodes
 {
@@ -65,12 +66,47 @@ namespace FeedbackEditor.ViewModel.Nodes
             AddSuccessors(node, Loop.ElementContainer.Elements);
         }
 
-        public void AddEmpty<T>() where T : SequenceAction, new()
+        public SequenceAction AddEmpty<T>(System.Windows.Point location) where T : SequenceAction, new()
         {
             var sequenceAction = new T();
             var ViewModel = NodeViewModelFactory.GetSequenceActionViewModel(sequenceAction);
+            ViewModel.Position = location;
 
             Network.Nodes.Add(ViewModel);
+            return sequenceAction;
+        }
+        
+        /// <summary>
+        /// Adds a connected sequence of Nodes. 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="template"></param>
+        /// <param name="length"></param>
+        /// <returns>The list of SequenceActions in order of linking</returns>
+        public IEnumerable<T> AddSequence<T>(int length, System.Windows.Point start_location, int offset) where T : SequenceAction, new()
+        {
+            List<T> values = new List<T>();
+            SequenceActionNodeViewModel? previous = null;
+
+            var location = new System.Windows.Point(start_location.X, start_location.Y);
+            for (int i = 0; i < length; i++)
+            {
+                var sequenceAction = new T();
+                var ViewModel = NodeViewModelFactory.GetSequenceActionViewModel(sequenceAction);
+                ViewModel.Position = location;
+
+                Network.Nodes.Add(ViewModel);
+
+                if (previous is not null)
+                {
+                    var connection = Network.ConnectionFactory.Invoke(ViewModel.PreviousActionInput, previous.FollowupActionOutput);
+                    Network.Connections.Add(connection);
+                }
+                previous = ViewModel;
+                values.Add(sequenceAction);
+                location.Offset(offset, 0);
+            }
+            return values;
         }
 
         private void Init(IEnumerable<SequenceAction> sequenceActions, NodeOutputViewModel root_output)

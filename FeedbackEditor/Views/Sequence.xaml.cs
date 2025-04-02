@@ -1,6 +1,7 @@
 ﻿using DynamicData;
 using FeedbackEditor.Models.FC;
 using FeedbackEditor.Models.FC.Actions;
+using FeedbackEditor.Models.FC.Dummy;
 using FeedbackEditor.ViewModel;
 using FeedbackEditor.ViewModel.Nodes;
 using FeedbackEditor.ViewModel.Nodes.SequenceActions;
@@ -12,6 +13,7 @@ using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,7 +43,33 @@ namespace FeedbackEditor.Views
 
         public bool HasNetwork { get; private set; }
 
-        public bool ShowAddPanel { get; set; }
+        public bool ShowAddPanel 
+        {
+            get => _showAddPanel;
+            set
+            { 
+                _showAddPanel = value;
+                if (value)
+                { 
+                    ShowSpecialAddPanel = false;
+                }
+            }
+        }
+        private bool _showAddPanel;
+
+        public bool ShowSpecialAddPanel 
+        {
+            get => _showSpecialAddPanel;
+            set 
+            {
+                _showSpecialAddPanel = value;
+                if (value)
+                {
+                    ShowAddPanel = false;
+                }
+            }
+        }
+        private bool _showSpecialAddPanel;
 
         private IDisposable? _disposeEvents;
 
@@ -65,7 +93,7 @@ namespace FeedbackEditor.Views
             Network = _currentLoop.Network;
             HasNetwork = true;
             LinearLayout();
-            NetworkView.CenterAndZoomView();
+            Network.ZoomFactor = 1;
         }
 
         public void ChangeListenerTo(LoopViewModel loopViewModel)
@@ -134,6 +162,13 @@ namespace FeedbackEditor.Views
             _currentLoop = null;
         }
 
+        private System.Windows.Point ComputeNodeLocation()
+        {
+            var screen_center = new Point(NetworkView.NetworkViewportRegion.X + (NetworkView.NetworkViewportRegion.Width / 2), NetworkView.NetworkViewportRegion.Y + (NetworkView.NetworkViewportRegion.Height /2));
+            return screen_center;
+            //return new Point(0, 0);
+        } 
+
         private async void OnLayoutButtonClick(object sender, RoutedEventArgs e)
         {
             if (_currentLoop is null)
@@ -162,16 +197,82 @@ namespace FeedbackEditor.Views
 
         private void OnAddButtonClick(object sender, RoutedEventArgs e)
         {
+            //autohiding of SpecialAddPanel is taken care of by automatic setting of ShowSpecialAddPanel
             ShowAddPanel = !ShowAddPanel;
+        }
+
+        private void OnSpecialAddButtonClick(object sender, RoutedEventArgs e)
+        {
+            //autohiding of AddPanel is taken care of by automatic setting of ShowAddPanel
+            ShowSpecialAddPanel = !ShowSpecialAddPanel;
         }
 
         private void OnAnyAddButtonClick<T>(object sender, RoutedEventArgs e) where T : SequenceAction, new()
         {
+            var screen_center = ComputeNodeLocation();
             if (HasNetwork)
             {
-                _currentLoop?.AddEmpty<T>();
+                _currentLoop?.AddEmpty<T>(screen_center);
             }
             ShowAddPanel = false;
+        }
+
+        /// <summary>
+        /// Generates a Walk Sequence in the Current Network. Nothing happens if there is no Network active.
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="group"></param>
+        private void CreateWalkSequence(WalkBetweenDummiesAction template, DummyGroup group, bool addStartDummies)
+        {
+            var screen_center = ComputeNodeLocation();
+            if (!HasNetwork)
+                return;
+            var actions = _currentLoop?.AddSequence<WalkBetweenDummiesAction>(group.Dummies.Count() - 1, screen_center, AssumedNodeWidth);
+            
+            if (actions is null)
+                return;
+
+            var list = group.Dummies;
+
+            list = list.OrderBy(x =>
+            {
+                if (!x.Name.Contains("_"))
+                    return -1;
+                var suffix = x.Name.Split("_").LastOrDefault();
+                if (int.TryParse(suffix, out var suffixValue))
+                {
+                    return suffixValue;
+                }
+                return -1; 
+            }).ToList();
+
+            for (int i = 1; i < list.Count(); i++)
+            {
+                //first element is always skipped, so actions are all offset by -1
+                var action = actions.ElementAt(i-1);
+                action.WalkFromCurrentPosition = template.WalkFromCurrentPosition;
+                action.WalkSequence = template.WalkSequence;
+
+                action.TargetDummy = list[i].Name;
+                action.TargetDummyId = list[i].Id;
+
+                action.SpeedFactorF = template.SpeedFactorF;
+
+                if (addStartDummies)
+                {
+                    action.StartDummy = list[i - 1].Name;
+                    action.StartDummyId = list[i - 1].Id;                    
+                }
+            }
+        }
+
+        private void OnGenerateWalkSequenceButtonClick(object sender, RoutedEventArgs e)
+        {
+            var popup = new CreateWalksequencePopup();
+            if (popup.ShowDialog() is not true)
+                return;
+
+            CreateWalkSequence(popup.ActionTemplate, popup.SelectedGroup, popup.ExplicitStartDummies);
         }
 
         private void OnAddSequenceButtonClick(object sender, RoutedEventArgs e)

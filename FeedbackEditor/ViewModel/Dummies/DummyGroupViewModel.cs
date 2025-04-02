@@ -27,6 +27,19 @@ namespace FeedbackEditor.ViewModel.Dummies
                         .ToList();
         }
 
+        [DependsOn(nameof(DummyGroup))]
+        public IEnumerable<DummyGroup> ReadonlyGroups
+        {
+            get {
+                var childGroups = DummyGroup.Groups.Select(x => x).ToList();
+                foreach (var item in childGroups)
+                {
+                    childGroups.Concat(item.Groups);
+                }
+                return childGroups;
+            } 
+        }
+
         [DependsOn(nameof(Dummy))]
         public string Name => DummyGroup.Name;
 
