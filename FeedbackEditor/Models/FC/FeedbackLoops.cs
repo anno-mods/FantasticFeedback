@@ -6,12 +6,18 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using System.Xml.Linq;
+using System.Xml;
 using System.Xml.Serialization;
+using System.Xml.Schema;
+using FeedbackEditor.Models.FC.Actions;
+using System.Security.Permissions;
 
 namespace FeedbackEditor.Models.FC
 {
     [Serializable]
-    public class FeedbackLoops
+    [XmlRoot("FeedbackLoops")]
+    public class FeedbackLoopsSerializationHack
     {
         [XmlElement("k")]
         //Index of the SequenceDefinition that should be active
@@ -22,6 +28,24 @@ namespace FeedbackEditor.Models.FC
         } = new();
 
         [XmlElement("v")]
+        //Index of the SequenceDefinition that is played when k is active
+        public List<int> ValueIndices
+        {
+            get;
+            set;
+        } = new();
+    }
+
+    [Serializable]
+    public class FeedbackLoops: IXmlSerializable
+    {
+        //Index of the SequenceDefinition that should be active
+        public List<int> FeedbackSequences
+        {
+            get;
+            set;
+        } = new();
+
         //Index of the SequenceDefinition that is played when k is active
         public List<int> ValueIndices
         {
@@ -68,6 +92,44 @@ namespace FeedbackEditor.Models.FC
         {
             FeedbackSequences.Clear();
             ValueIndices.Clear();
+        }
+
+        public XmlSchema? GetSchema()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            var clonedReader = reader.ReadSubtree();
+            var loadedNode = new XmlDocument();
+            loadedNode.Load(clonedReader);
+
+            using (XmlReader docReader = new XmlNodeReader(loadedNode.DocumentElement))
+            {
+                XmlSerializer serializer = new(typeof(FeedbackLoopsSerializationHack));
+                var sequenceObject = serializer.Deserialize(docReader) as FeedbackLoopsSerializationHack;
+                FeedbackSequences = sequenceObject.FeedbackSequences;
+                ValueIndices = sequenceObject.ValueIndices;
+            }
+
+            reader.ReadEndElement();
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            var export_vals = FeedbackSequences.Zip(ValueIndices);
+
+            foreach (var tuple in export_vals)
+            {
+                writer.WriteStartElement("k");
+                writer.WriteValue(tuple.First);
+                writer.WriteEndElement();
+
+                writer.WriteStartElement("v");
+                writer.WriteValue(tuple.Second);
+                writer.WriteEndElement();
+            }
         }
     }
 }
